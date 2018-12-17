@@ -1,6 +1,8 @@
 using System;
 using Example.Domain.Models;
 using Example.Domain.Interfaces;
+using Example.Infrastruct.Data.Context;
+using System.Linq;
 
 namespace Example.Infrastruct.Data.Repository
 {
@@ -9,10 +11,10 @@ namespace Example.Infrastruct.Data.Repository
     /// </summary>
     public class CustomerRepository : Repository<Customer>, ICustomerRepository
     {
-        //对特例接口进行实现
-        public Customer GetByEmail(string email)
+        public CustomerRepository(CustomerContext context) : base(context)
         {
-            throw new System.NotImplementedException();
         }
+        //对特例接口进行实现
+        public Customer GetByEmail(string email) => _dbSet.FirstOrDefault(p => p.Email == email);
     }
 }
