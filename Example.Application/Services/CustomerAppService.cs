@@ -1,9 +1,11 @@
 using System;
 using System.Collections.Generic;
+using AutoMapper;
+using AutoMapper.QueryableExtensions;
 using Example.Application.Interfaces;
 using Example.Application.ViewModels;
 using Example.Domain.Interfaces;
-
+using Example.Domain.Models;
 
 namespace Example.Application.Services
 {
@@ -16,37 +18,39 @@ namespace Example.Application.Services
     public class CustomerAppService : ICustomerAppService
     {
         private readonly ICustomerRepository _customerRepository;
+        private readonly IMapper _mapper;
 
-        public CustomerAppService(ICustomerRepository customerRepository)
+        public CustomerAppService(
+            ICustomerRepository customerRepository,
+            IMapper mapper)
         {
             _customerRepository = customerRepository;
+            _mapper = mapper;
         }
 
         public IEnumerable<CustomerViewModel> GetAll()
         {
-            return null;
-            //return _customerRepository.GetAll().ProjectTo<CustomerViewModel>();
+            return _customerRepository.GetAll().ProjectTo<CustomerViewModel>();
         }
 
         public CustomerViewModel GetById(Guid id)
         {
-            return null;
-            //return _mapper.Map<CustomerViewModel>(_customerRepository.GetById(id));
+            return _mapper.Map<CustomerViewModel>(_customerRepository.GetById(id));
         }
 
         public void Register(CustomerViewModel customerViewModel)
         {
-            //var registerCommand = _mapper.Map<RegisterNewCustomerCommand>(customerViewModel);
+            _customerRepository.Add(_mapper.Map<Customer>(customerViewModel));
         }
 
         public void Update(CustomerViewModel customerViewModel)
         {
-            //var updateCommand = _mapper.Map<UpdateCustomerCommand>(customerViewModel);
+           _customerRepository.Update(_mapper.Map<Customer>(customerViewModel));
         }
 
         public void Remove(Guid id)
         {
-            //var removeCommand = new RemoveCustomerCommand(id);
+           _customerRepository.Remove(id);
         }
 
         public void Dispose()

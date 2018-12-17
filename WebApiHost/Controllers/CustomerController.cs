@@ -1,6 +1,7 @@
 using System;
+using Example.Application.Interfaces;
+using Example.Application.ViewModels;
 using Microsoft.AspNetCore.Mvc;
-using WebApiHost.Models;
 
 namespace WebApiHost.Controllers
 {
@@ -8,6 +9,12 @@ namespace WebApiHost.Controllers
     [ApiController]
     public class CustomerController : ControllerBase
     {
+        ICustomerAppService _customerAppService;
+        public CustomerController(ICustomerAppService customerAppService)
+        {
+            _customerAppService = customerAppService;
+
+        }
         /// <summary>
         /// 保存顾客方法:add & update
         /// </summary>
@@ -16,33 +23,15 @@ namespace WebApiHost.Controllers
         /// <param name="email"></param>
         /// <param name="birthDate"></param>
         [HttpPost]
-        public void SaveCustomer(string id, string name, string email, string birthDate)
+        public void SaveCustomer(CustomerViewModel customer)
         {
-            Customer customer = CustomerDao.GetCustomer(id);
-            if (customer == null)
-            {
-                customer = new Customer();
-                customer.Id = id;
-            }
-
-            if (name != null)
-            {
-                customer.Name = name;
-            }
-            if (email != null)
-            {
-                customer.Email = email;
-            }
-
-            //...还有其他属性
-
-            CustomerDao.SaveCustomer(customer);
+            _customerAppService.Register(customer);
         }
 
         [HttpGet]
-        public Customer GetCustomer(string id)
+        public CustomerViewModel GetCustomer(Guid id)
         {
-            return CustomerDao.GetCustomer(id);
+            return _customerAppService.GetById(id);
         }
     }
 }

@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Linq;
 using Example.Domain.Interfaces;
+using Example.Infrastruct.Data.Context;
+using Microsoft.EntityFrameworkCore;
 
 namespace Example.Infrastruct.Data.Repository
 {
@@ -10,39 +12,51 @@ namespace Example.Infrastruct.Data.Repository
     /// <typeparam name="TEntity"></typeparam>
     public class Repository<TEntity> : IRepository<TEntity> where TEntity : class
     {
+        protected readonly CustomerContext _context;
+        protected readonly DbSet<TEntity> _dbSet;
+        public Repository(CustomerContext context)
+        {
+            _context = context;
+            _dbSet = context.Set<TEntity>();
+        }
         public void Add(TEntity obj)
         {
-            throw new NotImplementedException();
+            _dbSet.Add(obj);
         }
 
         public void Dispose()
         {
-            throw new NotImplementedException();
+            _context.Dispose();
+            GC.SuppressFinalize(this);
         }
 
         public IQueryable<TEntity> GetAll()
         {
-            throw new NotImplementedException();
+            return _dbSet;
         }
 
         public TEntity GetById(Guid id)
         {
-            throw new NotImplementedException();
+            return _dbSet.Find(id);
         }
 
         public void Remove(Guid id)
         {
-            throw new NotImplementedException();
+            var entity = _dbSet.Find(id);
+            if (entity != null)
+            {
+                _dbSet.Remove(entity);
+            }
         }
 
         public int SaveChanges()
         {
-            throw new NotImplementedException();
+           return _context.SaveChanges();
         }
 
         public void Update(TEntity obj)
         {
-            throw new NotImplementedException();
+            _dbSet.Update(obj);
         }
     }
 }
