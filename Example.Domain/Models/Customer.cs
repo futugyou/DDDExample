@@ -1,11 +1,12 @@
 ﻿using System;
+using Christ.Domain.Core.Models;
 
 namespace Example.Domain.Models
 {
     /// <summary>
     /// 定义领域对象 Customer
     /// </summary>
-    public class Customer
+    public class Customer : Entity
     {
         protected Customer() { }
         public Customer(Guid id, string name, string email, DateTime birthDate)
@@ -14,9 +15,7 @@ namespace Example.Domain.Models
             Name = name;
             Email = email;
             BirthDate = birthDate;
-        }
-
-        public Guid Id { get; private set; }
+        } 
         public string Name { get; private set; }
         public string Email { get; private set; }
         public DateTime BirthDate { get; private set; }
