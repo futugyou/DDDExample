@@ -15,7 +15,9 @@ namespace Example.Domain.Models
             Name = name;
             Email = email;
             BirthDate = birthDate;
+            Address = new Address();
         } 
+        public Address Address { get; set; }     
         public string Name { get; private set; }
         public string Email { get; private set; }
         public DateTime BirthDate { get; private set; }

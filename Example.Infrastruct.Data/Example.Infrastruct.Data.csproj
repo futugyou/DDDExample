@@ -6,10 +6,16 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="2.2.0" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="2.2.0" />
-    <PackageReference Include="Microsoft.Extensions.Configuration.FileExtensions" Version="2.2.0" />
-    <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="2.2.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.0.0-preview.18572.1" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.0.0-preview.18572.1" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.FileExtensions" Version="3.0.0-preview.18572.1" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="3.0.0-preview.18572.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Migrations\20181218094911_Init.Designer.cs">
+      <DependentUpon>20181218094911_Init.cs</DependentUpon>
+    </Compile>
   </ItemGroup>
 
   <PropertyGroup>

@@ -21,6 +21,7 @@ namespace Example.Infrastruct.Data.Mappings
                 .HasColumnType("varchar(100)")
                 .HasMaxLength(11)
                 .IsRequired();
+            builder.OwnsOne(p => p.Address);
         }
     }
 }
