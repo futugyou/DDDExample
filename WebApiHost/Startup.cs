@@ -1,22 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using AutoMapper;
-using Example.Application.AutoMap;
-using Example.Application.Interfaces;
-using Example.Application.Services;
-using Example.Domain.Interfaces;
-using Example.Infrastruct.Data.Context;
-using Example.Infrastruct.Data.Repository;
-using Microsoft.AspNetCore.Builder;
+﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
+using WebApiHost.Extensions;
 
 namespace WebApiHost
 {
@@ -32,13 +19,10 @@ namespace WebApiHost
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddAutoMapper();
-            //启动配置
-            AutoMapperConfig.RegisterMapper();
+            //启动配置   
+            services.AddAutoMapperSetup();
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
-            services.AddScoped<ICustomerAppService, CustomerAppService>();
-            services.AddScoped<ICustomerRepository, CustomerRepository>();
-            services.AddScoped<CustomerContext>();
+            NativeInjectorBootStrapper.RegisterServices(services);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

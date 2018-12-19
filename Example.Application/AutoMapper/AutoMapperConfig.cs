@@ -1,6 +1,7 @@
 using AutoMapper;
+using Example.Application.AutoMapper;
 
-namespace Example.Application.AutoMap
+namespace Example.Application.AutoMapper
 {
     public class AutoMapperConfig
     {
@@ -9,6 +10,7 @@ namespace Example.Application.AutoMap
             return new MapperConfiguration(conf =>
             {
                 conf.AddProfile(new DomainToViewModelMappingProfile());
+                conf.AddProfile(new ViewModelToDomainMappingProfile());
             });
         }
     }

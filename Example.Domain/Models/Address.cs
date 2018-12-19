@@ -1,10 +1,15 @@
 using System;
+using Microsoft.EntityFrameworkCore;
 using Example.Domain.Core.Models;
 
 namespace Example.Domain.Models
 {
+    [Owned]
     public class Address : ValueObject<Address>
     {
+        public Address()
+        {
+        }
 
         public Address(string province, string city,
             string county, string street, string zip)
@@ -14,7 +19,7 @@ namespace Example.Domain.Models
             this.County = county;
             this.Street = street;
         }
-        
+
         /// <summary>
         /// 省份
         /// </summary>
