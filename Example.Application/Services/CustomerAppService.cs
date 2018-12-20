@@ -4,6 +4,8 @@ using AutoMapper;
 using AutoMapper.QueryableExtensions;
 using Example.Application.Interfaces;
 using Example.Application.ViewModels;
+using Example.Domain.Commands.Customer;
+using Example.Domain.Core.Bus;
 using Example.Domain.Interfaces;
 using Example.Domain.Models;
 
@@ -19,13 +21,15 @@ namespace Example.Application.Services
     {
         private readonly ICustomerRepository _customerRepository;
         private readonly IMapper _mapper;
-
+        private readonly IMediatorHandler _mediatorHandler;
         public CustomerAppService(
             ICustomerRepository customerRepository,
-            IMapper mapper)
+            IMapper mapper,
+            IMediatorHandler mediatorHandler)
         {
             _customerRepository = customerRepository;
             _mapper = mapper;
+            _mediatorHandler = mediatorHandler;
         }
 
         public IEnumerable<CustomerViewModel> GetAll()
@@ -40,17 +44,19 @@ namespace Example.Application.Services
 
         public void Register(CustomerViewModel customerViewModel)
         {
-            _customerRepository.Add(_mapper.Map<Customer>(customerViewModel));
+            var registerCommand = _mapper.Map<RegisterCustomerCommand>(customerViewModel);
+            _mediatorHandler.SendCommand(registerCommand);
+            //_customerRepository.Add(_mapper.Map<Customer>(customerViewModel));
         }
 
         public void Update(CustomerViewModel customerViewModel)
         {
-           _customerRepository.Update(_mapper.Map<Customer>(customerViewModel));
+            _customerRepository.Update(_mapper.Map<Customer>(customerViewModel));
         }
 
         public void Remove(Guid id)
         {
-           _customerRepository.Remove(id);
+            _customerRepository.Remove(id);
         }
 
         public void Dispose()

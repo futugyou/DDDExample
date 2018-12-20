@@ -11,6 +11,8 @@ namespace Example.Application.AutoMapper
             {
                 conf.AddProfile(new DomainToViewModelMappingProfile());
                 conf.AddProfile(new ViewModelToDomainMappingProfile());
+                conf.AddProfile(new ViewModelToCommandMappingProfile());
+                
             });
         }
     }
