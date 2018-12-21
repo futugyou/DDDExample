@@ -1,5 +1,6 @@
 ﻿using Example.Domain.Commands.Customer;
 using Example.Domain.Core.Bus;
+using Example.Domain.Core.Notifications;
 using Example.Domain.Events.Customer;
 using Example.Domain.Interfaces;
 using Example.Domain.Models;
@@ -40,15 +41,16 @@ namespace Example.Domain.CommandHandlers
             var customer = new Customer(Guid.NewGuid(), request.Name, request.Email, request.BirthDate);
             if (_customerRepository.GetByEmail(customer.Email) != null)
             {
-                //DOTO;
+                //domain notification
+                _mediatorHandler.RaiseEvent(new DomainNotification(customer.Id.ToString(), "email address already exists"));
                 return Task.FromResult(Unit.Value);
             }
             _customerRepository.Add(customer);
-            if (true)
+            if (Commit())
             {
+                //domain event
                 _mediatorHandler.RaiseEvent(new CustomerRegisterEvent(customer.Id, customer.Name, customer.Email, customer.BirthDate));
             }
-            _unitOfWork.Commit();
             return Task.FromResult(Unit.Value);
         }
     }

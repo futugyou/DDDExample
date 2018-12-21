@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Example.Domain.Core.Events
 {
-    public abstract class Event : INotification
+    public abstract class Event : Message, INotification
     {
         public DateTime Timestamp { get; private set; }
         protected Event()
