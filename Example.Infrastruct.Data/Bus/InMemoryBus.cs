@@ -12,13 +12,18 @@ namespace Example.Infrastruct.Data.Bus
     public class InMemoryBus : IMediatorHandler
     {
         private readonly IMediator _mediator;
-        public InMemoryBus(IMediator mediator)
+        private readonly IEventStore _eventStore;
+        public InMemoryBus(IMediator mediator, IEventStore eventStore)
         {
             _mediator = mediator;
+            _eventStore = eventStore;
         }
 
         public Task RaiseEvent<T>(T @event) where T : Event
         {
+            //除去领域通知，全部进事件溯源
+            if (!@event.MessageType.Equals("DomainNotification"))
+                _eventStore?.Save(@event);
             return _mediator.Publish(@event);
         }
 

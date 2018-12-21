@@ -45,8 +45,8 @@ namespace Example.Application.Services
         public void Register(CustomerViewModel customerViewModel)
         {
             var registerCommand = _mapper.Map<RegisterCustomerCommand>(customerViewModel);
+            //command bus
             _mediatorHandler.SendCommand(registerCommand);
-            //_customerRepository.Add(_mapper.Map<Customer>(customerViewModel));
         }
 
         public void Update(CustomerViewModel customerViewModel)

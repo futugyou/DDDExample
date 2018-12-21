@@ -1,5 +1,6 @@
 ﻿using Christ.Domain.Core.Commands;
 using Example.Domain.Core.Bus;
+using Example.Domain.Core.Notifications;
 using Example.Domain.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -22,7 +23,7 @@ namespace Example.Domain.CommandHandlers
         {
             foreach (var item in command.ValidationResult.Errors)
             {
-
+                _mediatorHandler.RaiseEvent(new DomainNotification("", item.ErrorMessage));
             }
         }
 
