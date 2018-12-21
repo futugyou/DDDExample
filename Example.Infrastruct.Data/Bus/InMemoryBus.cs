@@ -1,5 +1,6 @@
 ﻿using Christ.Domain.Core.Commands;
 using Example.Domain.Core.Bus;
+using Example.Domain.Core.Events;
 using MediatR;
 using System;
 using System.Collections.Generic;
@@ -14,6 +15,11 @@ namespace Example.Infrastruct.Data.Bus
         public InMemoryBus(IMediator mediator)
         {
             _mediator = mediator;
+        }
+
+        public Task RaiseEvent<T>(T @event) where T : Event
+        {
+            return _mediator.Publish(@event);
         }
 
         public Task SendCommand<T>(T command) where T : Command

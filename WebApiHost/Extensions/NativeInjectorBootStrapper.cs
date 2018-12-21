@@ -4,6 +4,8 @@ using Example.Application.Services;
 using Example.Domain.CommandHandlers;
 using Example.Domain.Commands.Customer;
 using Example.Domain.Core.Bus;
+using Example.Domain.EventHandlers;
+using Example.Domain.Events.Customer;
 using Example.Domain.Interfaces;
 using Example.Infrastruct.Data.Bus;
 using Example.Infrastruct.Data.Context;
@@ -23,8 +25,12 @@ namespace WebApiHost.Extensions
 
             //command bus
             services.AddScoped<IMediatorHandler, InMemoryBus>();
+
             // Domain - Commands
             services.AddScoped<IRequestHandler<RegisterCustomerCommand>, CustomerCommandHandler>();
+
+            // Domain - Events
+            services.AddScoped<INotificationHandler<CustomerRegisterEvent>, CustomerEventHandler>();
 
             //infrastruct
             services.AddScoped<ICustomerRepository, CustomerRepository>();

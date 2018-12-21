@@ -1,5 +1,6 @@
 ﻿using Example.Domain.Commands.Customer;
 using Example.Domain.Core.Bus;
+using Example.Domain.Events.Customer;
 using Example.Domain.Interfaces;
 using Example.Domain.Models;
 using MediatR;
@@ -34,7 +35,6 @@ namespace Example.Domain.CommandHandlers
             if (!request.IsValid())
             {
                 NotifyValidationErrors(request);
-                //DOTO:
                 return Task.FromResult(Unit.Value);
             }
             var customer = new Customer(Guid.NewGuid(), request.Name, request.Email, request.BirthDate);
@@ -44,6 +44,10 @@ namespace Example.Domain.CommandHandlers
                 return Task.FromResult(Unit.Value);
             }
             _customerRepository.Add(customer);
+            if (true)
+            {
+                _mediatorHandler.RaiseEvent(new CustomerRegisterEvent(customer.Id, customer.Name, customer.Email, customer.BirthDate));
+            }
             _unitOfWork.Commit();
             return Task.FromResult(Unit.Value);
         }
