@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using System;
 using WebApiHost.Extensions;
 
 namespace WebApiHost
@@ -22,8 +23,9 @@ namespace WebApiHost
         {
             //启动配置   
             services.AddAutoMapperSetup();
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Latest);
             services.AddMediatR(typeof(Startup));
+             
             NativeInjectorBootStrapper.RegisterServices(services);
         }
 
