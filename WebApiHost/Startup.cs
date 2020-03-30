@@ -1,10 +1,9 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using System;
+using Microsoft.Extensions.Hosting;
 using WebApiHost.Extensions;
 
 namespace WebApiHost
@@ -23,27 +22,28 @@ namespace WebApiHost
         {
             //启动配置   
             services.AddAutoMapperSetup();
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Latest);
+            services.AddControllers();
             services.AddMediatR(typeof(Startup));
              
             NativeInjectorBootStrapper.RegisterServices(services);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
             }
-            else
+
+            app.UseRouting();
+
+            app.UseAuthorization();
+
+            app.UseEndpoints(endpoints =>
             {
-                // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
-                app.UseHsts();
-            }
-            app.UseStaticFiles();
-            app.UseHttpsRedirection();
-            app.UseMvc();
-        }
+                endpoints.MapControllers();
+            });
+        } 
     }
 }

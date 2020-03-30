@@ -1,0 +1,13 @@
+{
+    "author": "vishel", //必须
+    "classifications": [ "Web/WebAPI DDD" ], //必须，这个对应模板的Tags
+    "name": "DDDDemo", //必须，这个对应模板的Templates
+    "identity": "DDDDemoTemplate", //可选，模板的唯一名称
+    "shortName": "ddd", //必须，这个对应模板的Short Name
+    "tags": {
+      "language": "C#" ,
+      "type":"project"
+    },
+    "sourceName": "DDDDemo",  // 可选，要替换的名字
+    "preferNameDirectory": true  // 可选，添加目录  
+}

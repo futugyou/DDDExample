@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Example.Domain.Core.Events;
+﻿using Example.Domain.Core.Events;
 using Example.Infrastruct.Data.Repository.EventSourcing;
-using Newtonsoft.Json;
+using System.Text.Json;
 
 namespace Example.Infrastruct.Data.EventStore
 {
@@ -16,7 +13,7 @@ namespace Example.Infrastruct.Data.EventStore
         }
         public void Save<T>(T @event) where T : Event
         {
-            var serializedData = JsonConvert.SerializeObject(@event);
+            var serializedData = JsonSerializer.Serialize(@event);
             var storedEvent = new StoredEvent(@event, serializedData, "");
             _eventStoreRepository.Store(storedEvent);
         }
