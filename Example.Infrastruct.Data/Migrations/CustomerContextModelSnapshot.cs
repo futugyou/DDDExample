@@ -3,7 +3,6 @@ using System;
 using Example.Infrastruct.Data.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
-using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Example.Infrastruct.Data.Migrations
@@ -15,27 +14,27 @@ namespace Example.Infrastruct.Data.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "3.0.0-preview.18572.1")
-                .HasAnnotation("Relational:MaxIdentifierLength", 128)
-                .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                .HasAnnotation("ProductVersion", "5.0.0");
 
             modelBuilder.Entity("Example.Domain.Models.Customer", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
+                        .HasColumnType("TEXT")
                         .HasColumnName("Id");
 
-                    b.Property<DateTime>("BirthDate");
+                    b.Property<DateTime>("BirthDate")
+                        .HasColumnType("TEXT");
 
                     b.Property<string>("Email")
                         .IsRequired()
-                        .HasColumnType("varchar(100)")
-                        .HasMaxLength(11);
+                        .HasMaxLength(11)
+                        .HasColumnType("varchar(100)");
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("varchar(100)")
-                        .HasMaxLength(100);
+                        .HasMaxLength(100)
+                        .HasColumnType("varchar(100)");
 
                     b.HasKey("Id");
 
@@ -46,25 +45,30 @@ namespace Example.Infrastruct.Data.Migrations
                 {
                     b.OwnsOne("Example.Domain.Models.Address", "Address", b1 =>
                         {
-                            b1.Property<Guid>("CustomerId");
+                            b1.Property<Guid>("CustomerId")
+                                .HasColumnType("TEXT");
 
-                            b1.Property<string>("City");
+                            b1.Property<string>("City")
+                                .HasColumnType("TEXT");
 
-                            b1.Property<string>("County");
+                            b1.Property<string>("County")
+                                .HasColumnType("TEXT");
 
-                            b1.Property<string>("Province");
+                            b1.Property<string>("Province")
+                                .HasColumnType("TEXT");
 
-                            b1.Property<string>("Street");
+                            b1.Property<string>("Street")
+                                .HasColumnType("TEXT");
 
                             b1.HasKey("CustomerId");
 
                             b1.ToTable("Customers");
 
-                            b1.HasOne("Example.Domain.Models.Customer")
-                                .WithOne("Address")
-                                .HasForeignKey("Example.Domain.Models.Address", "CustomerId")
-                                .OnDelete(DeleteBehavior.Cascade);
+                            b1.WithOwner()
+                                .HasForeignKey("CustomerId");
                         });
+
+                    b.Navigation("Address");
                 });
 #pragma warning restore 612, 618
         }

@@ -10,7 +10,7 @@ namespace Example.Application.ViewModels
     public class CustomerViewModel
     {
         [Key]
-        public Guid Id { get; set; }
+        public Guid Id { get; set; } = Guid.NewGuid();
 
         [Required(ErrorMessage = "The Name is Required")]
         [MinLength(2)]

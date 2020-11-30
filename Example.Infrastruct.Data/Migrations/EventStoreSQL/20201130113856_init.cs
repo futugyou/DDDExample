@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Example.Infrastruct.Data.Migrations.EventStoreSQL
 {
-    public partial class storedevent : Migration
+    public partial class init : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -11,12 +11,12 @@ namespace Example.Infrastruct.Data.Migrations.EventStoreSQL
                 name: "StoredEvents",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(nullable: false),
-                    AggregateId = table.Column<Guid>(nullable: false),
+                    Id = table.Column<Guid>(type: "TEXT", nullable: false),
+                    Data = table.Column<string>(type: "TEXT", nullable: true),
+                    User = table.Column<string>(type: "TEXT", nullable: true),
+                    AggregateId = table.Column<Guid>(type: "TEXT", nullable: false),
                     Action = table.Column<string>(type: "varchar(100)", nullable: true),
-                    CreateDate = table.Column<DateTime>(nullable: false),
-                    Data = table.Column<string>(nullable: true),
-                    User = table.Column<string>(nullable: true)
+                    CreateDate = table.Column<DateTime>(type: "TEXT", nullable: false)
                 },
                 constraints: table =>
                 {

@@ -38,7 +38,7 @@ namespace Example.Domain.CommandHandlers
                 NotifyValidationErrors(request);
                 return Task.FromResult(Unit.Value);
             }
-            var customer = new Customer(Guid.NewGuid(), request.Name, request.Email, request.BirthDate);
+            var customer = new Customer(request.Id, request.Name, request.Email, request.BirthDate);
             if (_customerRepository.GetByEmail(customer.Email) != null)
             {
                 //domain notification

@@ -30,7 +30,8 @@ namespace Example.Infrastruct.Data.Context
                 .Build();
 
             // 定义要使用的数据库
-            optionsBuilder.UseSqlServer(config.GetConnectionString("DefaultConnection"));
+            //optionsBuilder.UseSqlServer(config.GetConnectionString("DefaultConnection"));
+            optionsBuilder.UseSqlite("Data Source = ddd_demo.db");
         } 
     }
 }

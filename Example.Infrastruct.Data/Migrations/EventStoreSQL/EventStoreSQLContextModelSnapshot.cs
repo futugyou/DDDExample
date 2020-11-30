@@ -3,7 +3,6 @@ using System;
 using Example.Infrastruct.Data.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
-using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Example.Infrastruct.Data.Migrations.EventStoreSQL
@@ -15,27 +14,30 @@ namespace Example.Infrastruct.Data.Migrations.EventStoreSQL
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "3.0.0-preview.18572.1")
-                .HasAnnotation("Relational:MaxIdentifierLength", 128)
-                .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                .HasAnnotation("ProductVersion", "5.0.0");
 
             modelBuilder.Entity("Example.Domain.Core.Events.StoredEvent", b =>
                 {
                     b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd();
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("TEXT");
 
-                    b.Property<Guid>("AggregateId");
+                    b.Property<Guid>("AggregateId")
+                        .HasColumnType("TEXT");
 
-                    b.Property<string>("Data");
+                    b.Property<string>("Data")
+                        .HasColumnType("TEXT");
 
                     b.Property<string>("MessageType")
-                        .HasColumnName("Action")
-                        .HasColumnType("varchar(100)");
+                        .HasColumnType("varchar(100)")
+                        .HasColumnName("Action");
 
                     b.Property<DateTime>("Timestamp")
+                        .HasColumnType("TEXT")
                         .HasColumnName("CreateDate");
 
-                    b.Property<string>("User");
+                    b.Property<string>("User")
+                        .HasColumnType("TEXT");
 
                     b.HasKey("Id");
 
