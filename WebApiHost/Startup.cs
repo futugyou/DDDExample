@@ -23,7 +23,7 @@ namespace WebApiHost
             //启动配置   
             services.AddAutoMapperSetup();
             services.AddControllers();
-            services.AddMediatR(typeof(Startup),typeof(Example.Domain.CommandHandlers.CommandHandler));
+            services.AddMediatR(typeof(Startup), typeof(Example.Domain.CommandHandlers.CommandHandler));
 
             NativeInjectorBootStrapper.RegisterServices(services);
         }
@@ -31,7 +31,8 @@ namespace WebApiHost
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-            new DatabaseSourceListener(); 
+            app.UseDiagnosticListener(Configuration);
+            new DatabaseSourceListener();
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
@@ -44,6 +45,6 @@ namespace WebApiHost
             {
                 endpoints.MapControllers();
             });
-        } 
+        }
     }
 }

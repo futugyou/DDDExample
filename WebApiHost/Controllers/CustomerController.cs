@@ -45,6 +45,7 @@ namespace WebApiHost.Controllers
         {
             //this is only eventsource test 
             DatabaseEventSource.Instance.OnCammandExecute(2, "this is a sql");
+            DiagnosticObserver.Instance.RegisteDiagnosticObserver();
             return _customerAppService.GetById(id);
         }
     }
