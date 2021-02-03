@@ -5,6 +5,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using WebApiHost.Extensions;
+using OpenTelemetry.Trace;
+using OpenTelemetry.Resources;
 
 namespace WebApiHost
 {
@@ -20,6 +22,12 @@ namespace WebApiHost
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddOpenTelemetryTracing((builder) =>
+            builder.SetResourceBuilder(ResourceBuilder.CreateDefault().AddService("ddd-demo"))
+            .AddHttpClientInstrumentation()
+            .AddAspNetCoreInstrumentation()
+            .AddConsoleExporter()
+            );
             //启动配置   
             services.AddAutoMapperSetup();
             services.AddControllers();
