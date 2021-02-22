@@ -7,15 +7,15 @@
 
   <ItemGroup>
     <PackageReference Include="AutoMapper" Version="10.1.1" />
-    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="8.1.0" />
+    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="8.1.1" />
     <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="9.0.0" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="5.0.2">
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="6.0.0-preview.1.21102.2">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
-    <PackageReference Include="Microsoft.Extensions.DiagnosticAdapter" Version="3.1.11" />
-    <PackageReference Include="OpenTelemetry.Exporter.Console" Version="1.0.0-rc2" />
-    <PackageReference Include="OpenTelemetry.Exporter.Jaeger" Version="1.0.0-rc2" />
+    <PackageReference Include="Microsoft.Extensions.DiagnosticAdapter" Version="5.0.0-preview.3.20215.2" />
+    <PackageReference Include="OpenTelemetry.Exporter.Console" Version="1.0.1" />
+    <PackageReference Include="OpenTelemetry.Exporter.Jaeger" Version="1.0.1" />
     <PackageReference Include="OpenTelemetry.Extensions.Hosting" Version="1.0.0-rc2" />
     <PackageReference Include="OpenTelemetry.Instrumentation.AspNetCore" Version="1.0.0-rc2" />
     <PackageReference Include="OpenTelemetry.Instrumentation.Http" Version="1.0.0-rc2" />
@@ -23,7 +23,7 @@
   </ItemGroup>
 
   <PropertyGroup>
-    <TargetFramework>net5.0</TargetFramework>
+    <TargetFramework>net6.0</TargetFramework>
     <AspNetCoreHostingModel>InProcess</AspNetCoreHostingModel>
   </PropertyGroup>
 

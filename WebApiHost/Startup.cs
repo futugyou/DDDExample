@@ -26,7 +26,7 @@ namespace WebApiHost
             builder.SetResourceBuilder(ResourceBuilder.CreateDefault().AddService("ddd-demo"))
             .AddHttpClientInstrumentation()
             .AddAspNetCoreInstrumentation()
-            .AddConsoleExporter()
+            .AddJaegerExporter()
             );
             //启动配置   
             services.AddAutoMapperSetup();

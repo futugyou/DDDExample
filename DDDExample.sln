@@ -1,19 +1,19 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.26124.0
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31004.235
 MinimumVisualStudioVersion = 15.0.26124.0
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApiHost", "WebApiHost\WebApiHost.csproj", "{A722F45D-A97D-40EF-8302-4545AD0AFE80}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebApiHost", "WebApiHost\WebApiHost.csproj", "{A722F45D-A97D-40EF-8302-4545AD0AFE80}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApiHost.UnitTest", "WebApiHost.UnitTest\WebApiHost.UnitTest.csproj", "{D6FDF5EB-B5EB-4954-AEA9-9BB3EA3E7A17}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebApiHost.UnitTest", "WebApiHost.UnitTest\WebApiHost.UnitTest.csproj", "{D6FDF5EB-B5EB-4954-AEA9-9BB3EA3E7A17}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Example.Domain", "Example.Domain\Example.Domain.csproj", "{8F5800A2-43E1-441D-8CCF-91EF9D17D87E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Example.Domain", "Example.Domain\Example.Domain.csproj", "{8F5800A2-43E1-441D-8CCF-91EF9D17D87E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Example.Infrastruct.Data", "Example.Infrastruct.Data\Example.Infrastruct.Data.csproj", "{8877D589-D26E-400D-B893-420433ED303A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Example.Infrastruct.Data", "Example.Infrastruct.Data\Example.Infrastruct.Data.csproj", "{8877D589-D26E-400D-B893-420433ED303A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Example.Application", "Example.Application\Example.Application.csproj", "{2933E2C9-278B-4681-8D80-D1D5CCD0E998}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Example.Application", "Example.Application\Example.Application.csproj", "{2933E2C9-278B-4681-8D80-D1D5CCD0E998}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Example.Domain.Core", "Example.Domain.Core\Example.Domain.Core.csproj", "{D41A575C-4829-49C2-AAF7-38430205F564}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Example.Domain.Core", "Example.Domain.Core\Example.Domain.Core.csproj", "{D41A575C-4829-49C2-AAF7-38430205F564}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -23,9 +23,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 		Release|x64 = Release|x64
 		Release|x86 = Release|x86
-	EndGlobalSection
-	GlobalSection(SolutionProperties) = preSolution
-		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{A722F45D-A97D-40EF-8302-4545AD0AFE80}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -100,5 +97,11 @@ Global
 		{D41A575C-4829-49C2-AAF7-38430205F564}.Release|x64.Build.0 = Release|Any CPU
 		{D41A575C-4829-49C2-AAF7-38430205F564}.Release|x86.ActiveCfg = Release|Any CPU
 		{D41A575C-4829-49C2-AAF7-38430205F564}.Release|x86.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {C8AF0F05-9617-4CED-A036-9B2EC09873AA}
 	EndGlobalSection
 EndGlobal
