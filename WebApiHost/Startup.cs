@@ -7,6 +7,7 @@ using Microsoft.Extensions.Hosting;
 using WebApiHost.Extensions;
 using OpenTelemetry.Trace;
 using OpenTelemetry.Resources;
+using Microsoft.OpenApi.Models;
 
 namespace WebApiHost
 {
@@ -23,14 +24,21 @@ namespace WebApiHost
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddOpenTelemetryTracing((builder) =>
-            builder.SetResourceBuilder(ResourceBuilder.CreateDefault().AddService("ddd-demo"))
-            .AddHttpClientInstrumentation()
-            .AddAspNetCoreInstrumentation()
-            .AddJaegerExporter()
+            {
+                builder
+                .SetResourceBuilder(ResourceBuilder.CreateDefault().AddService("ddd-demo"))
+                .AddHttpClientInstrumentation()
+                .AddAspNetCoreInstrumentation()
+                .AddJaegerExporter();
+            }
             );
             //启动配置   
             services.AddAutoMapperSetup();
             services.AddControllers();
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "WebApplication1", Version = "v1" });
+            });
             services.AddMediatR(typeof(Startup), typeof(Example.Domain.CommandHandlers.CommandHandler));
 
             NativeInjectorBootStrapper.RegisterServices(services);
@@ -44,6 +52,8 @@ namespace WebApiHost
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
+                app.UseSwagger();
+                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "WebApplication1 v1"));
             }
             app.UseRouting();
 

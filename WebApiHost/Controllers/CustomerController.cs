@@ -28,18 +28,23 @@ namespace WebApiHost.Controllers
         public void SaveCustomer(CustomerViewModel customer)
         {
             //this is only eventsource test 
-            var sub = new SubPayload(customer.Id, customer.Name);
-            var payload = new Payload
-            {
-                Sub = sub,
-                KeyValuePairs = new Dictionary<Guid, SubPayload> { { customer.Id, sub } },
-                SubPayloads = new List<SubPayload> { sub }
-            };
-            DatabaseEventSource.Instance.PayloadHad(payload);
+            //var sub = new SubPayload(customer.Id, customer.Name);
+            //var payload = new Payload
+            //{
+            //    Sub = sub,
+            //    KeyValuePairs = new Dictionary<Guid, SubPayload> { { customer.Id, sub } },
+            //    SubPayloads = new List<SubPayload> { sub }
+            //};
+            //DatabaseEventSource.Instance.PayloadHad(payload);
             _customerAppService.Register(customer);
-            DatabaseEventSource.Instance.RegisterComplete();
+            //DatabaseEventSource.Instance.RegisterComplete();
         }
 
+        /// <summary>
+        /// 7246784B-782D-4B9F-965E-E2FD3547FC90
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [HttpGet]
         public CustomerViewModel GetCustomer(Guid id)
         {
