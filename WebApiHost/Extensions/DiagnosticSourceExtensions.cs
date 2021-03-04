@@ -24,7 +24,20 @@ namespace WebApiHost.Extensions
             Console.WriteLine($"send reply status code:{httpResponse.StatusCode} ; Elaped:{elaped}");
         }
     }
+    public sealed class DiagnosticRequestCollector
+    {
+        [DiagnosticName("Microsoft.AspNetCore.Hosting.BeginRequest")]
+        public void OnReveiveRequest(HttpContext httpContext, long timestamp)
+        {
+            Console.WriteLine($"Reveice request url:{httpContext.Request.ToString()} ; Timestamp:{timestamp}");
+        }
 
+        [DiagnosticName("Microsoft.AspNetCore.Hosting.EndRequest")]
+        public void OnSendReply(HttpContext httpContext, long currentTimestamp)
+        {
+            Console.WriteLine($"send reply status code:{httpContext.Response.StatusCode} ; Timestamp:{currentTimestamp}");
+        }
+    }
     public sealed class DiagnosticObserver
     {
         public static readonly DiagnosticObserver Instance = new DiagnosticObserver();
@@ -72,6 +85,10 @@ namespace WebApiHost.Extensions
                     if (listener.Name == "Web")
                     {
                         listener.SubscribeWithAdapter(new DiagnosticCollector());
+                    }
+                    if (listener.Name == "Microsoft.AspNetCore")
+                    {
+                        listener.SubscribeWithAdapter(new DiagnosticRequestCollector());
                     }
                 });
             }
