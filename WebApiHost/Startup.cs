@@ -8,6 +8,7 @@ using WebApiHost.Extensions;
 using OpenTelemetry.Trace;
 using OpenTelemetry.Resources;
 using Microsoft.OpenApi.Models;
+using LogDashboard;
 
 namespace WebApiHost
 {
@@ -30,8 +31,8 @@ namespace WebApiHost
                 .AddHttpClientInstrumentation()
                 .AddAspNetCoreInstrumentation()
                 .AddJaegerExporter();
-            }
-            );
+            });
+            services.AddLogDashboard();
             //启动配置   
             services.AddAutoMapperSetup();
             services.AddControllers();
@@ -56,7 +57,7 @@ namespace WebApiHost
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "WebApplication1 v1"));
             }
             app.UseRouting();
-
+            app.UseLogDashboard();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
