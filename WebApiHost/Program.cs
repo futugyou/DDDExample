@@ -1,8 +1,10 @@
-﻿using Microsoft.AspNetCore.Hosting;
+﻿using Example.Infrastruct.Data.Context;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Hosting;
 using Serilog;
 using Serilog.Events;
 using System;
+using WebApiHost.Extensions;
 
 namespace WebApiHost
 {
@@ -22,7 +24,19 @@ namespace WebApiHost
               .WriteTo.File($"{AppContext.BaseDirectory}Logs/serilog.log", rollingInterval: RollingInterval.Day, outputTemplate: logOutputTemplate)
               .CreateLogger();
 
-            CreateHostBuilder(args).Build().Run();
+            var host = CreateHostBuilder(args).Build();
+            try
+            {
+                //see IWebHostExtensions in https://github.com/dotnet-architecture/eShopOnContainers/
+                host.MigrateDbContext<CustomerContext>((_, __) => { })
+                   .MigrateDbContext<EventStoreSQLContext>((_, __) => { });
+            }
+            catch (Exception ex)
+            {
+                Log.Fatal(ex, "Program terminated unexpectedly!");
+                throw;
+            }
+            host.Run();
         }
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>
