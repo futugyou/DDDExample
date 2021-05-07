@@ -16,13 +16,16 @@ using Example.Infrastruct.Data.Repository;
 using Example.Infrastruct.Data.Repository.EventSourcing;
 using Example.Infrastruct.Data.UoW;
 using MediatR;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Pomelo.EntityFrameworkCore.MySql.Infrastructure;
 
 namespace WebApiHost.Extensions
 {
     public class NativeInjectorBootStrapper
     {
-        public static void RegisterServices(IServiceCollection services)
+        public static void RegisterServices(IServiceCollection services, IConfiguration config)
         {
             //application
             services.AddScoped<ICustomerAppService, CustomerAppService>();
@@ -41,12 +44,24 @@ namespace WebApiHost.Extensions
 
             //infrastruct
             services.AddScoped<ICustomerRepository, CustomerRepository>();
-            services.AddScoped<CustomerContext>();
+
+            var serverVersion = new MySqlServerVersion(new Version(config["MysqlVersion"]));
+            services.AddDbContextPool<CustomerContext>(
+                dbContextOptions => dbContextOptions
+                    .UseMySql(config.GetConnectionString("Default"), serverVersion)
+                    .EnableSensitiveDataLogging()
+                    .EnableDetailedErrors()
+            );
             services.AddScoped<IUnitOfWork, UnitOfWork>();
 
             //ÊÂ¼þËÝÔ´
             services.AddScoped<IEventStoreRepository, EventStoreRepository>();
-            services.AddScoped<EventStoreSQLContext>();
+            services.AddDbContextPool<EventStoreSQLContext>(
+                dbContextOptions => dbContextOptions
+                    .UseMySql(config.GetConnectionString("Default"), serverVersion)
+                    .EnableSensitiveDataLogging()
+                    .EnableDetailedErrors()
+            );
             services.AddScoped<IEventStore, SqlEventStore>();
 
         }

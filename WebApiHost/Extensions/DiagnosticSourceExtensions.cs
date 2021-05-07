@@ -1,5 +1,4 @@
-﻿
-using Microsoft.AspNetCore.Builder;
+﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DiagnosticAdapter;
@@ -24,6 +23,7 @@ namespace WebApiHost.Extensions
             Console.WriteLine($"send reply status code:{httpResponse.StatusCode} ; Elaped:{elaped}");
         }
     }
+
     public sealed class DiagnosticRequestCollector
     {
         [DiagnosticName("Microsoft.AspNetCore.Hosting.BeginRequest")]
@@ -38,6 +38,7 @@ namespace WebApiHost.Extensions
             Console.WriteLine($"send reply status code:{httpContext.Response.StatusCode} ; Timestamp:{currentTimestamp}");
         }
     }
+
     public sealed class DiagnosticObserver
     {
         public static readonly DiagnosticObserver Instance = new DiagnosticObserver();
@@ -45,7 +46,6 @@ namespace WebApiHost.Extensions
         private DiagnosticObserver() { }
         public void RegisteDiagnosticObserver()
         {
-            //var source = new DiagnosticListener("Web");
             var stopwatch = Stopwatch.StartNew();
             if (source.IsEnabled("ReveiveRequest"))
             {
@@ -58,8 +58,8 @@ namespace WebApiHost.Extensions
                 source.Write("SendReply", new { HttpResponse = response, Elaped = stopwatch.Elapsed });
             }
         }
-
     }
+
     public static class DiagnosticSourceExtensions
     {
         public static IApplicationBuilder UseDiagnosticListener(this IApplicationBuilder builder, IConfiguration configuration = null)
@@ -77,8 +77,7 @@ namespace WebApiHost.Extensions
                 _next = next;
             }
 
-
-            private void RegisteDiagnosticObservable()
+            private static void RegisteDiagnosticObservable()
             {
                 DiagnosticListener.AllListeners.Subscribe(listener =>
                 {

@@ -10,6 +10,7 @@ namespace WebApiHost
     {
         public static void Main(string[] args)
         {
+            // This code for Serilog&LogDashboard ,It aslo can be used in DDD project!
             string logOutputTemplate = "{Timestamp:HH:mm:ss.fff zzz} || {Level} || {SourceContext:l} || {Message} || {Exception} ||end {NewLine}";
             Log.Logger = new LoggerConfiguration()
               .MinimumLevel.Debug()
@@ -20,6 +21,7 @@ namespace WebApiHost
               .WriteTo.Console(theme: Serilog.Sinks.SystemConsole.Themes.AnsiConsoleTheme.Code)
               .WriteTo.File($"{AppContext.BaseDirectory}Logs/serilog.log", rollingInterval: RollingInterval.Day, outputTemplate: logOutputTemplate)
               .CreateLogger();
+
             CreateHostBuilder(args).Build().Run();
         }
 

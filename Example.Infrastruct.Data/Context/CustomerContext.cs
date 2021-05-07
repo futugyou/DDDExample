@@ -9,7 +9,10 @@ namespace Example.Infrastruct.Data.Context
 {
     public class CustomerContext : DbContext
     {
-        public CustomerContext()
+        public DbSet<Customer> Customers { get; set; }
+
+        public CustomerContext(DbContextOptions<CustomerContext> options)
+          : base(options)
         {
             ChangeTracker.StateChanged += ChangeTracker_StateChanged;
             ChangeTracker.Tracked += ChangeTracker_Tracked;
@@ -25,13 +28,13 @@ namespace Example.Infrastruct.Data.Context
 
         }
 
-        public DbSet<Customer> Customers { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfiguration(new CustomerMap());
 
             base.OnModelCreating(modelBuilder);
         }
+
         /// <summary>
         /// 重写连接数据库
         /// </summary>
@@ -39,15 +42,16 @@ namespace Example.Infrastruct.Data.Context
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             // 从 appsetting.json 中获取配置信息
-            var config = new ConfigurationBuilder()
-                .SetBasePath(Directory.GetCurrentDirectory())
-                .AddJsonFile("appsettings.json")
-                .Build();
+            //var config = new ConfigurationBuilder()
+            //    .SetBasePath(Directory.GetCurrentDirectory())
+            //    .AddJsonFile("appsettings.json")
+            //    .Build();
 
             // 定义要使用的数据库
-            //optionsBuilder.UseSqlServer(config.GetConnectionString("DefaultConnection"));
-            optionsBuilder.UseSqlite("Data Source = ddd_demo.db");
-            optionsBuilder.AddInterceptors(_commandInterceptor, _connectInterceptor, _transactionInterceptor);
+            //var serverVersion = new MySqlServerVersion(new Version(config["MysqlVersion"]));
+            //optionsBuilder.UseMySql(config.GetConnectionString("Default"), serverVersion);
+            //optionsBuilder.UseSqlite("Data Source = ddd_demo.db");
+            //optionsBuilder.AddInterceptors(_commandInterceptor, _connectInterceptor, _transactionInterceptor);
         }
 
         private static readonly TaggedQueryCommandInterceptor _commandInterceptor = new TaggedQueryCommandInterceptor();

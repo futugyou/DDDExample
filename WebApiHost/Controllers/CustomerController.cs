@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using Example.Application.Interfaces;
 using Example.Application.ViewModels;
 using Microsoft.AspNetCore.Mvc;
-using WebApiHost.Extensions;
 
 namespace WebApiHost.Controllers
 {
@@ -27,17 +26,7 @@ namespace WebApiHost.Controllers
         [HttpPost]
         public void SaveCustomer(CustomerViewModel customer)
         {
-            //this is only eventsource test 
-            //var sub = new SubPayload(customer.Id, customer.Name);
-            //var payload = new Payload
-            //{
-            //    Sub = sub,
-            //    KeyValuePairs = new Dictionary<Guid, SubPayload> { { customer.Id, sub } },
-            //    SubPayloads = new List<SubPayload> { sub }
-            //};
-            //DatabaseEventSource.Instance.PayloadHad(payload);
             _customerAppService.Register(customer);
-            //DatabaseEventSource.Instance.RegisterComplete();
         }
 
         /// <summary>
@@ -48,9 +37,6 @@ namespace WebApiHost.Controllers
         [HttpGet]
         public CustomerViewModel GetCustomer(Guid id)
         {
-            //this is only eventsource test 
-            //DatabaseEventSource.Instance.OnCammandExecute(2, "this is a sql");
-            //DiagnosticObserver.Instance.RegisteDiagnosticObserver();
             return _customerAppService.GetById(id);
         }
     }
