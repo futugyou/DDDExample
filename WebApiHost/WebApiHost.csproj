@@ -15,6 +15,7 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
     <PackageReference Include="Microsoft.Extensions.DiagnosticAdapter" Version="5.0.0-preview.3.20215.2" />
+    <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.10.14" />
     <PackageReference Include="OpenTelemetry.Exporter.Console" Version="1.1.0-beta1" />
     <PackageReference Include="OpenTelemetry.Exporter.Jaeger" Version="1.1.0-beta1" />
     <PackageReference Include="OpenTelemetry.Extensions.Hosting" Version="1.0.0-rc3" />
@@ -30,6 +31,8 @@
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
     <AspNetCoreHostingModel>InProcess</AspNetCoreHostingModel>
+    <UserSecretsId>0bf8c6e8-fc42-4b48-83fa-3ffa32888f55</UserSecretsId>
+    <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
   </PropertyGroup>
 
 
