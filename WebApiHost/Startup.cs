@@ -1,14 +1,14 @@
-﻿using MediatR;
+﻿using LogDashboard;
+using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using WebApiHost.Extensions;
-using OpenTelemetry.Trace;
-using OpenTelemetry.Resources;
 using Microsoft.OpenApi.Models;
-using LogDashboard;
+using OpenTelemetry.Resources;
+using OpenTelemetry.Trace;
+using WebApiHost.Extensions;
 
 namespace WebApiHost
 {
@@ -48,8 +48,6 @@ namespace WebApiHost
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-            app.UseDiagnosticListener(Configuration);
-            _ = new DatabaseSourceListener();
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
