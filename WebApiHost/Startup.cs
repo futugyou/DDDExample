@@ -6,6 +6,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
+using OpenTelemetry.Exporter;
 using OpenTelemetry.Resources;
 using OpenTelemetry.Trace;
 using WebApiHost.Extensions;
@@ -24,18 +25,24 @@ namespace WebApiHost
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddControllers();
             services.AddOpenTelemetryTracing((builder) =>
             {
                 builder
-                .SetResourceBuilder(ResourceBuilder.CreateDefault().AddService("ddd-demo"))
+                .SetResourceBuilder(ResourceBuilder.CreateDefault().AddService(Configuration.GetValue<string>("Jaeger:ServiceName")))
                 .AddHttpClientInstrumentation()
                 .AddAspNetCoreInstrumentation()
-                .AddJaegerExporter();
+                .AddEntityFrameworkCoreInstrumentation(config => config.SetDbStatementForText = true)
+                .AddJaegerExporter(config =>
+                {
+                    Configuration.GetSection("Jaeger").Bind(config);
+                });
             });
+            //it doesn's work ,so use 'Bind'
+            services.Configure<JaegerExporterOptions>(Configuration.GetSection("Jaeger"));
             services.AddLogDashboard();
             //启动配置   
             services.AddAutoMapperSetup();
-            services.AddControllers();
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "DDD project", Version = "v1" });

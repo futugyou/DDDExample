@@ -19,7 +19,7 @@ namespace Example.Infrastruct.Data.Mappings
 
             builder.Property(c => c.Email)
                 .HasColumnType("varchar(100)")
-                .HasMaxLength(11)
+                .HasMaxLength(100)
                 .IsRequired();
             builder.OwnsOne(p => p.Address);
         }
