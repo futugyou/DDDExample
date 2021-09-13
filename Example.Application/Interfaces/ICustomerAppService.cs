@@ -11,10 +11,10 @@ namespace Example.Application.Interfaces
     /// </summary>
     public interface ICustomerAppService : IDisposable
     {
-        void Register(CustomerViewModel customerViewModel);
-        IEnumerable<CustomerViewModel> GetAll();
-        CustomerViewModel GetById(Guid id);
-        void Update(CustomerViewModel customerViewModel);
-        void Remove(Guid id);
+        Task Register(CustomerViewModel customerViewModel);
+        Task<IEnumerable<CustomerViewModel>> GetAll();
+        Task<CustomerViewModel> GetById(Guid id);
+        Task Update(CustomerViewModel customerViewModel);
+        Task Remove(Guid id);
     }
 }

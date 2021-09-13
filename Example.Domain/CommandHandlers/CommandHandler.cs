@@ -19,15 +19,15 @@ namespace Example.Domain.CommandHandlers
         }
 
 
-        protected void NotifyValidationErrors(Command command)
+        protected async Task NotifyValidationErrors(Command command)
         {
             foreach (var item in command.ValidationResult.Errors)
             {
-                _mediatorHandler.RaiseEvent(new DomainNotification("", item.ErrorMessage));
+                await _mediatorHandler.RaiseEvent(new DomainNotification("", item.ErrorMessage));
             }
         }
 
-        public bool Commit() => _unitOfWork.Commit();
+        public async Task<bool> CommitAsync() => await _unitOfWork.CommitAsync();
 
     }
 }

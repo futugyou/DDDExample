@@ -14,11 +14,11 @@ namespace Example.Infrastruct.Data.EventStore
         {
             _eventStoreRepository = eventStoreRepository;
         }
-        public void Save<T>(T @event) where T : Event
+        public async Task Save<T>(T @event) where T : Event
         {
             var serializedData = JsonConvert.SerializeObject(@event);
             var storedEvent = new StoredEvent(@event, serializedData, "");
-            _eventStoreRepository.Store(storedEvent);
+            await _eventStoreRepository.Store(storedEvent);
         }
     }
 }

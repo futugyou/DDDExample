@@ -8,7 +8,7 @@ namespace Example.Infrastruct.Data.Repository.EventSourcing
 {
     public interface IEventStoreRepository : IDisposable
     {
-        void Store(StoredEvent storedEvent);
-        IList<StoredEvent> All(Guid aggregateId);
+        Task Store(StoredEvent storedEvent);
+        Task<IList<StoredEvent>> All(Guid aggregateId);
     }
 }

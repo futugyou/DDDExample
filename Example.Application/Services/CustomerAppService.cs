@@ -32,31 +32,33 @@ namespace Example.Application.Services
             _mediatorHandler = mediatorHandler;
         }
 
-        public IEnumerable<CustomerViewModel> GetAll()
+        public async Task<IEnumerable<CustomerViewModel>> GetAll()
         {
-            return _customerRepository.GetAll().ProjectTo<CustomerViewModel>(_mapper.ConfigurationProvider);
+            var domain = await _customerRepository.GetAll();
+            return domain.ProjectTo<CustomerViewModel>(_mapper.ConfigurationProvider);
         }
 
-        public CustomerViewModel GetById(Guid id)
+        public async Task<CustomerViewModel> GetById(Guid id)
         {
-            return _mapper.Map<CustomerViewModel>(_customerRepository.GetById(id));
+            var domain = await _customerRepository.GetById(id);
+            return _mapper.Map<CustomerViewModel>(domain);
         }
 
-        public void Register(CustomerViewModel customerViewModel)
+        public async Task Register(CustomerViewModel customerViewModel)
         {
             var registerCommand = _mapper.Map<RegisterCustomerCommand>(customerViewModel);
             //command bus
-            _mediatorHandler.SendCommand(registerCommand);
+            await _mediatorHandler.SendCommand(registerCommand);
         }
 
-        public void Update(CustomerViewModel customerViewModel)
+        public async Task Update(CustomerViewModel customerViewModel)
         {
-            _customerRepository.Update(_mapper.Map<Customer>(customerViewModel));
+            await _customerRepository.Update(_mapper.Map<Customer>(customerViewModel));
         }
 
-        public void Remove(Guid id)
+        public async Task Remove(Guid id)
         {
-            _customerRepository.Remove(id);
+            await _customerRepository.Remove(id);
         }
 
         public void Dispose()

@@ -13,32 +13,32 @@ namespace Example.Domain.Interfaces
         /// 添加
         /// </summary>
         /// <param name="obj"></param>
-        void Add(TEntity obj);
+        Task Add(TEntity obj);
         /// <summary>
         /// 根据id获取对象
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        TEntity GetById(Guid id);
+        Task<TEntity> GetById(Guid id);
         /// <summary>
         /// 获取列表
         /// </summary>
         /// <returns></returns>
-        IQueryable<TEntity> GetAll();
+        Task<IQueryable<TEntity>> GetAll();
         /// <summary>
         /// 根据对象进行更新
         /// </summary>
         /// <param name="obj"></param>
-        void Update(TEntity obj);
+        Task Update(TEntity obj);
         /// <summary>
         /// 根据id删除
         /// </summary>
         /// <param name="id"></param>
-        void Remove(Guid id);
+        Task Remove(Guid id);
         /// <summary>
         /// 保存
         /// </summary>
         /// <returns></returns>
-        int SaveChanges();
+        Task<int> SaveChanges();
     }
 }

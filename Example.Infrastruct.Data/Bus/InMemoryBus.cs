@@ -19,17 +19,17 @@ namespace Example.Infrastruct.Data.Bus
             _eventStore = eventStore;
         }
 
-        public Task RaiseEvent<T>(T @event) where T : Event
+        public async Task RaiseEvent<T>(T @event) where T : Event
         {
             //除去领域通知，全部进事件溯源
             if (!@event.MessageType.Equals("DomainNotification"))
-                _eventStore?.Save(@event);
-            return _mediator.Publish(@event);
+                await _eventStore?.Save(@event);
+            await _mediator.Publish(@event);
         }
 
-        public Task SendCommand<T>(T command) where T : Command
+        public async Task SendCommand<T>(T command) where T : Command
         {
-            return _mediator.Send(command);
+            await _mediator.Send(command);
         }
     }
 }

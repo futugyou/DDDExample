@@ -31,27 +31,27 @@ namespace Example.Domain.CommandHandlers
             _customerRepository.Dispose();
         }
 
-        public Task<Unit> Handle(RegisterCustomerCommand request, CancellationToken cancellationToken)
+        public async Task<Unit> Handle(RegisterCustomerCommand request, CancellationToken cancellationToken)
         {
             if (!request.IsValid())
             {
-                NotifyValidationErrors(request);
-                return Task.FromResult(Unit.Value);
+                await NotifyValidationErrors(request);
+                return Unit.Value;
             }
             var customer = new Customer(request.Id, request.Name, request.Email, request.BirthDate);
-            if (_customerRepository.GetByEmail(customer.Email) != null)
+            if (await _customerRepository.GetByEmail(customer.Email) != null)
             {
                 //domain notification
-                _mediatorHandler.RaiseEvent(new DomainNotification(customer.Id.ToString(), "email address already exists"));
-                return Task.FromResult(Unit.Value);
+                await _mediatorHandler.RaiseEvent(new DomainNotification(customer.Id.ToString(), "email address already exists"));
+                return Unit.Value;
             }
-            _customerRepository.Add(customer);
-            if (Commit())
+            await _customerRepository.Add(customer);
+            if (await CommitAsync())
             {
                 //domain event
-                _mediatorHandler.RaiseEvent(new CustomerRegisterEvent(customer.Id, customer.Name, customer.Email, customer.BirthDate));
+                await _mediatorHandler.RaiseEvent(new CustomerRegisterEvent(customer.Id, customer.Name, customer.Email, customer.BirthDate));
             }
-            return Task.FromResult(Unit.Value);
+            return Unit.Value;
         }
     }
 }

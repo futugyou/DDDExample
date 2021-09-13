@@ -24,9 +24,9 @@ namespace WebApiHost.Controllers
         /// <param name="email"></param>
         /// <param name="birthDate"></param>
         [HttpPost]
-        public void SaveCustomer(CustomerViewModel customer)
+        public async Task SaveCustomer(CustomerViewModel customer)
         {
-            _customerAppService.Register(customer);
+            await _customerAppService.Register(customer);
         }
 
         /// <summary>
@@ -35,9 +35,9 @@ namespace WebApiHost.Controllers
         /// <param name="id"></param>
         /// <returns></returns>
         [HttpGet]
-        public CustomerViewModel GetCustomer(Guid id)
+        public async Task<CustomerViewModel> GetCustomer(Guid id)
         {
-            return _customerAppService.GetById(id);
+            return await _customerAppService.GetById(id);
         }
     }
 }

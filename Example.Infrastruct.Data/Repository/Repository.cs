@@ -19,9 +19,9 @@ namespace Example.Infrastruct.Data.Repository
             _context = context;
             _dbSet = context.Set<TEntity>();
         }
-        public void Add(TEntity obj)
+        public async Task Add(TEntity obj)
         {
-            _dbSet.Add(obj);
+            await _dbSet.AddAsync(obj);
         }
 
         public void Dispose()
@@ -30,33 +30,34 @@ namespace Example.Infrastruct.Data.Repository
             GC.SuppressFinalize(this);
         }
 
-        public IQueryable<TEntity> GetAll()
+        public async Task<IQueryable<TEntity>> GetAll()
         {
             return _dbSet;
         }
 
-        public TEntity GetById(Guid id)
+        public async Task<TEntity> GetById(Guid id)
         {
-            return _dbSet.Find(id);
+            return await _dbSet.FindAsync(id);
         }
 
-        public void Remove(Guid id)
+        public async Task Remove(Guid id)
         {
-            var entity = _dbSet.Find(id);
+            var entity = await _dbSet.FindAsync(id);
             if (entity != null)
             {
                 _dbSet.Remove(entity);
             }
         }
 
-        public int SaveChanges()
+        public async Task<int> SaveChanges()
         {
-           return _context.SaveChanges();
+            return await _context.SaveChangesAsync();
         }
 
-        public void Update(TEntity obj)
+        public Task Update(TEntity obj)
         {
             _dbSet.Update(obj);
+            return Task.CompletedTask;
         }
     }
 }

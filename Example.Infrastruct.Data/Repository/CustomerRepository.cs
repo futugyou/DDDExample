@@ -3,6 +3,7 @@ using Example.Domain.Models;
 using Example.Domain.Interfaces;
 using Example.Infrastruct.Data.Context;
 using System.Linq;
+using Microsoft.EntityFrameworkCore;
 
 namespace Example.Infrastruct.Data.Repository
 {
@@ -15,6 +16,6 @@ namespace Example.Infrastruct.Data.Repository
         {
         }
         //对特例接口进行实现
-        public Customer GetByEmail(string email) => _dbSet.FirstOrDefault(p => p.Email == email);
+        public async Task<Customer> GetByEmail(string email) => await _dbSet.FirstOrDefaultAsync(p => p.Email == email);
     }
 }

@@ -10,9 +10,9 @@ namespace Example.Infrastruct.Data.UoW
         {
             _dbContext = dbContext;
         }
-        public bool Commit()
+        public async Task<bool> CommitAsync()
         {
-            return _dbContext.SaveChanges() > 0;
+            return (await _dbContext.SaveChangesAsync()) > 0;
         }
 
         public void Dispose()

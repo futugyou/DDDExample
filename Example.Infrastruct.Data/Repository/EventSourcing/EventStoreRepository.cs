@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using Example.Domain.Core.Events;
 using Example.Infrastruct.Data.Context;
+using Microsoft.EntityFrameworkCore;
 
 namespace Example.Infrastruct.Data.Repository.EventSourcing
 {
@@ -14,9 +15,9 @@ namespace Example.Infrastruct.Data.Repository.EventSourcing
         {
             _eventStoreSQLContext = eventStoreSQLContext;
         }
-        public IList<StoredEvent> All(Guid aggregateId)
+        public async Task<IList<StoredEvent>> All(Guid aggregateId)
         {
-            return _eventStoreSQLContext.StoredEvents.Where(p => p.AggregateId == aggregateId).ToList();
+            return await _eventStoreSQLContext.StoredEvents.Where(p => p.AggregateId == aggregateId).ToListAsync();
         }
 
         public void Dispose()
@@ -24,10 +25,10 @@ namespace Example.Infrastruct.Data.Repository.EventSourcing
             _eventStoreSQLContext.Dispose();
         }
 
-        public void Store(StoredEvent storedEvent)
+        public async Task Store(StoredEvent storedEvent)
         {
             _eventStoreSQLContext.Add(storedEvent);
-            _eventStoreSQLContext.SaveChanges();
+            await _eventStoreSQLContext.SaveChangesAsync();
         }
     }
 }
