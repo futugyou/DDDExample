@@ -3,17 +3,17 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.31004.235
 MinimumVisualStudioVersion = 15.0.26124.0
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebApiHost", "WebApiHost\WebApiHost.csproj", "{A722F45D-A97D-40EF-8302-4545AD0AFE80}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebApiHost", "src\WebApiHost\WebApiHost.csproj", "{A722F45D-A97D-40EF-8302-4545AD0AFE80}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebApiHost.UnitTest", "WebApiHost.UnitTest\WebApiHost.UnitTest.csproj", "{D6FDF5EB-B5EB-4954-AEA9-9BB3EA3E7A17}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebApiHost.UnitTest", "src\WebApiHost.UnitTest\WebApiHost.UnitTest.csproj", "{D6FDF5EB-B5EB-4954-AEA9-9BB3EA3E7A17}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Example.Domain", "Example.Domain\Example.Domain.csproj", "{8F5800A2-43E1-441D-8CCF-91EF9D17D87E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Example.Domain", "src\Example.Domain\Example.Domain.csproj", "{8F5800A2-43E1-441D-8CCF-91EF9D17D87E}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Example.Infrastruct.Data", "Example.Infrastruct.Data\Example.Infrastruct.Data.csproj", "{8877D589-D26E-400D-B893-420433ED303A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Example.Infrastruct.Data", "src\Example.Infrastruct.Data\Example.Infrastruct.Data.csproj", "{8877D589-D26E-400D-B893-420433ED303A}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Example.Application", "Example.Application\Example.Application.csproj", "{2933E2C9-278B-4681-8D80-D1D5CCD0E998}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Example.Application", "src\Example.Application\Example.Application.csproj", "{2933E2C9-278B-4681-8D80-D1D5CCD0E998}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Example.Domain.Core", "Example.Domain.Core\Example.Domain.Core.csproj", "{D41A575C-4829-49C2-AAF7-38430205F564}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Example.Domain.Core", "src\Example.Domain.Core\Example.Domain.Core.csproj", "{D41A575C-4829-49C2-AAF7-38430205F564}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
