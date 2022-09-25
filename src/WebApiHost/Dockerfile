@@ -7,22 +7,18 @@ EXPOSE 443
 
 FROM mcr.microsoft.com/dotnet/sdk:${NET_IMAGE} AS build
 WORKDIR /src
-
 COPY ["WebApiHost/WebApiHost.csproj", "WebApiHost/"]
-COPY ["Example.Infrastruct.Data/Example.Infrastruct.Data.csproj", "Example.Infrastruct.Data/"]
-COPY ["Example.Domain.Core/Example.Domain.Core.csproj", "Example.Domain.Core/"]
-COPY ["Example.Domain/Example.Domain.csproj", "Example.Domain/"]
 COPY ["Example.Application/Example.Application.csproj", "Example.Application/"]
-COPY ["WebApiHost.UnitTest/WebApiHost.UnitTest.csproj", "WebApiHost.UnitTest/"]
-COPY ["DDDExample.sln", "./"]
-RUN dotnet restore "DDDExample.sln"
-
+COPY ["Example.Domain/Example.Domain.csproj", "Example.Domain/"]
+COPY ["Example.Domain.Core/Example.Domain.Core.csproj", "Example.Domain.Core/"]
+COPY ["Example.Infrastruct.Data/Example.Infrastruct.Data.csproj", "Example.Infrastruct.Data/"]
+RUN dotnet restore "WebApiHost/WebApiHost.csproj"
 COPY . .
 WORKDIR "/src/WebApiHost"
-#RUN dotnet build "WebApiHost.csproj" -c Release -o /app/build
+# RUN dotnet build "WebApiHost.csproj" -c Release -o /app/build
 
 FROM build AS publish
-RUN dotnet publish --no-restore "WebApiHost.csproj" -c Release -o /app/publish
+RUN dotnet publish --no-restore  "WebApiHost.csproj" -c Release -o /app/publish /p:UseAppHost=false
 
 FROM base AS final
 WORKDIR /app
