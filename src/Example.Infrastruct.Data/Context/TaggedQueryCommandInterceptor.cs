@@ -1,52 +1,44 @@
-﻿using Microsoft.EntityFrameworkCore.Diagnostics;
-using System.Data.Common;
-using System.Threading;
-using System.Threading.Tasks;
+﻿namespace Example.Infrastruct.Data;
 
-namespace Example.Infrastruct.Data.Context
+internal class TaggedQueryCommandInterceptor : DbCommandInterceptor
 {
-    internal class TaggedQueryCommandInterceptor : DbCommandInterceptor
+    public override DbDataReader ReaderExecuted(DbCommand command, CommandExecutedEventData eventData, DbDataReader result)
     {
-        public override DbDataReader ReaderExecuted(DbCommand command, CommandExecutedEventData eventData, DbDataReader result)
-        {
 
-            return result;
-        }
-        public override ValueTask<DbDataReader> ReaderExecutedAsync(DbCommand command, CommandExecutedEventData eventData, DbDataReader result, CancellationToken cancellationToken = default)
-        {
-            return new ValueTask<DbDataReader>(result);
-        }
+        return result;
     }
-    internal class TaggedConnectionInterceptor : DbConnectionInterceptor
+    public override ValueTask<DbDataReader> ReaderExecutedAsync(DbCommand command, CommandExecutedEventData eventData, DbDataReader result, CancellationToken cancellationToken = default)
     {
-        public override InterceptionResult ConnectionOpening(DbConnection connection, ConnectionEventData eventData, InterceptionResult result)
-        {
-            return result;
-        }
-        public override ValueTask<InterceptionResult> ConnectionOpeningAsync(DbConnection connection, ConnectionEventData eventData, InterceptionResult result, CancellationToken cancellationToken = default)
-        {
-            return new ValueTask<InterceptionResult>(result);
-        }
-        public override void ConnectionClosed(DbConnection connection, ConnectionEndEventData eventData)
-        {
-
-        }
-        public override InterceptionResult ConnectionClosing(DbConnection connection, ConnectionEventData eventData, InterceptionResult result)
-        {
-            return result;
-        }
+        return new ValueTask<DbDataReader>(result);
     }
-    internal class TaggedTransactionInterceptor : DbTransactionInterceptor
+}
+internal class TaggedConnectionInterceptor : DbConnectionInterceptor
+{
+    public override InterceptionResult ConnectionOpening(DbConnection connection, ConnectionEventData eventData, InterceptionResult result)
     {
-        public override void TransactionCommitted(DbTransaction transaction, TransactionEndEventData eventData)
-        {
-
-        }
-        public override Task TransactionCommittedAsync(DbTransaction transaction, TransactionEndEventData eventData, CancellationToken cancellationToken = default)
-        {
-            return Task.CompletedTask;
-        }
+        return result;
     }
+    public override ValueTask<InterceptionResult> ConnectionOpeningAsync(DbConnection connection, ConnectionEventData eventData, InterceptionResult result, CancellationToken cancellationToken = default)
+    {
+        return new ValueTask<InterceptionResult>(result);
+    }
+    public override void ConnectionClosed(DbConnection connection, ConnectionEndEventData eventData)
+    {
 
+    }
+    public override InterceptionResult ConnectionClosing(DbConnection connection, ConnectionEventData eventData, InterceptionResult result)
+    {
+        return result;
+    }
+}
+internal class TaggedTransactionInterceptor : DbTransactionInterceptor
+{
+    public override void TransactionCommitted(DbTransaction transaction, TransactionEndEventData eventData)
+    {
 
+    }
+    public override Task TransactionCommittedAsync(DbTransaction transaction, TransactionEndEventData eventData, CancellationToken cancellationToken = default)
+    {
+        return Task.CompletedTask;
+    }
 }

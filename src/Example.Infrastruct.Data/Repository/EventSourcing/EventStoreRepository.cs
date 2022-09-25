@@ -1,34 +1,25 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Example.Domain.Core.Events;
-using Example.Infrastruct.Data.Context;
-using Microsoft.EntityFrameworkCore;
+﻿namespace Example.Infrastruct.Data;
 
-namespace Example.Infrastruct.Data.Repository.EventSourcing
+public class EventStoreRepository : IEventStoreRepository
 {
-    public class EventStoreRepository : IEventStoreRepository
+    private readonly EventStoreSQLContext _eventStoreSQLContext;
+    public EventStoreRepository(EventStoreSQLContext eventStoreSQLContext)
     {
-        private readonly EventStoreSQLContext _eventStoreSQLContext;
-        public EventStoreRepository(EventStoreSQLContext eventStoreSQLContext)
-        {
-            _eventStoreSQLContext = eventStoreSQLContext;
-        }
-        public async Task<IList<StoredEvent>> All(Guid aggregateId)
-        {
-            return await _eventStoreSQLContext.StoredEvents.Where(p => p.AggregateId == aggregateId).ToListAsync();
-        }
+        _eventStoreSQLContext = eventStoreSQLContext;
+    }
+    public async Task<IList<StoredEvent>> All(Guid aggregateId)
+    {
+        return await _eventStoreSQLContext.StoredEvents.Where(p => p.AggregateId == aggregateId).ToListAsync();
+    }
 
-        public void Dispose()
-        {
-            _eventStoreSQLContext.Dispose();
-        }
+    public void Dispose()
+    {
+        _eventStoreSQLContext.Dispose();
+    }
 
-        public async Task Store(StoredEvent storedEvent)
-        {
-            _eventStoreSQLContext.Add(storedEvent);
-            await _eventStoreSQLContext.SaveChangesAsync();
-        }
+    public async Task Store(StoredEvent storedEvent)
+    {
+        _eventStoreSQLContext.Add(storedEvent);
+        await _eventStoreSQLContext.SaveChangesAsync();
     }
 }

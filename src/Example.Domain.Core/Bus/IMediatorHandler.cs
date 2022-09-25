@@ -1,7 +1,4 @@
-using Christ.Domain.Core.Commands;
-using Example.Domain.Core.Events;
-
-namespace Example.Domain.Core.Bus;
+namespace Example.Domain.Core;
 
 public interface IMediatorHandler
 {

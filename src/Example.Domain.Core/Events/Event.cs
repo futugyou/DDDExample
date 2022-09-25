@@ -1,16 +1,10 @@
-﻿using MediatR;
-using System;
-using System.Collections.Generic;
-using System.Text;
+﻿namespace Example.Domain.Core;
 
-namespace Example.Domain.Core.Events
+public abstract class Event : Message, INotification
 {
-    public abstract class Event : Message, INotification
+    public DateTime Timestamp { get; private set; }
+    protected Event()
     {
-        public DateTime Timestamp { get; private set; }
-        protected Event()
-        {
-            Timestamp = DateTime.Now;
-        }
+        Timestamp = DateTime.Now;
     }
 }

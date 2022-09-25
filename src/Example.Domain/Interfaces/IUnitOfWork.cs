@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿namespace Example.Domain;
 
-namespace Example.Domain.Interfaces
+public interface IUnitOfWork : IDisposable
 {
-    public interface IUnitOfWork : IDisposable
-    {
-        Task<bool> CommitAsync();
-    }
+    Task<bool> CommitAsync();
 }
