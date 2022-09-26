@@ -1,41 +1,65 @@
-﻿namespace WebApiHost;
+﻿var appName = "ddd-demo";
+var builder = WebApplication.CreateBuilder(args);
+var services = builder.Services;
+var configuration = builder.Configuration;
 
-public class Program
+services.AddControllers();
+services.AddOpenTelemetryTracing((builder) =>
 {
-    public static void Main(string[] args)
+    builder
+    .SetResourceBuilder(ResourceBuilder.CreateDefault().AddService(configuration.GetValue<string>("Jaeger:ServiceName")))
+    .AddHttpClientInstrumentation()
+    .AddAspNetCoreInstrumentation()
+    .AddEntityFrameworkCoreInstrumentation(config => config.SetDbStatementForText = true)
+    .AddJaegerExporter(config =>
     {
-        // This code for Serilog&LogDashboard ,It aslo can be used in DDD project!
-        string logOutputTemplate = "{Timestamp:HH:mm:ss.fff zzz} || {Level} || {SourceContext:l} || {Message} || {Exception} ||end {NewLine}";
-        Log.Logger = new LoggerConfiguration()
-          .MinimumLevel.Debug()
-          .MinimumLevel.Override("Default", LogEventLevel.Information)
-          .MinimumLevel.Override("Microsoft", LogEventLevel.Error)
-          .MinimumLevel.Override("Microsoft.Hosting.Lifetime", LogEventLevel.Information)
-          .Enrich.FromLogContext()
-          .WriteTo.Console(theme: Serilog.Sinks.SystemConsole.Themes.AnsiConsoleTheme.Code)
-          .WriteTo.File($"{AppContext.BaseDirectory}Logs/serilog.log", rollingInterval: RollingInterval.Day, outputTemplate: logOutputTemplate)
-          .CreateLogger();
+        configuration.GetSection("Jaeger").Bind(config);
+    });
+});
+//it doesn's work ,so use 'Bind'
+services.Configure<JaegerExporterOptions>(configuration.GetSection("Jaeger"));
+services.AddLogDashboard();
+//启动配置   
+services.AddAutoMapperSetup();
+services.AddSwaggerGen(c =>
+{
+    c.SwaggerDoc("v1", new OpenApiInfo { Title = "DDD project", Version = "v1" });
+});
+services.AddMediatR(typeof(Program), typeof(CommandHandler));
 
-        var host = CreateHostBuilder(args).Build();
-        try
-        {
-            //see IWebHostExtensions in https://github.com/dotnet-architecture/eShopOnContainers/
-            host.MigrateDbContext<CustomerContext>((_, __) => { })
-               .MigrateDbContext<EventStoreSQLContext>((_, __) => { });
-        }
-        catch (Exception ex)
-        {
-            Log.Fatal(ex, "Program terminated unexpectedly!");
-            throw;
-        }
-        host.Run();
-    }
+NativeInjectorBootStrapper.RegisterServices(services, configuration);
 
-    public static IHostBuilder CreateHostBuilder(string[] args) =>
-       Host.CreateDefaultBuilder(args)
-            .UseSerilog()
-            .ConfigureWebHostDefaults(webBuilder =>
-            {
-                webBuilder.UseStartup<Startup>();
-            });
+var app = builder.Build();
+if (app.Environment.IsDevelopment())
+{
+    app.UseDeveloperExceptionPage();
+    app.UseSwagger();
+    app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "DDD project v1"));
+}
+
+app.UseRouting();
+app.UseLogDashboard();
+app.UseAuthorization();
+
+app.UseEndpoints(endpoints =>
+{
+    endpoints.MapControllers();
+});
+
+try
+{
+    app.Logger.LogInformation("Applying database migration ({ApplicationName})...", appName);
+    app.ApplyDatabaseMigration<CustomerContext>((_, __) => { });
+    app.ApplyDatabaseMigration<EventStoreSQLContext>((_, __) => { });
+
+    app.Logger.LogInformation("Starting web host ({ApplicationName})...", appName);
+    app.Run();
+}
+catch (Exception ex)
+{
+    app.Logger.LogCritical(ex, "Host terminated unexpectedly ({ApplicationName})...", appName);
+}
+finally
+{
+    Log.CloseAndFlush();
 }
