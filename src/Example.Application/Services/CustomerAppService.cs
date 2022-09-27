@@ -35,6 +35,11 @@ public class CustomerAppService : ICustomerAppService
 
     public async Task Register(CustomerViewModel customerViewModel)
     {
+        if (customerViewModel == null)
+        {
+            throw new ArgumentNullException(nameof(customerViewModel));
+        }
+
         var registerCommand = _mapper.Map<RegisterCustomerCommand>(customerViewModel);
         //command bus
         await _mediatorHandler.SendCommand(registerCommand);
