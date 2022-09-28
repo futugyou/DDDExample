@@ -17,6 +17,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebApiHost", "src\WebApiHos
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebApiHost.UnitTest", "src\WebApiHost.UnitTest\WebApiHost.UnitTest.csproj", "{5C4FEBDB-1A1A-42EF-954D-1B7F929FB768}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Example.Domain.UnitTest", "src\Example.Domain.UnitTest\Example.Domain.UnitTest.csproj", "{7EEBAECC-A63E-4E5D-82AF-EF40B9BA6C42}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -51,6 +53,10 @@ Global
 		{5C4FEBDB-1A1A-42EF-954D-1B7F929FB768}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5C4FEBDB-1A1A-42EF-954D-1B7F929FB768}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5C4FEBDB-1A1A-42EF-954D-1B7F929FB768}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7EEBAECC-A63E-4E5D-82AF-EF40B9BA6C42}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7EEBAECC-A63E-4E5D-82AF-EF40B9BA6C42}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7EEBAECC-A63E-4E5D-82AF-EF40B9BA6C42}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7EEBAECC-A63E-4E5D-82AF-EF40B9BA6C42}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
