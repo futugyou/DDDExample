@@ -24,9 +24,9 @@ public class Repository<TEntity> : IRepository<TEntity> where TEntity : class
         GC.SuppressFinalize(this);
     }
 
-    public async Task<IQueryable<TEntity>> GetAll()
+    public Task<IQueryable<TEntity>> GetAll()
     {
-        return _dbSet;
+        return Task.FromResult(_dbSet.AsQueryable());
     }
 
     public async Task<TEntity> GetById(Guid id)

@@ -41,10 +41,7 @@ app.UseRouting();
 app.UseLogDashboard();
 app.UseAuthorization();
 
-app.UseEndpoints(endpoints =>
-{
-    endpoints.MapControllers();
-});
+app.MapControllers();
 
 try
 {
