@@ -24,17 +24,32 @@ public class CustomerAppService : ICustomerAppService
     public async Task<IEnumerable<CustomerViewModel>> GetAll()
     {
         var domain = await _customerRepository.GetAll();
+        if (domain == null)
+        {
+            return Enumerable.Empty<CustomerViewModel>();
+        }
+
         return domain.ProjectTo<CustomerViewModel>(_mapper.ConfigurationProvider);
     }
 
     public async Task<CustomerViewModel> GetById(Guid id)
     {
         var domain = await _customerRepository.GetById(id);
+        if (domain == null)
+        {
+            return null;
+        }
+
         return _mapper.Map<CustomerViewModel>(domain);
     }
 
     public async Task Register(CustomerViewModel customerViewModel)
     {
+        if (customerViewModel == null)
+        {
+            throw new ArgumentNullException(nameof(customerViewModel));
+        }
+
         var registerCommand = _mapper.Map<RegisterCustomerCommand>(customerViewModel);
         //command bus
         await _mediatorHandler.SendCommand(registerCommand);
