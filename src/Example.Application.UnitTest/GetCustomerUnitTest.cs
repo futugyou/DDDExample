@@ -4,22 +4,10 @@ using Moq;
 namespace Example.Application.UnitTest;
 public class GetCustomerUnitTest
 {
-    private static IMapper _mapper;
     private static Customer customer;
 
     public GetCustomerUnitTest()
     {
-        if (_mapper == null)
-        {
-            var mappingConfig = new MapperConfiguration(mc =>
-            {
-                mc.AddProfile(new DomainToViewModelMappingProfile());
-                mc.AddProfile(new ViewModelToDomainMappingProfile());
-                mc.AddProfile(new ViewModelToCommandMappingProfile());
-            });
-
-            _mapper = mappingConfig.CreateMapper(); ;
-        }
         customer = new Customer(Guid.NewGuid(), "name", "q@c.com", DateTime.Now);
     }
 
@@ -33,7 +21,7 @@ public class GetCustomerUnitTest
         _customerRepository.Setup(p => p.GetAll()).ReturnsAsync(customers);
 
         // Act
-        ICustomerAppService service = new CustomerAppService(_customerRepository.Object, _mapper, _mediatorHandler.Object);
+        ICustomerAppService service = new CustomerAppService(_customerRepository.Object, AutoMapperHelper.mapper, _mediatorHandler.Object);
         var users = await service.GetAll();
 
         // Assert
@@ -50,7 +38,7 @@ public class GetCustomerUnitTest
         var customers = new List<Customer> { customer }.AsQueryable();
 
         // Act
-        ICustomerAppService service = new CustomerAppService(_customerRepository.Object, _mapper, _mediatorHandler.Object);
+        ICustomerAppService service = new CustomerAppService(_customerRepository.Object, AutoMapperHelper.mapper, _mediatorHandler.Object);
         var users = await service.GetAll();
 
         // Assert
@@ -67,7 +55,7 @@ public class GetCustomerUnitTest
         _customerRepository.Setup(c => c.GetById(customer.Id)).ReturnsAsync(customer);
 
         // Act
-        ICustomerAppService service = new CustomerAppService(_customerRepository.Object, _mapper, _mediatorHandler.Object);
+        ICustomerAppService service = new CustomerAppService(_customerRepository.Object, AutoMapperHelper.mapper, _mediatorHandler.Object);
         var users = await service.GetById(customer.Id);
 
         // Assert
@@ -83,7 +71,7 @@ public class GetCustomerUnitTest
         _customerRepository.Setup(c => c.GetById(Guid.Empty));
 
         // Act
-        ICustomerAppService service = new CustomerAppService(_customerRepository.Object, _mapper, _mediatorHandler.Object);
+        ICustomerAppService service = new CustomerAppService(_customerRepository.Object, AutoMapperHelper.mapper, _mediatorHandler.Object);
         var user = await service.GetById(customer.Id);
 
         // Assert

@@ -57,6 +57,11 @@ public class CustomerAppService : ICustomerAppService
 
     public async Task Update(CustomerViewModel customerViewModel)
     {
+        if (customerViewModel == null)
+        {
+            throw new ArgumentNullException(nameof(customerViewModel));
+        }
+
         await _customerRepository.Update(_mapper.Map<Customer>(customerViewModel));
     }
 
