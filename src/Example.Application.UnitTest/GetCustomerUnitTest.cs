@@ -4,11 +4,11 @@ using Moq;
 namespace Example.Application.UnitTest;
 public class GetCustomerUnitTest
 {
-    private static Customer customer;
+    private static Customer customer = new Customer(Guid.NewGuid(), "name", "q@c.com", DateTime.Now);
 
     public GetCustomerUnitTest()
     {
-        customer = new Customer(Guid.NewGuid(), "name", "q@c.com", DateTime.Now);
+
     }
 
     [Fact]

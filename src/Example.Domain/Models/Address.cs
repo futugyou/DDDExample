@@ -1,6 +1,5 @@
 namespace Example.Domain;
 
-[Owned]
 public class Address : ValueObject<Address>
 {
     public Address()
