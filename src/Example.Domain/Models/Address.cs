@@ -31,13 +31,13 @@ public class Address : ValueObject<Address>
     /// 街道
     /// </summary>
     public string Street { get; private set; }
-    protected override bool EqualsCore(Address obj)
-    {
-        throw new NotImplementedException();
-    }
 
-    protected override int GetHashCodeCore()
+    protected override IEnumerable<object> GetEqualityComponents()
     {
-        throw new NotImplementedException();
+        // Using a yield return statement to return each element one at a time
+        yield return Street;
+        yield return City;
+        yield return Province;
+        yield return County;
     }
 }
