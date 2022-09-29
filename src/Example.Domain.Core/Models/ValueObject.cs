@@ -4,30 +4,36 @@ public abstract class ValueObject<T> where T : ValueObject<T>
 {
     public override bool Equals(object obj)
     {
-        var valueObject = obj as T;
-        return !ReferenceEquals(valueObject, null) && EqualsCore(valueObject);
+        if (obj == null || obj.GetType() != GetType())
+        {
+            return false;
+        }
+
+        var other = (ValueObject<T>)obj;
+
+        return this.GetEqualityComponents().SequenceEqual(other.GetEqualityComponents());
     }
-    protected abstract bool EqualsCore(T obj);
+    protected abstract IEnumerable<object> GetEqualityComponents();
     // override object.GetHashCode
     public override int GetHashCode()
     {
-        return GetHashCodeCore();
+        return GetEqualityComponents()
+            .Select(x => x != null ? x.GetHashCode() : 0)
+            .Aggregate((x, y) => x ^ y);
     }
-    protected abstract int GetHashCodeCore();
-    public static bool operator ==(ValueObject<T> a, ValueObject<T> b)
-    {
-        if (ReferenceEquals(a, null) && ReferenceEquals(b, null))
-            return true;
 
-        if (ReferenceEquals(a, null) || ReferenceEquals(b, null))
+    public static bool operator ==(ValueObject<T> left, ValueObject<T> right)
+    {
+        if (ReferenceEquals(left, null) ^ ReferenceEquals(right, null))
+        {
             return false;
-
-        return a.Equals(b);
+        }
+        return ReferenceEquals(left, null) || left.Equals(right);
     }
 
-    public static bool operator !=(ValueObject<T> a, ValueObject<T> b)
+    public static bool operator !=(ValueObject<T> left, ValueObject<T> right)
     {
-        return !(a == b);
+        return !(left == right);
     }
     public virtual T Clone()
     {
