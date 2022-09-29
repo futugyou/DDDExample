@@ -1,14 +1,36 @@
+using System.Xml.Linq;
+
 namespace Example.Domain;
 
 public class Address : ValueObject<Address>
 {
-    public Address()
+    internal Address()
     {
     }
 
     public Address(string province, string city,
         string county, string street, string zip)
     {
+        if (string.IsNullOrEmpty(province))
+        {
+            throw new ArgumentNullException(nameof(province));
+        }
+
+        if (string.IsNullOrEmpty(city))
+        {
+            throw new ArgumentNullException(nameof(city));
+        }
+
+        if (string.IsNullOrEmpty(county))
+        {
+            throw new ArgumentNullException(nameof(county));
+        }
+
+        if (string.IsNullOrEmpty(street))
+        {
+            throw new ArgumentNullException(nameof(street));
+        }
+
         this.Province = province;
         this.City = city;
         this.County = county;
