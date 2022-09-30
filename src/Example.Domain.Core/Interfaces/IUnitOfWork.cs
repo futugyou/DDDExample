@@ -1,4 +1,4 @@
-﻿namespace Example.Domain;
+﻿namespace Example.Domain.Core;
 
 public interface IUnitOfWork : IDisposable
 {

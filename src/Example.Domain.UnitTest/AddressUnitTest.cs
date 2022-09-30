@@ -62,6 +62,10 @@ public class AddressUnitTest
         var address3 = new Address(province, city, county, street2, It.IsAny<string>());
         // Assert
         Assert.True(address1 == address2);
+        Assert.Equal(address1, address2);
+        Assert.True(address1.Equals((object)address2));
+        Assert.False(address1 == (object)address2);
+        Assert.True(address1.GetHashCode() == address2.GetHashCode());
         Assert.True(address2 != address3);
         Assert.True(address1 != address3);
     }

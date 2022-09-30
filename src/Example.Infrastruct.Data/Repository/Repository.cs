@@ -4,7 +4,7 @@
 /// 泛型仓储，实现泛型仓储接口
 /// </summary>
 /// <typeparam name="TEntity"></typeparam>
-public class Repository<TEntity> : IRepository<TEntity> where TEntity : class
+public class Repository<TEntity> : IRepository<TEntity> where TEntity : Entity, IAggregateRoot
 {
     protected readonly CustomerContext _context;
     protected readonly DbSet<TEntity> _dbSet;
