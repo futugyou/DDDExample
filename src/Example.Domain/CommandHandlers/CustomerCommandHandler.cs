@@ -25,7 +25,16 @@ public class CustomerCommandHandler : CommandHandler, IRequestHandler<RegisterCu
             await NotifyValidationErrors(request);
             return Unit.Value;
         }
-        var customer = new Customer(request.Id, request.Name, request.Email, request.BirthDate);
+
+        var customer = await _customerRepository.GetByEmail(request.Email);
+        if (customer != null)
+        {
+            //domain notification
+            await _mediatorHandler.RaiseEvent(new DomainNotification(customer.Id.ToString(), "email address already exists"));
+            return Unit.Value;
+        }
+
+        customer = new Customer(request.Id, request.Name, request.Email, request.BirthDate);
         if (await _customerRepository.GetByEmail(customer.Email) != null)
         {
             //domain notification
@@ -33,11 +42,14 @@ public class CustomerCommandHandler : CommandHandler, IRequestHandler<RegisterCu
             return Unit.Value;
         }
         await _customerRepository.Add(customer);
-        if (await CommitAsync())
-        {
-            //domain event
-            await _mediatorHandler.RaiseEvent(new CustomerRegisterEvent(customer.Id, customer.Name, customer.Email, customer.BirthDate));
-        }
+        await CommitAsync();
+
+        // TODO: Refactoring
+        //if (await CommitAsync())
+        //{
+        //domain event
+        //await _mediatorHandler.RaiseEvent(new CustomerRegisterEvent(customer.Id, customer.Name, customer.Email, customer.BirthDate));
+        //}
         return Unit.Value;
     }
 }

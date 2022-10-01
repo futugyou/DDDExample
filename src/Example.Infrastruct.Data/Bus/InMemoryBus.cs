@@ -13,8 +13,8 @@ public class InMemoryBus : IMediatorHandler
     public async Task RaiseEvent<T>(T @event) where T : Event
     {
         //除去领域通知，全部进事件溯源
-        if (!@event.MessageType.Equals("DomainNotification"))
-            await _eventStore?.Save(@event);
+        //if (!@event.MessageType.Equals("DomainNotification"))
+        //    await _eventStore?.Save(@event);
         await _mediator.Publish(@event);
     }
 

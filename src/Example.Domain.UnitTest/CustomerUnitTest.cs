@@ -32,7 +32,13 @@ public class CustomerUnitTest
         var email = "";
         // Act
         var customer = new Customer(id, name, email, It.IsAny<DateTime>());
+        var domainEvent = customer.DomainEvents.FirstOrDefault();
         // Assert
         Assert.True(customer.Id == id);
+        Assert.IsAssignableFrom<CustomerRegisterEvent>(domainEvent);
+        Assert.NotNull(domainEvent);
+        var customerCreateEvent = (CustomerRegisterEvent)domainEvent;
+        Assert.NotNull(customerCreateEvent);
+        Assert.True(customer.Id == customerCreateEvent.Id);
     }
 }
