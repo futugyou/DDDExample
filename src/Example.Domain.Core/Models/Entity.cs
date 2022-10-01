@@ -10,6 +10,9 @@ public abstract class Entity
     /// </summary>
     public Guid Id { get; protected set; }
 
+    private List<DomainEvent> _domainEvents = new List<DomainEvent>();
+    public IReadOnlyCollection<DomainEvent> DomainEvents => _domainEvents?.AsReadOnly();
+
     /// <summary>
     /// 重写方法 相等运算
     /// </summary>
@@ -67,4 +70,18 @@ public abstract class Entity
         return GetType().Name + " [Id=" + Id + "]";
     }
 
+    public void AddDomainEvent(DomainEvent @event)
+    {
+        _domainEvents.Add(@event);
+    }
+
+    public void RemoveDomainEvent(DomainEvent @event)
+    {
+        _domainEvents.Remove(@event);
+    }
+
+    public void ClearDomainEvents()
+    {
+        _domainEvents.Clear();
+    }
 }

@@ -1,10 +1,7 @@
-﻿using Example.Domain.Core;
-using Moq;
-
-namespace Example.Application.UnitTest;
+﻿namespace Example.Application.UnitTest;
 public class GetCustomerUnitTest
 {
-    private static Customer customer = new Customer(Guid.NewGuid(), "name", "q@c.com", DateTime.Now);
+    private static Customer customer = new Customer(Guid.NewGuid(), "thisisname", "q@c.com", DateTime.Now);
 
     public GetCustomerUnitTest()
     {

@@ -32,6 +32,8 @@ public class Customer : Entity, IAggregateRoot
         Email = email ?? throw new ArgumentNullException(nameof(email));
         BirthDate = birthDate;
         Address = new Address();
+
+        AddDomainEvent(new CustomerRegisterEvent(Id, Name, Email, BirthDate));
     }
     public Address Address { get; set; }
     public string Name { get; private set; }
