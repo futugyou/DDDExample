@@ -9,7 +9,7 @@ public class CustomerViewModel
     public Guid Id { get; set; } = Guid.NewGuid();
 
     [Required(ErrorMessage = "The Name is Required")]
-    [MinLength(2)]
+    [MinLength(5)]
     [MaxLength(100)]
     [DisplayName("Name")]
     public string Name { get; set; }

@@ -20,6 +20,11 @@ public class CustomerController : ControllerBase
     [HttpPost]
     public async Task SaveCustomer(CustomerViewModel customer)
     {
+        if (!ModelState.IsValid)
+        {
+            throw new ArgumentException(nameof(customer));
+        }
+
         await _customerAppService.Register(customer);
     }
 
