@@ -1,0 +1,13 @@
+version: '3.4'
+
+services:
+  webapihost:
+    image: ${DOCKER_REGISTRY-}webapihost
+    build:
+      context: .
+      dockerfile: WebApiHost/Dockerfile
+    depends_on:
+      - sqldata
+
+  sqldata:
+    image: mcr.microsoft.com/mssql/server:2019-latest
