@@ -17,5 +17,7 @@ public class CustomerMap : IEntityTypeConfiguration<Customer>
             .HasMaxLength(100)
             .IsRequired();
         builder.OwnsOne(p => p.Address);
+
+        builder.Ignore(b => b.DomainEvents);
     }
 }
