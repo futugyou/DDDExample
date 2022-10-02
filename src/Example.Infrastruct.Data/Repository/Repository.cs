@@ -43,10 +43,10 @@ public class Repository<TEntity> : IRepository<TEntity> where TEntity : Entity, 
         }
     }
 
-    public async Task<int> SaveChanges()
-    {
-        return await _context.SaveChangesAsync();
-    }
+    //public async Task<int> SaveChanges()
+    //{
+    //    return await _context.SaveChangesAsync();
+    //}
 
     public Task Update(TEntity obj)
     {

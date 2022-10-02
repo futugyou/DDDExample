@@ -32,9 +32,11 @@ public interface IRepository<TEntity> : IDisposable where TEntity : IAggregateRo
     /// </summary>
     /// <param name="id"></param>
     Task Remove(Guid id);
+    
+    // use unit of work
     /// <summary>
     /// 保存
     /// </summary>
     /// <returns></returns>
-    Task<int> SaveChanges();
+    //Task<int> SaveChanges();
 }

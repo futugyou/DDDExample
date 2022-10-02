@@ -17,7 +17,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebApiHost", "src\WebApiHos
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebApiHost.UnitTest", "src\WebApiHost.UnitTest\WebApiHost.UnitTest.csproj", "{5C4FEBDB-1A1A-42EF-954D-1B7F929FB768}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Example.Domain.UnitTest", "src\Example.Domain.UnitTest\Example.Domain.UnitTest.csproj", "{7EEBAECC-A63E-4E5D-82AF-EF40B9BA6C42}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Example.Domain.UnitTest", "src\Example.Domain.UnitTest\Example.Domain.UnitTest.csproj", "{7EEBAECC-A63E-4E5D-82AF-EF40B9BA6C42}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Example.Infrastruct.UnitTest", "src\Example.Infrastruct.UnitTest\Example.Infrastruct.UnitTest.csproj", "{8BC9493A-B4CF-4598-A49D-E567B0DD5878}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -57,6 +59,10 @@ Global
 		{7EEBAECC-A63E-4E5D-82AF-EF40B9BA6C42}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7EEBAECC-A63E-4E5D-82AF-EF40B9BA6C42}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7EEBAECC-A63E-4E5D-82AF-EF40B9BA6C42}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8BC9493A-B4CF-4598-A49D-E567B0DD5878}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8BC9493A-B4CF-4598-A49D-E567B0DD5878}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8BC9493A-B4CF-4598-A49D-E567B0DD5878}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8BC9493A-B4CF-4598-A49D-E567B0DD5878}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
