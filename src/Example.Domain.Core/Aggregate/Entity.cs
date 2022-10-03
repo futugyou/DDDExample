@@ -32,10 +32,10 @@ public abstract class Entity
     /// <returns></returns>
     public static bool operator ==(Entity a, Entity b)
     {
-        if (ReferenceEquals(a, null) && ReferenceEquals(b, null))
+        if (a is null && b is null)
             return true;
 
-        if (ReferenceEquals(a, null) || ReferenceEquals(b, null))
+        if (a is null || b is null)
             return false;
 
         return a.Equals(b);

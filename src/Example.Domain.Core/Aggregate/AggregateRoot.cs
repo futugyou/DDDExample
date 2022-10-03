@@ -1,7 +1,6 @@
 ﻿namespace Example.Domain.Core;
 public abstract class AggregateRoot : Entity
 {
-
     private List<DomainEvent> _domainEvents = new List<DomainEvent>();
     public IReadOnlyCollection<DomainEvent> DomainEvents => _domainEvents?.AsReadOnly();
 
