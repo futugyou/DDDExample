@@ -1,4 +1,6 @@
-﻿namespace Example.Domain;
+﻿using System;
+
+namespace Example.Domain;
 
 /// <summary>
 /// 定义领域对象 Customer
@@ -39,4 +41,12 @@ public class Customer : AggregateRoot
     public string Name { get; private set; }
     public string Email { get; private set; }
     public DateTime BirthDate { get; private set; }
+
+    public void Apply(CustomerRegisterEvent ev)
+    {
+        Id = ev.AggregateId;
+        Name = ev.Name;
+        Email = ev.Email;
+        BirthDate = ev.BirthDate;
+    }
 }

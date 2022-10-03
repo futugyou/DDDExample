@@ -39,6 +39,6 @@ public class CustomerUnitTest
         Assert.NotNull(domainEvent);
         var customerCreateEvent = (CustomerRegisterEvent)domainEvent;
         Assert.NotNull(customerCreateEvent);
-        Assert.True(customer.Id == customerCreateEvent.Id);
+        Assert.True(customer.Id == customerCreateEvent.AggregateId);
     }
 }

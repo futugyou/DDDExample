@@ -1,5 +1,5 @@
 ﻿namespace Example.Domain.Core;
-internal interface IEventSourcing
+public interface IEventSourcing
 {
     long Version { get; }
 
