@@ -3,7 +3,7 @@
 /// <summary>
 /// 定义领域对象 Customer
 /// </summary>
-public class Customer : Entity, IAggregateRoot
+public class Customer : AggregateRoot
 {
     private const int MinNameLenght = 5;
     private const int MaxNameLenght = 100;
