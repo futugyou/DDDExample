@@ -48,6 +48,6 @@ public class RepositoryUnitTest
         return dbSet;
     }
 }
-public class EntityAsAggregateRoot : Entity, IAggregateRoot
+public class EntityAsAggregateRoot : AggregateRoot
 {
 }

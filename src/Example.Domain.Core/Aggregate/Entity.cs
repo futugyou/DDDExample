@@ -10,9 +10,6 @@ public abstract class Entity
     /// </summary>
     public Guid Id { get; protected set; }
 
-    private List<DomainEvent> _domainEvents = new List<DomainEvent>();
-    public IReadOnlyCollection<DomainEvent> DomainEvents => _domainEvents?.AsReadOnly();
-
     /// <summary>
     /// 重写方法 相等运算
     /// </summary>
@@ -35,10 +32,10 @@ public abstract class Entity
     /// <returns></returns>
     public static bool operator ==(Entity a, Entity b)
     {
-        if (ReferenceEquals(a, null) && ReferenceEquals(b, null))
+        if (a is null && b is null)
             return true;
 
-        if (ReferenceEquals(a, null) || ReferenceEquals(b, null))
+        if (a is null || b is null)
             return false;
 
         return a.Equals(b);
@@ -68,20 +65,5 @@ public abstract class Entity
     public override string ToString()
     {
         return GetType().Name + " [Id=" + Id + "]";
-    }
-
-    public void AddDomainEvent(DomainEvent @event)
-    {
-        _domainEvents.Add(@event);
-    }
-
-    public void RemoveDomainEvent(DomainEvent @event)
-    {
-        _domainEvents.Remove(@event);
-    }
-
-    public void ClearDomainEvents()
-    {
-        _domainEvents.Clear();
     }
 }
