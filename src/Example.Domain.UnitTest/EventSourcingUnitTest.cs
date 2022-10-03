@@ -10,6 +10,7 @@ public class EventSourcingUnitTest
         // Arrage
         long _version = 0;
         IEventSourcing sourcing = new StubEventSourcing();
+
         // Act
         // Assert
         Assert.Throws<ConcurrencyException>(() => sourcing.ValidateVersion(_version));
@@ -17,6 +18,20 @@ public class EventSourcingUnitTest
 
     [Fact]
     public void ValidateVersionOkTest()
+    {
+        // Arrage
+        long _version = -1;
+        IEventSourcing sourcing = new StubEventSourcing();
+
+        // Act
+        sourcing.ValidateVersion(_version);
+
+        // Assert
+        Assert.True(sourcing.Version == _version);
+    }
+
+    [Fact]
+    public void ApplyEventTest()
     {
         // Arrage
         long _version = 0;
@@ -30,18 +45,34 @@ public class EventSourcingUnitTest
         Assert.Equal(createEvent.AggregateId, customr?.Id);
 
         Assert.IsAssignableFrom<DomainEvent>(createEvent);
+        Assert.Equal(createEvent.AggregateVersion, customr?.Version);
     }
 
     [Fact]
-    public void ApplyEvent()
+    public void GetUncommittedEventsTest()
     {
         // Arrage
-        long _version = -1;
-        IEventSourcing sourcing = new StubEventSourcing();
+        var customr = CreateNewAggregate<Customer>();
+
         // Act
-        sourcing.ValidateVersion(_version);
+        var result = customr?.GetUncommittedEvents();
+
         // Assert
-        Assert.True(sourcing.Version == _version);
+        Assert.NotNull(result);
+        Assert.Empty(result);
+        Assert.IsAssignableFrom<IEnumerable<DomainEvent>>(result);
+    }
+
+    [Fact]
+    public void AddDomainEventWithInvalidVesrionTest()
+    {
+        //Arrange
+        long expectedVersion = 0;
+        var sut = CreateNewAggregate<StubEventSourcing>();
+        //Act
+        //Assert
+        Assert.Throws<ConcurrencyException>(()
+            => sut.ExposeAddDomainEvent(It.IsAny<DomainEvent>(), expectedVersion));
     }
 
     private T? CreateNewAggregate<T>() where T : AggregateRoot
