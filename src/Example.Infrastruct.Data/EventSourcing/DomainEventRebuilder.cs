@@ -1,8 +1,11 @@
-﻿namespace Example.Infrastruct.Data;
+﻿using System.Text.Json;
+
+namespace Example.Infrastruct.Data;
 public class DomainEventRebuilder : IDomainEventRebuilder
 {
     public IEnumerable<DomainEvent> RebuildDomainEvents(IEnumerable<EventStore> events)
     {
-        throw new NotImplementedException();
+        var op = new JsonSerializerOptions();
+        return events.Select(e => System.Text.Json.JsonSerializer.Deserialize(e.PayLoad, Type.GetType(e.TypeName), op) as DomainEvent);
     }
 }

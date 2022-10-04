@@ -32,8 +32,9 @@ public class NativeInjectorBootStrapper
         services.AddScoped<IUnitOfWork, UnitOfWork>();
 
         //ÊÂ¼þËÝÔ´
-        //TODO replace to new IEventStoreRepository
-        services.AddScoped<IEventStoreRepository, EventStoreRepository>();
+        services.AddScoped(typeof(IEventStoreRepository<>), typeof(EventStoreRepository<>));
+        services.AddScoped<IDomainEventRebuilder, DomainEventRebuilder>();
+        services.AddScoped(typeof(IAggregateInvoker<>), typeof(AggregateInvoker<>));
 
     }
 }
