@@ -1,4 +1,5 @@
-﻿using Example.Domain.Core;
+﻿using Example.Domain;
+using Example.Domain.Core;
 
 namespace Example.Infrastruct.UnitTest;
 public class EventStoreRepositoryUnitTest
@@ -18,7 +19,7 @@ public class EventStoreRepositoryUnitTest
             DateTime.UtcNow,
             "{}"
             );
-        IEventStoreRepository storeRepository = new EventStoreRepository(context);
+        IEventStoreRepository<Customer> storeRepository = new EventStoreRepository<Customer>(context, It.IsAny<IAggregateInvoker<Customer>>());
 
         // act
         await storeRepository.AppendAsync(@event);
@@ -27,6 +28,21 @@ public class EventStoreRepositoryUnitTest
 
         // assert
         Assert.NotNull(result);
-        Assert.Equal(result.Id,@event.Id);
+        Assert.Equal(result.Id, @event.Id);
     }
+
+    [Fact]
+    public async Task GetByIdAsyncErrorTest()
+    {
+        // arrange 
+        var context = new Mock<CustomerContext>();
+        IEventStoreRepository<Customer> storeRepository = new EventStoreRepository<Customer>(context.Object, It.IsAny<IAggregateInvoker<Customer>>());
+        var id = Guid.Empty;
+
+        // act
+
+        // assert
+        await Assert.ThrowsAsync<ArgumentNullException>(() => storeRepository.GetByIdAsync(id));
+    }
+
 }

@@ -43,4 +43,12 @@ public abstract class AggregateRoot : Entity, IEventSourcing
             _version = version;
         }
     }
+
+    public void LoadFromHistory(IEnumerable<DomainEvent> events)
+    {
+        foreach (var @event in events)
+        {
+            ApplyEvent(@event, @event.AggregateVersion);
+        }
+    }
 }

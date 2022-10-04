@@ -5,7 +5,7 @@ public class CustomerContext : DbContext
     public DbSet<Customer> Customers { get; set; }
     public DbSet<EventStore> EventStores { get; set; }
     
-    public CustomerContext()
+    protected CustomerContext()
     {
     }
 
