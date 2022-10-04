@@ -3,11 +3,10 @@
 public class InMemoryBus : IMediatorHandler
 {
     private readonly IMediator _mediator;
-    private readonly IEventStore _eventStore;
-    public InMemoryBus(IMediator mediator, IEventStore eventStore)
+    //private readonly IEventStore _eventStore;
+    public InMemoryBus(IMediator mediator)
     {
         _mediator = mediator;
-        _eventStore = eventStore;
     }
 
     public async Task RaiseEvent<T>(T @event) where T : Event

@@ -47,7 +47,6 @@ try
 {
     app.Logger.LogInformation("Applying database migration ({ApplicationName})...", appName);
     app.ApplyDatabaseMigration<CustomerContext>((_, __) => { });
-    app.ApplyDatabaseMigration<EventStoreSQLContext>((_, __) => { });
 
     app.Logger.LogInformation("Starting web host ({ApplicationName})...", appName);
     app.Run();
