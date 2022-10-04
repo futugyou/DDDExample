@@ -3,7 +3,9 @@ namespace Example.Infrastruct.Data;
 public class CustomerContext : DbContext
 {
     public DbSet<Customer> Customers { get; set; }
-    public CustomerContext()
+    public DbSet<EventStore> EventStores { get; set; }
+    
+    protected CustomerContext()
     {
     }
 
@@ -27,6 +29,7 @@ public class CustomerContext : DbContext
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.ApplyConfiguration(new CustomerMap());
+        modelBuilder.ApplyConfiguration(new EventStoreMap());
 
         base.OnModelCreating(modelBuilder);
     }

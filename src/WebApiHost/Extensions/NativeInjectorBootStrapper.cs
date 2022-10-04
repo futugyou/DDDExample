@@ -32,14 +32,9 @@ public class NativeInjectorBootStrapper
         services.AddScoped<IUnitOfWork, UnitOfWork>();
 
         //ÊÂ¼þËÝÔ´
-        services.AddScoped<IEventStoreRepository, EventStoreRepository>();
-        services.AddDbContextPool<EventStoreSQLContext>(
-            dbContextOptions => dbContextOptions
-                .UseMySql(config.GetConnectionString("Default"), serverVersion)
-                .EnableSensitiveDataLogging()
-                .EnableDetailedErrors()
-        );
-        services.AddScoped<IEventStore, SqlEventStore>();
+        services.AddScoped(typeof(IEventStoreRepository<>), typeof(EventStoreRepository<>));
+        services.AddScoped<IDomainEventRebuilder, DomainEventRebuilder>();
+        services.AddScoped(typeof(IAggregateInvoker<>), typeof(AggregateInvoker<>));
 
     }
 }
