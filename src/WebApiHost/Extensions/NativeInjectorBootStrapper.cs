@@ -31,10 +31,13 @@ public class NativeInjectorBootStrapper
         );
         services.AddScoped<IUnitOfWork, UnitOfWork>();
 
-        //ÊÂ¼þËÝÔ´
+        //Event Sourcing
         services.AddScoped(typeof(IEventStoreRepository<>), typeof(EventStoreRepository<>));
         services.AddScoped<IDomainEventRebuilder, DomainEventRebuilder>();
         services.AddScoped(typeof(IAggregateInvoker<>), typeof(AggregateInvoker<>));
+
+        services.AddScoped<IEventSourcingDispatch, EventSourcingDispatch>();
+        services.AddScoped(typeof(IEventSourcingHandler<>), typeof(EventSourcingHandler<>));
 
     }
 }
