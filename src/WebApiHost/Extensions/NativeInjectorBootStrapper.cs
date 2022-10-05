@@ -14,7 +14,7 @@ public class NativeInjectorBootStrapper
         services.AddScoped<IRequestHandler<RegisterCustomerCommand>, CustomerCommandHandler>();
 
         // Domain - Events
-        services.AddScoped<INotificationHandler<CustomerRegisterEvent>, CustomerEventHandler>();
+        //services.AddScoped<INotificationHandler<CustomerRegisterEvent>, CustomerEventHandler>();
 
         // Domain - Notification
         services.AddScoped<INotificationHandler<DomainNotification>, DomainNotificationHandler>();
