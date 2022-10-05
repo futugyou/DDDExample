@@ -44,7 +44,7 @@ public class EventSourcingUnitTest
         // Assert
         Assert.Equal(createEvent.AggregateId, customr?.Id);
 
-        Assert.IsAssignableFrom<DomainEvent>(createEvent);
+        Assert.IsAssignableFrom<IDomainEvent>(createEvent);
         Assert.Equal(createEvent.AggregateVersion, customr?.Version);
     }
 
@@ -60,7 +60,7 @@ public class EventSourcingUnitTest
         // Assert
         Assert.NotNull(result);
         Assert.Empty(result);
-        Assert.IsAssignableFrom<IEnumerable<DomainEvent>>(result);
+        Assert.IsAssignableFrom<IEnumerable<IDomainEvent>>(result);
     }
 
     [Fact]
@@ -72,7 +72,7 @@ public class EventSourcingUnitTest
         //Act
         //Assert
         Assert.Throws<ConcurrencyException>(()
-            => sut.ExposeAddDomainEvent(It.IsAny<DomainEvent>(), expectedVersion));
+            => sut.ExposeAddDomainEvent(It.IsAny<IDomainEvent>(), expectedVersion));
     }
 
     private T? CreateNewAggregate<T>() where T : AggregateRoot

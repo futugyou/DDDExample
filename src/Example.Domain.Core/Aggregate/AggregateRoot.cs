@@ -3,13 +3,13 @@
 namespace Example.Domain.Core;
 public abstract class AggregateRoot : Entity, IEventSourcing
 {
-    public IReadOnlyCollection<DomainEvent> DomainEvents => _domainEvents?.AsReadOnly();
-    private List<DomainEvent> _domainEvents = new();
+    public IReadOnlyCollection<IDomainEvent> DomainEvents => _domainEvents?.AsReadOnly();
+    private List<IDomainEvent> _domainEvents = new();
 
     public long Version => _version;
     private long _version = -1;
 
-    public void AddDomainEvent(DomainEvent @event, long originalVersion = -1)
+    public void AddDomainEvent(IDomainEvent @event, long originalVersion = -1)
     {
         ValidateVersion(originalVersion);
         @event.BuildVersion(_version + 1);
@@ -35,7 +35,7 @@ public abstract class AggregateRoot : Entity, IEventSourcing
         _domainEvents.Clear();
     }
 
-    public void ApplyEvent(DomainEvent @event, long version)
+    public void ApplyEvent(IDomainEvent @event, long version)
     {
         if (!_domainEvents.Any(x => Equals(x.EventId, @event.EventId)))
         {
@@ -44,7 +44,7 @@ public abstract class AggregateRoot : Entity, IEventSourcing
         }
     }
 
-    public void LoadFromHistory(IEnumerable<DomainEvent> events)
+    public void LoadFromHistory(IEnumerable<IDomainEvent> events)
     {
         foreach (var @event in events)
         {

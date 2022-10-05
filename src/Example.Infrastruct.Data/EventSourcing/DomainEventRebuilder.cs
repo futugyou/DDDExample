@@ -3,9 +3,9 @@
 namespace Example.Infrastruct.Data;
 public class DomainEventRebuilder : IDomainEventRebuilder
 {
-    public IEnumerable<DomainEvent> RebuildDomainEvents(IEnumerable<EventStore> events)
+    public IEnumerable<IDomainEvent> RebuildDomainEvents(IEnumerable<EventStore> events)
     {
         var op = new JsonSerializerOptions();
-        return events.Select(e => System.Text.Json.JsonSerializer.Deserialize(e.PayLoad, Type.GetType(e.TypeName), op) as DomainEvent);
+        return events.Select(e => System.Text.Json.JsonSerializer.Deserialize(e.PayLoad, Type.GetType(e.TypeName), op) as IDomainEvent);
     }
 }
