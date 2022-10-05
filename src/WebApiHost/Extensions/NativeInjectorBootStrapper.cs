@@ -14,7 +14,7 @@ public class NativeInjectorBootStrapper
         services.AddScoped<IRequestHandler<RegisterCustomerCommand>, CustomerCommandHandler>();
 
         // Domain - Events
-        services.AddScoped<INotificationHandler<CustomerRegisterEvent>, CustomerEventHandler>();
+        //services.AddScoped<INotificationHandler<CustomerRegisterEvent>, CustomerEventHandler>();
 
         // Domain - Notification
         services.AddScoped<INotificationHandler<DomainNotification>, DomainNotificationHandler>();
@@ -31,10 +31,13 @@ public class NativeInjectorBootStrapper
         );
         services.AddScoped<IUnitOfWork, UnitOfWork>();
 
-        //ÊÂ¼þËÝÔ´
+        //Event Sourcing
         services.AddScoped(typeof(IEventStoreRepository<>), typeof(EventStoreRepository<>));
         services.AddScoped<IDomainEventRebuilder, DomainEventRebuilder>();
         services.AddScoped(typeof(IAggregateInvoker<>), typeof(AggregateInvoker<>));
+
+        services.AddScoped<IEventSourcingDispatch, EventSourcingDispatch>();
+        services.AddScoped(typeof(IEventSourcingHandler<>), typeof(EventSourcingHandler<>));
 
     }
 }

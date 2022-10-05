@@ -7,5 +7,5 @@ using System.Threading.Tasks;
 namespace Example.Infrastruct.Data;
 public interface IDomainEventRebuilder
 {
-    IEnumerable<DomainEvent> RebuildDomainEvents(IEnumerable<EventStore> events);
+    IEnumerable<IDomainEvent> RebuildDomainEvents(IEnumerable<EventStore> events);
 }
