@@ -53,4 +53,33 @@ public class CustomerCommandHandler : CommandHandler, IRequestHandler<RegisterCu
 
         return Unit.Value;
     }
+
+    public async Task<Unit> Handle(ChangeCustomerNameCommand request, CancellationToken cancellationToken)
+    {
+        if (request == null)
+        {
+            throw new ArgumentNullException(nameof(request));
+        }
+
+        if (!request.IsValid())
+        {
+            await NotifyValidationErrors(request);
+            return Unit.Value;
+        }
+
+        var customer = await _customerRepository.GetById(request.Id);
+        if (customer == null)
+        {
+            //domain notification
+            await _mediatorHandler.RaiseEvent(new DomainNotification(request.Id.ToString(), "no customer found"));
+            return Unit.Value;
+        }
+
+        customer.ChangeName(request.Name, customer.Version);
+        await _customerRepository.Update(customer);
+        await _eventSourcingDispatch.Dispatch(customer);
+        await CommitAsync();
+
+        return Unit.Value;
+    }
 }
