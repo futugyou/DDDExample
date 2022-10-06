@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Xml.Linq;
 
 namespace Example.Domain;
 
@@ -48,5 +49,31 @@ public class Customer : AggregateRoot
         Name = ev.Name;
         Email = ev.Email;
         BirthDate = ev.BirthDate;
+    }
+
+    public void ChangeName(string newName, long originalVersion)
+    {
+        if (string.IsNullOrWhiteSpace(newName))
+        {
+            throw new AggregateException(nameof(newName));
+        }
+
+        if (newName?.Length < MinNameLenght)
+        {
+            throw new AggregateException("name is too short");
+        }
+
+        if (newName?.Length > MaxNameLenght)
+        {
+            throw new AggregateException("name is too long");
+        }
+
+        AddDomainEvent(new CustomerChangeNameEvent(Id, newName), originalVersion);
+    }
+
+    public void Apply(CustomerChangeNameEvent ev)
+    {
+        Id = ev.AggregateId;
+        Name = ev.Name;
     }
 }

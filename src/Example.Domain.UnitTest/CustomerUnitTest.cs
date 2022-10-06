@@ -1,3 +1,6 @@
+using Example.Domain.Core.Exceptions;
+using System.Xml.Linq;
+
 namespace Example.Domain.UnitTest;
 
 public class CustomerUnitTest
@@ -40,5 +43,58 @@ public class CustomerUnitTest
         var customerCreateEvent = (CustomerRegisterEvent)domainEvent;
         Assert.NotNull(customerCreateEvent);
         Assert.True(customer.Id == customerCreateEvent.AggregateId);
+    }
+
+    [Fact]
+    public void ChangeNameWhenExpectedVersionIsNotEqualsToAggregateVersionShouldThrowConcurrencyExceptionTest()
+    {
+        //Arrange
+        var expectedVersion = 1;
+        var id = Guid.NewGuid();
+        var name = "12345";
+        var email = "";
+        var customer = new Customer(id, name, email, It.IsAny<DateTime>());
+
+        var newName = "5678900";
+
+        //Act
+        //Assert
+        Assert.Throws<ConcurrencyException>(() => customer.ChangeName(newName, expectedVersion));
+    }
+
+    [Theory]
+    [InlineData(null)]
+    [InlineData("")]
+    [InlineData(" ")]
+    public void ChangeNameWhenNullOrEmptyShouldThrowAggregateExceptionTest(string newName)
+    {
+        //Arrange
+        var id = Guid.NewGuid();
+        var name = "12345";
+        var email = "";
+        var customer = new Customer(id, name, email, It.IsAny<DateTime>());
+
+        //Act
+        //Assert
+        Assert.Throws<AggregateException>(() => customer.ChangeName(newName, It.IsAny<long>()));
+    }
+
+    [Fact]
+    public void ChangeNameWithValiidArgumentsShouldApplyCustomerChangeNameEventTest()
+    {
+        //Arrange
+        var expectedVersion = 0;
+        var id = Guid.NewGuid();
+        var name = "12345";
+        var email = "";
+        var customer = new Customer(id, name, email, It.IsAny<DateTime>());
+
+        var newName = "5678900";
+
+        //Act
+        customer.ChangeName(newName, expectedVersion);
+
+        //Assert
+        Assert.Equal(newName, customer.Name);
     }
 }
