@@ -1,7 +1,13 @@
-namespace Example.Domain;
+﻿namespace Example.Application;
 
-public abstract class CustomerValidation<T> : AbstractValidator<T> where T : CustomerCommand
+public class RegisterCustomerValidatation : CustomerValidation<RegisterCustomerCommand>
 {
+    public RegisterCustomerValidatation()
+    {
+        ValidateName();
+        ValidateEmail();
+    }
+
     protected void ValidateName()
     {
         RuleFor(p => p.Name).NotEmpty().WithMessage("can not be null");

@@ -1,4 +1,4 @@
-﻿namespace Example.Domain;
+﻿namespace Example.Application;
 
 public class CommandHandler
 {

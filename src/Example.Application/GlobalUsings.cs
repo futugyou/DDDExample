@@ -5,3 +5,4 @@ global using global::Example.Domain.Core;
 global using global::MediatR;
 global using global::System.ComponentModel;
 global using global::System.ComponentModel.DataAnnotations;
+global using global::FluentValidation;
