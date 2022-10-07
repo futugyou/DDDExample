@@ -1,0 +1,30 @@
+version: '3.4'
+
+services:
+  webapihost-unittest:
+    environment:
+      - ASPNETCORE_ENVIRONMENT=UnitTest
+    entrypoint:
+      - dotnet
+      - test
+
+  application-unittest:
+    environment:
+      - ASPNETCORE_ENVIRONMENT=UnitTest    
+    entrypoint:
+      - dotnet
+      - test
+         
+  domain-unittest:
+    environment:
+      - ASPNETCORE_ENVIRONMENT=UnitTest    
+    entrypoint:
+      - dotnet
+      - test
+
+  infrastruct-unittest:
+    environment:
+      - ASPNETCORE_ENVIRONMENT=UnitTest    
+    entrypoint:
+      - dotnet
+      - test
