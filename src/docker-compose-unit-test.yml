@@ -1,0 +1,26 @@
+version: '3.4'
+
+services:
+  webapihost-unittest:
+    image: ${DOCKER_REGISTRY-}webapihost-unittest
+    build:
+      context: .
+      dockerfile: WebApiHost.UnitTest/Dockerfile
+
+  application-unittest:
+    image: ${DOCKER_REGISTRY-}application-unittest
+    build:
+      context: .
+      dockerfile: Example.Application.UnitTest/Dockerfile
+
+  domain-unittest:
+    image: ${DOCKER_REGISTRY-}domain-unittest
+    build:
+      context: .
+      dockerfile: Example.Domain.UnitTest/Dockerfile
+
+  infrastruct-unittest:
+    image: ${DOCKER_REGISTRY-}infrastruct-unittest
+    build:
+      context: .
+      dockerfile: Example.Infrastruct.UnitTest/Dockerfile
