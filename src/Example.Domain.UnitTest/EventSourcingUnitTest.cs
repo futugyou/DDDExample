@@ -1,7 +1,5 @@
-﻿using Example.Domain.Core.Exceptions;
-using System.Reflection;
+﻿namespace Example.Domain.UnitTest;
 
-namespace Example.Domain.UnitTest;
 public class EventSourcingUnitTest
 {
     [Fact]
@@ -61,6 +59,34 @@ public class EventSourcingUnitTest
         Assert.NotNull(result);
         Assert.Empty(result);
         Assert.IsAssignableFrom<IEnumerable<IDomainEvent>>(result);
+    }
+
+    [Fact]
+    public void LoadFromHistoryTest()
+    {
+        // Arrage
+        var newname = "thisisnewname";
+
+        var customr = CreateNewAggregate<Customer>();
+
+        var registerEvent = new CustomerRegisterEvent(customr.Id, customr.Name, customr.Email, customr.BirthDate);
+        registerEvent.BuildVersion(0);
+
+        var changeNameEvent = new CustomerChangeNameEvent(customr.Id, newname);
+        changeNameEvent.BuildVersion(1);
+
+        var events = new List<IDomainEvent>
+        {
+            registerEvent,
+            changeNameEvent,
+        };
+
+        // Act
+        customr.LoadFromHistory(events);
+
+        // Assert
+        Assert.Equal(newname, customr.Name);
+        Assert.Equal(1, customr.Version);
     }
 
     [Fact]

@@ -1,6 +1,4 @@
-﻿using Example.Domain.Core.Exceptions;
-
-namespace Example.Domain.Core;
+﻿namespace Example.Domain.Core;
 public abstract class AggregateRoot : Entity, IEventSourcing
 {
     public IReadOnlyCollection<IDomainEvent> DomainEvents => _domainEvents?.AsReadOnly();

@@ -1,6 +1,3 @@
-using Example.Domain.Core.Exceptions;
-using System.Xml.Linq;
-
 namespace Example.Domain.UnitTest;
 
 public class CustomerUnitTest
@@ -15,15 +12,19 @@ public class CustomerUnitTest
         Assert.Throws<ArgumentNullException>(() => new Customer(id, It.IsAny<string>(), It.IsAny<string>(), It.IsAny<DateTime>()));
     }
 
-    [Fact]
-    public void CustomerWithoutNameTest()
+
+    [Theory]
+    [InlineData(null)]
+    [InlineData("")]
+    [InlineData(" ")]
+    [InlineData(UnitTool.LongString)]
+    public void CustomerWithInvalidNameTest(string name)
     {
         // Arrage
         var id = Guid.NewGuid();
-        var name = "";
         // Act
         // Assert
-        Assert.Throws<AggregateException>(() => new Customer(id, name, It.IsAny<string>(), It.IsAny<DateTime>()));
+        Assert.Throws<CustomerNameCheckException>(() => new Customer(id, name, It.IsAny<string>(), It.IsAny<DateTime>()));
     }
 
     [Fact]

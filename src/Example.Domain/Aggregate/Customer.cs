@@ -1,7 +1,4 @@
-﻿using System;
-using System.Xml.Linq;
-
-namespace Example.Domain;
+﻿namespace Example.Domain;
 
 /// <summary>
 /// 定义领域对象 Customer
@@ -12,32 +9,41 @@ public class Customer : AggregateRoot
     private const int MaxNameLenght = 100;
 
     protected Customer() { }
+
     public Customer(Guid id, string name, string email, DateTime birthDate)
     {
         if (id == Guid.Empty)
         {
             throw new ArgumentNullException(nameof(id));
         }
-
         Id = id;
 
-        if (name?.Length < MinNameLenght)
-        {
-            throw new AggregateException("name is too short");
-        }
-
-        if (name?.Length > MaxNameLenght)
-        {
-            throw new AggregateException("name is too long");
-        }
-
+        CustomerNameCheck(name);
         Name = name;
+
         Email = email ?? throw new ArgumentNullException(nameof(email));
         BirthDate = birthDate;
         Address = new Address();
 
         AddDomainEvent(new CustomerRegisterEvent(Id, Name, Email, BirthDate));
     }
+
+    private void CustomerNameCheck(string name)
+    {
+        if (string.IsNullOrEmpty(name))
+        {
+            throw new CustomerNameCheckException(nameof(name));
+        }
+        if (name?.Length < MinNameLenght)
+        {
+            throw new CustomerNameCheckException("name is too short");
+        }
+        if (name?.Length > MaxNameLenght)
+        {
+            throw new CustomerNameCheckException("name is too long");
+        }
+    }
+
     public Address Address { get; set; }
     public string Name { get; private set; }
     public string Email { get; private set; }
