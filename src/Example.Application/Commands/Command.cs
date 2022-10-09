@@ -1,10 +1,10 @@
-namespace Example.Domain.Core;
+namespace Example.Application;
 
 public abstract class Command : IRequest
 {
     public DateTime Timestamp { get; private set; }
 
-    public ValidationResult ValidationResult { get; set; }
+    public FluentValidation.Results.ValidationResult ValidationResult { get; set; }
     protected Command()
     {
         Timestamp = DateTime.Now;

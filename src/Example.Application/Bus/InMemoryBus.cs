@@ -1,4 +1,4 @@
-﻿namespace Example.Infrastruct.Data;
+﻿namespace Example.Application;
 
 public class InMemoryBus : IMediatorHandler
 {
