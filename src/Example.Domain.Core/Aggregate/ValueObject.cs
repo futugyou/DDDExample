@@ -24,11 +24,12 @@ public abstract class ValueObject<T> where T : ValueObject<T>
 
     public static bool operator ==(ValueObject<T> left, ValueObject<T> right)
     {
-        if (ReferenceEquals(left, null) ^ ReferenceEquals(right, null))
+        if (left is null ^ right is null)
         {
             return false;
         }
-        return ReferenceEquals(left, null) || left.Equals(right);
+
+        return left is null || left.Equals(right);
     }
 
     public static bool operator !=(ValueObject<T> left, ValueObject<T> right)

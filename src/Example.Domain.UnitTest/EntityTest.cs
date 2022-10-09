@@ -1,4 +1,5 @@
 ﻿namespace Example.Domain.UnitTest;
+
 public class EntityTest
 {
     [Fact]
@@ -24,5 +25,4 @@ public class EntityTest
         Assert.True(a.GetHashCode() == d.GetHashCode());
         Assert.Contains(a.Id.ToString(), a.ToString());
     }
-
 }
