@@ -1,8 +1,9 @@
 ﻿namespace Example.Domain.Core;
 public abstract class AggregateRoot : Entity, IEventSourcing
 {
-    public IReadOnlyCollection<IDomainEvent> DomainEvents => _domainEvents?.AsReadOnly();
-    private List<IDomainEvent> _domainEvents = new();
+    public IReadOnlyCollection<IDomainEvent> DomainEvents => _domainEvents.AsReadOnly();
+
+    private readonly List<IDomainEvent> _domainEvents = new();
 
     public long Version => _version;
     private long _version = -1;

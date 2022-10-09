@@ -47,13 +47,13 @@ public class EventSourcingUnitTest
     }
 
     [Fact]
-    public void GetUncommittedEventsTest()
+    public void CallGetUncommittedEventsShouldGetDomainEventTest()
     {
         // Arrage
-        var customr = CreateNewAggregate<Customer>();
+        var customer = CreateNewAggregate<Customer>();
 
         // Act
-        var result = customr?.GetUncommittedEvents();
+        var result = customer?.GetUncommittedEvents();
 
         // Assert
         Assert.NotNull(result);
@@ -62,7 +62,26 @@ public class EventSourcingUnitTest
     }
 
     [Fact]
-    public void LoadFromHistoryTest()
+    public void CallClearUncommittedEventsShouldClearDomainEventTest()
+    {
+        // Arrage
+        var id = Guid.NewGuid();
+        var name = "12345";
+        var email = "";
+        var customer = new Customer(id, name, email, It.IsAny<DateTime>());
+
+        // Act
+        var events = customer.GetUncommittedEvents();
+
+        // Assert
+        Assert.Single(events);
+        customer.ClearUncommittedEvents();
+        events = customer.GetUncommittedEvents();
+        Assert.Empty(events);
+    }
+
+    [Fact]
+    public void CallLoadFromHistoryMethodShouldRenderCurrentStateTest()
     {
         // Arrage
         var newname = "thisisnewname";
