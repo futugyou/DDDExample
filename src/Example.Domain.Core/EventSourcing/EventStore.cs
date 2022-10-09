@@ -9,7 +9,6 @@ public class EventStore
     public string TypeName { get; private set; }
     public DateTime Created { get; private set; }
     public string PayLoad { get; private set; }
-    public bool IsSync { get; private set; }
 
     private EventStore()
     {
@@ -28,10 +27,5 @@ public class EventStore
         TypeName = typeName;
         Created = created;
         PayLoad = serializedBody;
-    }
-
-    public void MarkAsSynced()
-    {
-        IsSync = true;
     }
 }

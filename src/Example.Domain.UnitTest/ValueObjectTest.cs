@@ -26,6 +26,7 @@ public class ValueObjectTest
         Assert.True(a.Equals(b));
 
         Assert.True(a.GetHashCode() == b.GetHashCode());
+        Assert.True(0 == c.GetHashCode());
 
         Assert.True(a == b);
         Assert.False(d == a);

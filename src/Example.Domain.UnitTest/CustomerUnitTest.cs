@@ -16,6 +16,7 @@ public class CustomerUnitTest
     [InlineData(null)]
     [InlineData("")]
     [InlineData(" ")]
+    [InlineData("1234")]
     [InlineData(UnitTool.LongString)]
     public void CustomerWithInvalidNameTest(string name)
     {
@@ -66,6 +67,8 @@ public class CustomerUnitTest
     [InlineData(null)]
     [InlineData("")]
     [InlineData(" ")]
+    [InlineData("1234")]
+    [InlineData(UnitTool.LongString)]
     public void ChangeNameWhenNullOrEmptyShouldThrowAggregateExceptionTest(string newName)
     {
         //Arrange
