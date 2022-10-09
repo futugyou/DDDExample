@@ -1,7 +1,5 @@
 ﻿namespace Example.Domain.Core;
 
-// TODO: Refactoring
-// Temporarily hold both events
 public abstract class DomainEvent : IDomainEvent
 {
     public Guid AggregateId { get; protected set; }

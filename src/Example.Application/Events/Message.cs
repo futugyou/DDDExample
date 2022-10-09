@@ -1,4 +1,4 @@
-﻿namespace Example.Domain.Core;
+﻿namespace Example.Application;
 
 public abstract class Message : IRequest
 {
