@@ -1,4 +1,4 @@
-﻿namespace Example.Infrastruct.Data;
+﻿namespace Example.Infrastruct;
 
 /// <summary>
 /// 泛型仓储，实现泛型仓储接口

@@ -46,7 +46,7 @@ app.MapControllers();
 try
 {
     app.Logger.LogInformation("Applying database migration ({ApplicationName})...", appName);
-    app.ApplyDatabaseMigration<CustomerContext>((_, __) => { });
+    app.ApplyDatabaseMigration<CustomerContext>((_, _) => { });
 
     app.Logger.LogInformation("Starting web host ({ApplicationName})...", appName);
     app.Run();

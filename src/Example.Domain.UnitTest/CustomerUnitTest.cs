@@ -12,7 +12,6 @@ public class CustomerUnitTest
         Assert.Throws<ArgumentNullException>(() => new Customer(id, It.IsAny<string>(), It.IsAny<string>(), It.IsAny<DateTime>()));
     }
 
-
     [Theory]
     [InlineData(null)]
     [InlineData("")]

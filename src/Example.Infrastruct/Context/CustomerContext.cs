@@ -1,10 +1,10 @@
-namespace Example.Infrastruct.Data;
+namespace Example.Infrastruct;
 
 public class CustomerContext : DbContext
 {
     public DbSet<Customer> Customers { get; set; }
     public DbSet<EventStore> EventStores { get; set; }
-    
+
     protected CustomerContext()
     {
     }
@@ -28,8 +28,8 @@ public class CustomerContext : DbContext
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        modelBuilder.ApplyConfiguration(new CustomerMap());
-        modelBuilder.ApplyConfiguration(new EventStoreMap());
+        _ = modelBuilder.ApplyConfiguration(new CustomerMap());
+        _ = modelBuilder.ApplyConfiguration(new EventStoreMap());
 
         base.OnModelCreating(modelBuilder);
     }
@@ -53,7 +53,7 @@ public class CustomerContext : DbContext
         //optionsBuilder.AddInterceptors(_commandInterceptor, _connectInterceptor, _transactionInterceptor);
     }
 
-    private static readonly TaggedQueryCommandInterceptor _commandInterceptor = new TaggedQueryCommandInterceptor();
-    private static readonly TaggedConnectionInterceptor _connectInterceptor = new TaggedConnectionInterceptor();
-    private static readonly TaggedTransactionInterceptor _transactionInterceptor = new TaggedTransactionInterceptor();
+    //private static readonly TaggedQueryCommandInterceptor _commandInterceptor = new TaggedQueryCommandInterceptor();
+    //private static readonly TaggedConnectionInterceptor _connectInterceptor = new TaggedConnectionInterceptor();
+    //private static readonly TaggedTransactionInterceptor _transactionInterceptor = new TaggedTransactionInterceptor();
 }

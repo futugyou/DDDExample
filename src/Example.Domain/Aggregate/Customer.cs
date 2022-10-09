@@ -16,6 +16,7 @@ public class Customer : AggregateRoot
         {
             throw new ArgumentNullException(nameof(id));
         }
+
         Id = id;
 
         CustomerNameCheck(name);
@@ -34,10 +35,12 @@ public class Customer : AggregateRoot
         {
             throw new CustomerNameCheckException(nameof(name));
         }
+
         if (name?.Length < MinNameLenght)
         {
             throw new CustomerNameCheckException("name is too short");
         }
+
         if (name?.Length > MaxNameLenght)
         {
             throw new CustomerNameCheckException("name is too long");

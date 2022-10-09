@@ -1,5 +1,4 @@
 ﻿using Example.Domain;
-using Example.Domain.Core;
 
 namespace Example.Infrastruct.UnitTest;
 public class AggregateInvokerUnitTest

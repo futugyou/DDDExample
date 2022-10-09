@@ -1,4 +1,4 @@
-global using Xunit;
-global using Moq;
-global using Example.Infrastruct.Data;
-global using Microsoft.EntityFrameworkCore;
+global using global::Example.Domain.Core;
+global using global::Microsoft.EntityFrameworkCore;
+global using global::Moq;
+global using global::Xunit;

@@ -1,5 +1,3 @@
-using Example.Domain.Core;
-
 namespace Example.Infrastruct.UnitTest;
 
 public class UnitOfWorkUnitTest
@@ -12,7 +10,7 @@ public class UnitOfWorkUnitTest
         context.Setup(c => c.SaveChangesAsync(default)).ReturnsAsync(1).Verifiable();
 
         // act
-        IUnitOfWork unitOfWork = new UnitOfWork(context.Object);
+        var unitOfWork = new UnitOfWork(context.Object);
         await unitOfWork.CommitAsync();
 
         // assert

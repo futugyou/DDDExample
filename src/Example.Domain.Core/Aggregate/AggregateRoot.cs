@@ -5,13 +5,12 @@ public abstract class AggregateRoot : Entity, IEventSourcing
 
     private readonly List<IDomainEvent> _domainEvents = new();
 
-    public long Version => _version;
-    private long _version = -1;
+    public long Version { get; private set; } = -1;
 
     public void AddDomainEvent(IDomainEvent @event, long originalVersion = -1)
     {
         ValidateVersion(originalVersion);
-        @event.BuildVersion(_version + 1);
+        @event.BuildVersion(Version + 1);
         ApplyEvent(@event, @event.AggregateVersion);
         _domainEvents.Add(@event);
     }
@@ -39,7 +38,7 @@ public abstract class AggregateRoot : Entity, IEventSourcing
         if (!_domainEvents.Any(x => Equals(x.EventId, @event.EventId)))
         {
             ((dynamic)this).Apply((dynamic)@event);
-            _version = version;
+            Version = version;
         }
     }
 

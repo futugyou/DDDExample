@@ -1,4 +1,5 @@
-﻿namespace Example.Infrastruct.Data;
+﻿namespace Example.Infrastruct;
+
 public class UnitOfWork : IUnitOfWork
 {
     private readonly CustomerContext _dbContext;

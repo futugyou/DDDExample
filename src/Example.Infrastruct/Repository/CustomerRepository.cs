@@ -1,4 +1,4 @@
-namespace Example.Infrastruct.Data;
+namespace Example.Infrastruct;
 
 /// <summary>
 /// Customer仓储，操作对象还是领域对象

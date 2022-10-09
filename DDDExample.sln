@@ -11,7 +11,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Example.Domain", "src\Examp
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Example.Domain.Core", "src\Example.Domain.Core\Example.Domain.Core.csproj", "{9DC2AC47-A101-430A-93A0-9E4F03016C1C}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Example.Infrastruct.Data", "src\Example.Infrastruct.Data\Example.Infrastruct.Data.csproj", "{8252140A-F375-4D1D-8851-604305A468FD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Example.Infrastruct", "src\Example.Infrastruct\Example.Infrastruct.csproj", "{8252140A-F375-4D1D-8851-604305A468FD}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebApiHost", "src\WebApiHost\WebApiHost.csproj", "{E22F7317-F561-49BB-A469-083B5583C326}"
 EndProject
@@ -28,6 +28,11 @@ Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "src\docke
 		{7EEBAECC-A63E-4E5D-82AF-EF40B9BA6C42} = {7EEBAECC-A63E-4E5D-82AF-EF40B9BA6C42}
 		{8BC9493A-B4CF-4598-A49D-E567B0DD5878} = {8BC9493A-B4CF-4598-A49D-E567B0DD5878}
 		{E22F7317-F561-49BB-A469-083B5583C326} = {E22F7317-F561-49BB-A469-083B5583C326}
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{404CE88C-B525-4218-B341-54A5F92BB1A0}"
+	ProjectSection(SolutionItems) = preProject
+		src\.editorconfig = src\.editorconfig
 	EndProjectSection
 EndProject
 Global

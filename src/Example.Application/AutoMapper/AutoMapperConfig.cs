@@ -8,7 +8,7 @@ public class AutoMapperConfig
         {
             conf.AddProfile(new DomainToViewModelMappingProfile());
             conf.AddProfile(new ViewModelToDomainMappingProfile());
-            conf.AddProfile(new ViewModelToCommandMappingProfile());            
+            conf.AddProfile(new ViewModelToCommandMappingProfile());
         });
     }
 }

@@ -1,4 +1,4 @@
-namespace Example.Infrastruct.Data;
+namespace Example.Infrastruct;
 
 public class CustomerMap : IEntityTypeConfiguration<Customer>
 {

@@ -7,7 +7,7 @@ public class Address : ValueObject<Address>
     }
 
     public Address(string province, string city,
-        string county, string street, string zip)
+        string county, string street, string _)
     {
         if (string.IsNullOrEmpty(province))
         {

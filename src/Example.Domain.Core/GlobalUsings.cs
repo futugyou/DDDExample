@@ -1,2 +1,1 @@
-﻿global using global::FluentValidation.Results;
-global using global::MediatR;
+﻿global using global::MediatR;

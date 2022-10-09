@@ -1,7 +1,4 @@
-﻿using Example.Domain;
-using Example.Domain.Core;
-using Microsoft.EntityFrameworkCore.ChangeTracking;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore.ChangeTracking;
 
 namespace Example.Infrastruct.UnitTest;
 public class RepositoryUnitTest

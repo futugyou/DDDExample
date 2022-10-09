@@ -1,4 +1,4 @@
-﻿namespace Example.Infrastruct.Data;
+﻿namespace Example.Infrastruct;
 public class EventStoreRepository<T> : IEventStoreRepository<T> where T : AggregateRoot
 {
     private readonly DbSet<EventStore> _dbSet;
@@ -13,6 +13,7 @@ public class EventStoreRepository<T> : IEventStoreRepository<T> where T : Aggreg
         {
             throw new ArgumentNullException(nameof(databaseContext));
         }
+
         _dbSet = databaseContext.Set<EventStore>();
         _invoker = invoker;
         _domainEventRebuilder = domainEventRebuilder;
@@ -23,7 +24,7 @@ public class EventStoreRepository<T> : IEventStoreRepository<T> where T : Aggreg
         await _dbSet.AddAsync(@event);
     }
 
-    public   Task<T> GetByIdAsync(Guid id)
+    public Task<T> GetByIdAsync(Guid id)
     {
         if (id == Guid.Empty)
         {
@@ -45,6 +46,6 @@ public class EventStoreRepository<T> : IEventStoreRepository<T> where T : Aggreg
         var events = _domainEventRebuilder.RebuildDomainEvents(eventItemss);
         aggregate.LoadFromHistory(events);
 
-        return   Task.FromResult(aggregate);
+        return Task.FromResult(aggregate);
     }
 }

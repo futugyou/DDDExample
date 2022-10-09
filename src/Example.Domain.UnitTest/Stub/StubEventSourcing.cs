@@ -1,5 +1,5 @@
 ﻿namespace Example.Domain.UnitTest;
-public class StubEventSourcing: AggregateRoot
+public class StubEventSourcing : AggregateRoot
 {
     public void ExposeAddDomainEvent(IDomainEvent stubEvent, long originalVersion)
     {

@@ -8,7 +8,7 @@ public class RemoveCustomerUnitTest
         var _mediatorHandler = new Mock<IMediatorHandler>();
         var _customerRepository = new Mock<ICustomerRepository>();
         // Act
-        ICustomerAppService service = new CustomerAppService(_customerRepository.Object, AutoMapperHelper.mapper, _mediatorHandler.Object);
+        using var service = new CustomerAppService(_customerRepository.Object, AutoMapperHelper.mapper, _mediatorHandler.Object);
         await service.Remove(Guid.NewGuid());
 
         // Assert

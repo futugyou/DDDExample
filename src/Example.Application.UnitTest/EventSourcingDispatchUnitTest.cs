@@ -1,6 +1,4 @@
-﻿using Example.Domain;
-
-namespace Example.Application.UnitTest;
+﻿namespace Example.Application.UnitTest;
 
 public class EventSourcingDispatchUnitTest
 {

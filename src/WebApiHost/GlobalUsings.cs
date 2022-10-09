@@ -1,7 +1,7 @@
 ﻿global using global::Example.Application;
 global using global::Example.Domain;
 global using global::Example.Domain.Core;
-global using global::Example.Infrastruct.Data;
+global using global::Example.Infrastruct;
 global using global::LogDashboard;
 global using global::MediatR;
 global using global::Microsoft.AspNetCore.Mvc;

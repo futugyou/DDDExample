@@ -22,7 +22,7 @@ public class RegisterCustomerUnitTest
         };
 
         // Act
-        ICustomerAppService service = new CustomerAppService(_customerRepository.Object, _mapper.Object, _mediatorHandler.Object);
+        using var service = new CustomerAppService(_customerRepository.Object, _mapper.Object, _mediatorHandler.Object);
         await service.Register(userViewModel);
 
         // Assert

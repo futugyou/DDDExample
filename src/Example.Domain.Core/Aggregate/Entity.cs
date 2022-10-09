@@ -19,8 +19,15 @@ public abstract class Entity
     {
         var compareTo = obj as Entity;
 
-        if (ReferenceEquals(this, compareTo)) return true;
-        if (ReferenceEquals(null, compareTo)) return false;
+        if (ReferenceEquals(this, compareTo))
+        {
+            return true;
+        }
+
+        if (compareTo is null)
+        {
+            return false;
+        }
 
         return Id.Equals(compareTo.Id);
     }
@@ -33,10 +40,14 @@ public abstract class Entity
     public static bool operator ==(Entity a, Entity b)
     {
         if (a is null && b is null)
+        {
             return true;
+        }
 
         if (a is null || b is null)
+        {
             return false;
+        }
 
         return a.Equals(b);
     }

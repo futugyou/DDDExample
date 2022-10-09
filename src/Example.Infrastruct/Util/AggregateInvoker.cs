@@ -1,6 +1,6 @@
 ﻿using System.Reflection;
 
-namespace Example.Infrastruct.Data;
+namespace Example.Infrastruct;
 public class AggregateInvoker<T> : IAggregateInvoker<T> where T : AggregateRoot
 {
     public T CreateInstanceOfAggregateRoot()

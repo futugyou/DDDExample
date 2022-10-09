@@ -29,7 +29,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <ProjectReference Include="..\Example.Infrastruct.Data\Example.Infrastruct.Data.csproj" />
+	  <ProjectReference Include="..\Example.Infrastruct\Example.Infrastruct.csproj" />
 	</ItemGroup>
 
 </Project>

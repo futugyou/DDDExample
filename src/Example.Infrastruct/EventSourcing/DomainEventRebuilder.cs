@@ -1,6 +1,6 @@
 ﻿using System.Text.Json;
 
-namespace Example.Infrastruct.Data;
+namespace Example.Infrastruct;
 public class DomainEventRebuilder : IDomainEventRebuilder
 {
     public IEnumerable<IDomainEvent> RebuildDomainEvents(IEnumerable<EventStore> events)

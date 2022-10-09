@@ -19,7 +19,7 @@ public class UpdateCustomerUnitTest
         };
 
         // Act
-        ICustomerAppService service = new CustomerAppService(_customerRepository.Object, AutoMapperHelper.mapper, _mediatorHandler.Object);
+        using var service = new CustomerAppService(_customerRepository.Object, AutoMapperHelper.mapper, _mediatorHandler.Object);
         await service.Update(customerViewModel);
 
         // Assert

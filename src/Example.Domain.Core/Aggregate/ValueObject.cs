@@ -14,7 +14,7 @@ public abstract class ValueObject<T> where T : ValueObject<T>
         return this.GetEqualityComponents().SequenceEqual(other.GetEqualityComponents());
     }
     protected abstract IEnumerable<object> GetEqualityComponents();
-    // override object.GetHashCode
+
     public override int GetHashCode()
     {
         return GetEqualityComponents()
@@ -36,6 +36,7 @@ public abstract class ValueObject<T> where T : ValueObject<T>
     {
         return !(left == right);
     }
+
     public virtual T Clone()
     {
         return (T)MemberwiseClone();

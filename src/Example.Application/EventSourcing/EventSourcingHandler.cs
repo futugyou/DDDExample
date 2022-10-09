@@ -16,7 +16,7 @@ public class EventSourcingHandler<T> : IEventSourcingHandler<IDomainEvent> where
             throw new ArgumentNullException(nameof(@event));
         }
 
-        var serializedBody = System.Text.Json.JsonSerializer.Serialize(@event);
+        var serializedBody = JsonSerializer.Serialize(@event);
 
         var eventStore = new EventStore(@event.AggregateId, aggregateVersion,
             $"{aggregateVersion}@{@event.AggregateId}",

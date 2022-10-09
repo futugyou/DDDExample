@@ -12,17 +12,23 @@ public class EntityTest
         StubEntity? c = null;
         var d = new StubEntity(id);
         StubEntity? e = null;
+        var f = a;
         // Act
 
         // Assert
         Assert.False(a.Equals(b));
         Assert.False(a.Equals(c));
+        Assert.True(a.Equals(f));
+
         Assert.True(a == d);
         Assert.True(c == e);
         Assert.False(a == e);
         Assert.False(c == a);
+
         Assert.True(a != b);
+
         Assert.True(a.GetHashCode() == d.GetHashCode());
+
         Assert.Contains(a.Id.ToString(), a.ToString());
     }
 }

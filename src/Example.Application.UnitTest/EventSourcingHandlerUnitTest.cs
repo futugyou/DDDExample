@@ -1,6 +1,4 @@
-﻿using Example.Domain;
-
-namespace Example.Application.UnitTest;
+﻿namespace Example.Application.UnitTest;
 
 public class EventSourcingHandlerUnitTest
 {
@@ -35,6 +33,6 @@ public class EventSourcingHandlerUnitTest
         await handler.Handle(@event, version);
 
         // Assert
-        repository.Verify(a=>a.AppendAsync(It.IsAny<EventStore>()),Times.Once,"append async must called once");
+        repository.Verify(a => a.AppendAsync(It.IsAny<EventStore>()), Times.Once, "append async must called once");
     }
 }

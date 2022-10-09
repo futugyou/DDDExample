@@ -2,7 +2,6 @@
 
 public class CustomerCommandHandler : CommandHandler, IRequestHandler<RegisterCustomerCommand>, IDisposable
 {
-    private readonly IUnitOfWork _unitOfWork;
     private readonly IMediatorHandler _mediatorHandler;
     private readonly ICustomerRepository _customerRepository;
     private readonly IEventSourcingDispatch _eventSourcingDispatch;
@@ -13,7 +12,6 @@ public class CustomerCommandHandler : CommandHandler, IRequestHandler<RegisterCu
                                   IEventSourcingDispatch eventSourcingDispatch)
         : base(unitOfWork, mediatorHandler)
     {
-        _unitOfWork = unitOfWork;
         _mediatorHandler = mediatorHandler;
         _customerRepository = customerRepository;
         _eventSourcingDispatch = eventSourcingDispatch;
@@ -47,6 +45,7 @@ public class CustomerCommandHandler : CommandHandler, IRequestHandler<RegisterCu
             await _mediatorHandler.RaiseEvent(new DomainNotification(customer.Id.ToString(), "email address already exists"));
             return Unit.Value;
         }
+
         await _customerRepository.Add(customer);
         await _eventSourcingDispatch.Dispatch(customer);
         await CommitAsync();
@@ -54,7 +53,7 @@ public class CustomerCommandHandler : CommandHandler, IRequestHandler<RegisterCu
         return Unit.Value;
     }
 
-    public async Task<Unit> Handle(ChangeCustomerNameCommand request, CancellationToken cancellationToken)
+    public async Task<Unit> Handle(ChangeCustomerNameCommand request, CancellationToken _)
     {
         if (request == null)
         {

@@ -17,7 +17,7 @@ public class ChangeCustomerNameCommandUnitTest
                                                  mediatorHandler.Object,
                                                  repository.Object,
                                                  dispatch.Object);
-        ChangeCustomerNameCommand request = null;
+        ChangeCustomerNameCommand? request = null;
 
         // Assert
         await Assert.ThrowsAsync<ArgumentNullException>(() => handler.Handle(request, default));
@@ -37,7 +37,7 @@ public class ChangeCustomerNameCommandUnitTest
                                                  mediatorHandler.Object,
                                                  repository.Object,
                                                  dispatch.Object);
-        ChangeCustomerNameCommand request = new ChangeCustomerNameCommand(Guid.NewGuid(), null);
+        var request = new ChangeCustomerNameCommand(Guid.NewGuid(), null);
         var result = await handler.Handle(request, default);
 
         // Assert
@@ -53,8 +53,9 @@ public class ChangeCustomerNameCommandUnitTest
         var repository = new Mock<ICustomerRepository>();
         var dispatch = new Mock<IEventSourcingDispatch>();
 
-        ChangeCustomerNameCommand request = new ChangeCustomerNameCommand(Guid.NewGuid(), "this is new name");
-        repository.Setup(m => m.GetById(request.Id)).Returns(Task.FromResult((Customer)null));
+        var request = new ChangeCustomerNameCommand(Guid.NewGuid(), "this is new name");
+        Customer? customer = null;
+        repository.Setup(m => m.GetById(request.Id)).Returns(Task.FromResult(customer));
 
         // Act
         var handler = new CustomerCommandHandler(unitOfWork.Object,
@@ -76,7 +77,7 @@ public class ChangeCustomerNameCommandUnitTest
         var repository = new Mock<ICustomerRepository>();
         var dispatch = new Mock<IEventSourcingDispatch>();
         var customer = new Customer(Guid.NewGuid(), "this is name", "email@e.com", DateTime.UtcNow);
-        ChangeCustomerNameCommand request = new ChangeCustomerNameCommand(customer.Id, "this is new name");
+        var request = new ChangeCustomerNameCommand(customer.Id, "this is new name");
         repository.Setup(m => m.GetById(request.Id)).Returns(Task.FromResult(customer));
         repository.Setup(m => m.Update(customer)).Returns(Task.CompletedTask).Verifiable();
 

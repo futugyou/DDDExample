@@ -10,7 +10,6 @@ public class CommandHandler
         _mediatorHandler = mediatorHandler;
     }
 
-
     protected async Task NotifyValidationErrors(Command command)
     {
         foreach (var item in command.ValidationResult.Errors)

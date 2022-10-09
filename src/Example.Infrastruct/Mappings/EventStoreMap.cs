@@ -1,4 +1,4 @@
-﻿namespace Example.Infrastruct.Data;
+﻿namespace Example.Infrastruct;
 public class EventStoreMap : IEntityTypeConfiguration<EventStore>
 {
     public void Configure(EntityTypeBuilder<EventStore> builder)

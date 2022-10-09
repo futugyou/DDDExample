@@ -1,6 +1,4 @@
 ﻿using Example.Domain;
-using Example.Domain.Core;
-using Example.Infrastruct.Data;
 
 namespace Example.Infrastruct.UnitTest;
 public class EventStoreRepositoryUnitTest
@@ -63,5 +61,4 @@ public class EventStoreRepositoryUnitTest
         // assert
         Assert.NotNull(aggregate);
     }
-
 }

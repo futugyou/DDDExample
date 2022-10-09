@@ -1,4 +1,4 @@
-﻿namespace Example.Infrastruct.Data;
+﻿namespace Example.Infrastruct;
 
 public interface IAggregateInvoker<out T> where T : AggregateRoot
 {
