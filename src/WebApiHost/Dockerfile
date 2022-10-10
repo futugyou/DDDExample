@@ -11,7 +11,7 @@ COPY ["WebApiHost/WebApiHost.csproj", "WebApiHost/"]
 COPY ["Example.Application/Example.Application.csproj", "Example.Application/"]
 COPY ["Example.Domain/Example.Domain.csproj", "Example.Domain/"]
 COPY ["Example.Domain.Core/Example.Domain.Core.csproj", "Example.Domain.Core/"]
-COPY ["Example.Infrastruct.Data/Example.Infrastruct.Data.csproj", "Example.Infrastruct.Data/"]
+COPY ["Example.Infrastruct/Example.Infrastruct.csproj", "Example.Infrastruct/"]
 RUN dotnet restore "WebApiHost/WebApiHost.csproj"
 COPY . .
 WORKDIR "/src/WebApiHost"
