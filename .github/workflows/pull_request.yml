@@ -1,27 +1,35 @@
-name: .NET
+name: pull_request
 
 on:
-  workflow_dispatch:
-  push:
-    branches: [ master ]
-
+  workflow_dispatch:    
+  pull_request:
+    branches:
+    - master
     paths:
     - src/**
-    
-  pull_request:
-    branches: [ master ]  
-
-    paths:
-    - src/**  
+    - .github/**
 
 jobs:
   build:
 
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        dotnet-version: [ '7.0.x' ]
 
     steps:
-    - name: Checkout
-      uses: actions/checkout@v2
+    - uses: actions/checkout@v3
+    - name: Setup .NET Core SDK ${{ matrix.dotnet-version }}
+      uses: actions/setup-dotnet@v2
+      with:
+        dotnet-version: ${{ matrix.dotnet-version }}
+        include-prerelease: true
+    - name: Install dependencies
+      run: dotnet restore
+    - name: Build
+      run: dotnet build --configuration Release --no-restore
+    - name: Test
+      run: dotnet test --no-restore --verbosity normal
       
     - name: Set up QEMU
       uses: docker/setup-qemu-action@v1

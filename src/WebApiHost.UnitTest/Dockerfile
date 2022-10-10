@@ -10,7 +10,7 @@ COPY ["src/WebApiHost/WebApiHost.csproj", "src/WebApiHost/"]
 COPY ["src/Example.Application/Example.Application.csproj", "src/Example.Application/"]
 COPY ["src/Example.Domain/Example.Domain.csproj", "src/Example.Domain/"]
 COPY ["src/Example.Domain.Core/Example.Domain.Core.csproj", "src/Example.Domain.Core/"]
-COPY ["src/Example.Infrastruct.Data/Example.Infrastruct.Data.csproj", "src/Example.Infrastruct.Data/"]
+COPY ["src/Example.Infrastruct/Example.Infrastruct.csproj", "src/Example.Infrastruct/"]
 RUN dotnet restore "src/WebApiHost.UnitTest/WebApiHost.UnitTest.csproj"
 COPY . .
 WORKDIR "/src/src/WebApiHost.UnitTest"
