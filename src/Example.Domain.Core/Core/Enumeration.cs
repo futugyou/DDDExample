@@ -1,6 +1,6 @@
 ﻿namespace Example.Domain.Core;
 
-public abstract class Enumeration : IComparable
+public abstract class Enumeration
 {
     public string Name { get; private set; }
 
@@ -30,6 +30,26 @@ public abstract class Enumeration : IComparable
         return typeMatches && valueMatches;
     }
 
+    public static bool operator ==(Enumeration a, Enumeration b)
+    {
+        if (a is null && b is null)
+        {
+            return true;
+        }
+
+        if (a is null || b is null)
+        {
+            return false;
+        }
+
+        return a.Equals(b);
+    }
+
+    public static bool operator !=(Enumeration a, Enumeration b)
+    {
+        return !(a == b);
+    }
+
     public static T FromValue<T>(int value) where T : Enumeration
     {
         var matchingItem = Parse<T, int>(value, "value", item => item.Id == value);
@@ -43,8 +63,6 @@ public abstract class Enumeration : IComparable
     }
 
     public override int GetHashCode() => Id.GetHashCode();
-
-    public int CompareTo(object other) => Id.CompareTo(((Enumeration)other).Id);
 
     #region private
     private static T Parse<T, K>(K value, string description, Func<T, bool> predicate) where T : Enumeration
