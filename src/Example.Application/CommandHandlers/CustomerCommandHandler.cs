@@ -39,12 +39,6 @@ public class CustomerCommandHandler : CommandHandler, IRequestHandler<RegisterCu
         }
 
         customer = new Customer(request.Id, request.Name, request.Email, request.BirthDate);
-        if (await _customerRepository.GetByEmail(customer.Email) != null)
-        {
-            //domain notification
-            await _mediatorHandler.RaiseEvent(new DomainNotification(customer.Id.ToString(), "email address already exists"));
-            return Unit.Value;
-        }
 
         await _customerRepository.Add(customer);
         await _eventSourcingDispatch.Dispatch(customer);
