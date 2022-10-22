@@ -2,7 +2,7 @@
 
 public class CustomerChangeNameEvent : DomainEvent
 {
-    public string Name { get; private set; }
+    public string Name { get; }
 
     public CustomerChangeNameEvent(Guid id, string newName)
     {

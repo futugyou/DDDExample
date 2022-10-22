@@ -25,8 +25,9 @@ public class Customer : AggregateRoot
         Email = email ?? throw new ArgumentNullException(nameof(email));
         BirthDate = birthDate;
         Address = new Address();
+        CustomerLevel = CustomerLevel.Comman;
 
-        AddDomainEvent(new CustomerRegisterEvent(Id, Name, Email, BirthDate));
+        AddDomainEvent(new CustomerRegisterEvent(Id, Name, Email, BirthDate, CustomerLevel));
     }
 
     private void CustomerNameCheck(string name)
@@ -51,6 +52,7 @@ public class Customer : AggregateRoot
     public string Name { get; private set; }
     public string Email { get; private set; }
     public DateTime BirthDate { get; private set; }
+    public CustomerLevel CustomerLevel { get; private set; }
 
     public void Apply(CustomerRegisterEvent ev)
     {
@@ -58,6 +60,7 @@ public class Customer : AggregateRoot
         Name = ev.Name;
         Email = ev.Email;
         BirthDate = ev.BirthDate;
+        CustomerLevel = ev.CustomerLevel;
     }
 
     public void ChangeName(string newName, long originalVersion)
@@ -84,5 +87,16 @@ public class Customer : AggregateRoot
     {
         Id = ev.AggregateId;
         Name = ev.Name;
+    }
+
+    public void ChangeCustomerLevel(CustomerLevel customerLevel, long originalVersion)
+    {
+        AddDomainEvent(new ChangeCustomerLevelEvent(customerLevel), originalVersion);
+    }
+
+    public void Apply(ChangeCustomerLevelEvent ev)
+    {
+        Id = ev.AggregateId;
+        CustomerLevel = ev.CustomerLevel;
     }
 }
