@@ -8,8 +8,8 @@ public class AggregateInvoker<T> : IAggregateInvoker<T> where T : AggregateRoot
         return (T)typeof(T)
             .GetConstructor(BindingFlags.Instance | BindingFlags.NonPublic,
                 null,
-                new Type[0],
-                new ParameterModifier[0])
+                Array.Empty<Type>(),
+                Array.Empty<ParameterModifier>())
             ?.Invoke(new object[0]);
     }
 }

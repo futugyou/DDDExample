@@ -33,7 +33,7 @@ public class EventSourcingUnitTest
     {
         // Arrage
         long _version = 0;
-        var createEvent = new CustomerRegisterEvent(Guid.NewGuid(), "name", "e@e.com", DateTime.UtcNow);
+        var createEvent = new CustomerRegisterEvent(Guid.NewGuid(), "name", "e@e.com", DateTime.UtcNow, CustomerLevel.Comman);
         var customr = CreateNewAggregate<Customer>();
 
         // Act
@@ -88,7 +88,7 @@ public class EventSourcingUnitTest
 
         var customr = CreateNewAggregate<Customer>();
 
-        var registerEvent = new CustomerRegisterEvent(customr.Id, customr.Name, customr.Email, customr.BirthDate);
+        var registerEvent = new CustomerRegisterEvent(customr.Id, customr.Name, customr.Email, customr.BirthDate, customr.CustomerLevel);
         registerEvent.BuildVersion(0);
 
         var changeNameEvent = new CustomerChangeNameEvent(customr.Id, newname);

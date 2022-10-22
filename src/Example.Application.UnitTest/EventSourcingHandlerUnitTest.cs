@@ -26,7 +26,7 @@ public class EventSourcingHandlerUnitTest
         repository.Setup(a => a.AppendAsync(It.IsAny<EventStore>()))
             .Verifiable();
         long version = 0;
-        var @event = new CustomerRegisterEvent(It.IsAny<Guid>(), It.IsAny<string>(), It.IsAny<string>(), It.IsAny<DateTime>());
+        var @event = new CustomerRegisterEvent(It.IsAny<Guid>(), It.IsAny<string>(), It.IsAny<string>(), It.IsAny<DateTime>(), It.IsAny<CustomerLevel>());
 
         // Act
         var handler = new EventSourcingHandler<AggregateRoot>(repository.Object);

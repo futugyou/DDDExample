@@ -33,7 +33,7 @@ public class EventSourcingDispatchUnitTest
         aggregate.Setup(a => a.GetUncommittedEvents())
             .Returns(new List<IDomainEvent>
             {
-                new CustomerRegisterEvent(It.IsAny<Guid>(), It.IsAny<string>(),  It.IsAny<string>(),  It.IsAny<DateTime>())
+                new CustomerRegisterEvent(It.IsAny<Guid>(), It.IsAny<string>(), It.IsAny<string>(), It.IsAny<DateTime>(), It.IsAny<CustomerLevel>())
             });
 
         // Act
