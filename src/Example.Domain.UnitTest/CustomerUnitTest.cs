@@ -34,9 +34,11 @@ public class CustomerUnitTest
         var id = Guid.NewGuid();
         var name = "12345";
         var email = "";
+
         // Act
         var customer = new Customer(id, name, email, It.IsAny<DateTime>());
         var domainEvent = customer.DomainEvents.FirstOrDefault();
+
         // Assert
         Assert.True(customer.Id == id);
         Assert.IsAssignableFrom<CustomerRegisterEvent>(domainEvent);

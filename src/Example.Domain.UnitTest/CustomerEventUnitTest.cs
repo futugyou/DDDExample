@@ -1,40 +1,14 @@
 ﻿namespace Example.Domain.UnitTest;
 
-public class EventSourcingUnitTest
+public class CustomerEventUnitTest
 {
-    [Fact]
-    public void ValidateVersionThrowConcurrencyExceptionTest()
-    {
-        // Arrage
-        long _version = 0;
-        IEventSourcing sourcing = new StubEventSourcing();
-
-        // Act
-        // Assert
-        Assert.Throws<ConcurrencyException>(() => sourcing.ValidateVersion(_version));
-    }
-
-    [Fact]
-    public void ValidateVersionOkTest()
-    {
-        // Arrage
-        long _version = -1;
-        IEventSourcing sourcing = new StubEventSourcing();
-
-        // Act
-        sourcing.ValidateVersion(_version);
-
-        // Assert
-        Assert.True(sourcing.Version == _version);
-    }
-
     [Fact]
     public void ApplyEventTest()
     {
         // Arrage
         long _version = 0;
         var createEvent = new CustomerRegisterEvent(Guid.NewGuid(), "name", "e@e.com", DateTime.UtcNow, CustomerLevel.Comman);
-        var customr = CreateNewAggregate<Customer>();
+        var customr = UnitTool.CreateNewAggregate<Customer>();
 
         // Act
         customr?.ApplyEvent(createEvent, _version);
@@ -50,7 +24,7 @@ public class EventSourcingUnitTest
     public void CallGetUncommittedEventsShouldGetDomainEventTest()
     {
         // Arrage
-        var customer = CreateNewAggregate<Customer>();
+        var customer = UnitTool.CreateNewAggregate<Customer>();
 
         // Act
         var result = customer?.GetUncommittedEvents();
@@ -86,7 +60,7 @@ public class EventSourcingUnitTest
         // Arrage
         var newname = "thisisnewname";
 
-        var customr = CreateNewAggregate<Customer>();
+        var customr = UnitTool.CreateNewAggregate<Customer>();
 
         var registerEvent = new CustomerRegisterEvent(customr.Id, customr.Name, customr.Email, customr.BirthDate, customr.CustomerLevel);
         registerEvent.BuildVersion(0);
@@ -106,30 +80,5 @@ public class EventSourcingUnitTest
         // Assert
         Assert.Equal(newname, customr.Name);
         Assert.Equal(1, customr.Version);
-    }
-
-    [Fact]
-    public void AddDomainEventWithInvalidVesrionTest()
-    {
-        //Arrange
-        long expectedVersion = 0;
-        var sut = CreateNewAggregate<StubEventSourcing>();
-        //Act
-        //Assert
-        Assert.Throws<ConcurrencyException>(()
-            => sut.ExposeAddDomainEvent(It.IsAny<IDomainEvent>(), expectedVersion));
-    }
-
-    private T? CreateNewAggregate<T>() where T : AggregateRoot
-    {
-        var t = typeof(T)
-            .GetConstructor(BindingFlags.Instance |
-                                     BindingFlags.NonPublic |
-                                     BindingFlags.Public,
-                            null,
-                            new Type[0],
-                            new ParameterModifier[0])
-            ?.Invoke(new object[0]);
-        return t as T;
     }
 }
