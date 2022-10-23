@@ -6,3 +6,11 @@ public class StubEntity : Entity
         Id = id;
     }
 }
+
+public class StubEntityA : Entity
+{
+    public StubEntityA(Guid id)
+    {
+        Id = id;
+    }
+}

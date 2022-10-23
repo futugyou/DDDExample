@@ -19,12 +19,17 @@ public abstract class Entity
     {
         var compareTo = obj as Entity;
 
+        if (compareTo is null)
+        {
+            return false;
+        }
+
         if (ReferenceEquals(this, compareTo))
         {
             return true;
         }
 
-        if (compareTo is null)
+        if (GetType() != obj.GetType())
         {
             return false;
         }

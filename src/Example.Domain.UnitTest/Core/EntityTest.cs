@@ -3,32 +3,84 @@
 public class EntityTest
 {
     [Fact]
-    public void EntityBaseMethodTest()
+    public void DifferentEntityTypeShouldNotEqual()
     {
         // Arrage
         var id = Guid.NewGuid();
         var a = new StubEntity(id);
-        var b = new StubEntity(Guid.NewGuid());
-        StubEntity? c = null;
-        var d = new StubEntity(id);
-        StubEntity? e = null;
-        var f = a;
-        // Act
+        var b = new StubEntityA(id);
 
-        // Assert
+        //Act
+
+        //Assert
+        Assert.NotEqual<Entity>(a, b);
         Assert.False(a.Equals(b));
-        Assert.False(a.Equals(c));
-        Assert.True(a.Equals(f));
-
-        Assert.True(a == d);
-        Assert.True(c == e);
-        Assert.False(a == e);
-        Assert.False(c == a);
-
+        Assert.False(a == b);
         Assert.True(a != b);
+    }
 
-        Assert.True(a.GetHashCode() == d.GetHashCode());
+    [Fact]
+    public void NullEntityShouldNotEqual()
+    {
+        // Arrage
+        var id = Guid.NewGuid();
+        var a = new StubEntity(id);
+        StubEntity? n = null;
 
-        Assert.Contains(a.Id.ToString(), a.ToString());
+        //Act
+
+        //Assert
+        Assert.NotEqual<Entity>(a, n);
+        Assert.False(a.Equals(n));
+        Assert.False(a == n);
+        Assert.False(n == a);
+        Assert.True(a != n);
+    }
+
+    [Fact]
+    public void ReferenceEqualsEntityShouldEqual()
+    {
+        // Arrage
+        var id = Guid.NewGuid();
+        var a = new StubEntity(id);
+        var b = a;
+
+        //Act
+
+        //Assert
+        Assert.Equal<Entity>(a, b);
+        Assert.True(a.Equals(b));
+        Assert.True(a == b);
+    }
+
+    [Fact]
+    public void EqualEntityShoudEqualHashCode()
+    {
+        // Arrage
+        var id = Guid.NewGuid();
+        var a = new StubEntity(id);
+        var b = new StubEntity(id);
+
+        //Act
+
+        //Assert
+        Assert.Equal<Entity>(a, b);
+        Assert.True(a.Equals(b));
+        Assert.True(a == b);
+        Assert.True(a.GetHashCode() == b.GetHashCode());
+    }
+
+    [Fact]
+    public void EntityToStringShouldContainsID()
+    {
+        // Arrage
+        var id = Guid.NewGuid();
+        var a = new StubEntity(id);
+        var str = a.ToString();
+
+        //Act
+
+        //Assert
+        Assert.Contains(id.ToString(), str);
     }
 }
