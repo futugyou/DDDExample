@@ -22,6 +22,13 @@ public class Stub1ValueObject : ValueObject<Stub1ValueObject>
     }
 
     public string Name { get; private set; }
+    protected override IEnumerable<object> GetEqualityComponents()
+    {
+        yield return Name;
+    }
+}
+public class StubNullValueObject : ValueObject<Stub1ValueObject>
+{
     protected override IEnumerable<object?> GetEqualityComponents()
     {
         yield return null;

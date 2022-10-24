@@ -3,37 +3,112 @@
 public class ValueObjectTest
 {
     [Fact]
-    public void ValueObjectBaseMethodTest()
+    public void OneNullValueObjectShouldNotEqual()
+    {
+        // Arrage
+        var name = "thisisname";
+        var a = new StubValueObject(name);
+        StubValueObject? b = null;
+
+        // Act
+
+        // Assert
+        Assert.NotEqual(a, b);
+        Assert.True(!a.Equals(b));
+        Assert.True(a != b);
+        Assert.True(b != a);
+        Assert.False(a == b);
+        Assert.False(b == a);
+    }
+
+    [Fact]
+    public void TwoNullValueObjectShouldEqual()
+    {
+        // Arrage
+        StubValueObject? b = null;
+        StubValueObject? c = null;
+
+        // Act
+
+        // Assert
+        Assert.True(c == b);
+        Assert.True(b == c);
+        Assert.False(c != b);
+        Assert.False(b != c);
+    }
+
+    [Fact]
+    public void DifferentValueObjectShouldNotEqual()
+    {
+        // Arrage
+        var name = "thisisname";
+        var a = new StubValueObject(name);
+        var b = new Stub1ValueObject(name);
+
+        // Act
+
+        // Assert
+        Assert.True(!a.Equals(b));
+    }
+
+    [Fact]
+    public void EqualValueObjectShouldEqualHashCode()
     {
         // Arrage
         var name = "thisisname";
         var a = new StubValueObject(name);
         var b = new StubValueObject(name);
-        var c = new Stub1ValueObject(name);
-
-        StubValueObject? d = null;
-        StubValueObject? d2 = null;
-
-        name = "thisisname2";
-        var e = new StubValueObject(name);
-        var f = a.Clone();
 
         // Act
 
         // Assert
-        Assert.False(a.Equals(d));
-        Assert.False(a.Equals(c));
-        Assert.True(a.Equals(b));
+        Assert.Equal(a, b);
+        Assert.Equal(a.GetHashCode(), a.GetHashCode());
+    }
 
-        Assert.True(a.GetHashCode() == b.GetHashCode());
-        Assert.True(0 == c.GetHashCode());
+    [Fact]
+    public void NullEqualityComponentsValueObjectShouldEqualHashCode()
+    {
+        // Arrage
+        var a = new StubNullValueObject();
+        var b = new StubNullValueObject();
 
-        Assert.True(a == b);
-        Assert.False(d == a);
-        Assert.True(d == d2);
+        // Act
 
-        Assert.True(a != e);
+        // Assert
+        Assert.Equal(a, b);
+        Assert.Equal(a.GetHashCode(), a.GetHashCode());
+    }
 
-        Assert.True(a == f);
+    [Fact]
+    public void CloneValueObjectShouldEqual()
+    {
+        // Arrage
+        var name = "thisisname";
+        var a = new StubValueObject(name);
+        var b = a.Clone();
+
+        // Act
+
+        // Assert
+        Assert.Equal(a, b);
+        Assert.Equal(a.GetHashCode(), a.GetHashCode());
+    }
+
+    [Fact]
+    public void DifferentValueObjectPropShouldNotEqual()
+    {
+        // Arrage
+        var name = "thisisname";
+        var a = new Stub1ValueObject(name);
+        name = "thisisname1";
+        var b = new Stub1ValueObject(name);
+
+        // Act
+
+        // Assert
+        Assert.NotEqual(a, b);
+        Assert.False(a.Equals(b));
+        Assert.True(a != b);
     }
 }

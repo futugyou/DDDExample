@@ -1,6 +1,6 @@
 ﻿namespace Example.Domain.UnitTest;
 
-public class EventSourcingUnitTest
+public class EventSourcingTest
 {
     [Fact]
     public void ValidateVersionThrowConcurrencyExceptionTest()
@@ -36,6 +36,7 @@ public class EventSourcingUnitTest
         var sut = UnitTool.CreateNewAggregate<StubEventSourcing>();
         //Act
         //Assert
+        Assert.NotNull(sut);
         Assert.Throws<ConcurrencyException>(()
             => sut.ExposeAddDomainEvent(It.IsAny<IDomainEvent>(), expectedVersion));
     }

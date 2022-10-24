@@ -60,7 +60,7 @@ public class CustomerEventUnitTest
         // Arrage
         var newname = "thisisnewname";
 
-        var customr = UnitTool.CreateNewAggregate<Customer>();
+        var customr = UnitTool.CreateNewAggregate<Customer>()!;
 
         var registerEvent = new CustomerRegisterEvent(customr.Id, customr.Name, customr.Email, customr.BirthDate, customr.CustomerLevel);
         registerEvent.BuildVersion(0);

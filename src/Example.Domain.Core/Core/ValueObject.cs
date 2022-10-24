@@ -11,7 +11,7 @@ public abstract class ValueObject<T> where T : ValueObject<T>
 
         var other = (ValueObject<T>)obj;
 
-        return this.GetEqualityComponents().SequenceEqual(other.GetEqualityComponents());
+        return GetEqualityComponents().SequenceEqual(other.GetEqualityComponents());
     }
     protected abstract IEnumerable<object> GetEqualityComponents();
 
