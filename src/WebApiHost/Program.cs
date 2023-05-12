@@ -4,19 +4,22 @@ var services = builder.Services;
 var configuration = builder.Configuration;
 
 services.AddControllers();
-services.AddOpenTelemetryTracing((builder) =>
-{
-    builder
-    .SetResourceBuilder(ResourceBuilder.CreateDefault().AddService(configuration.GetValue<string>("Jaeger:ServiceName")))
-    .AddHttpClientInstrumentation()
-    .AddAspNetCoreInstrumentation()
-    .AddEntityFrameworkCoreInstrumentation(config => config.SetDbStatementForText = true)
-    .AddJaegerExporter(config =>
+services
+    .AddOpenTelemetry()
+    .WithTracing((builder) =>
     {
-        configuration.GetSection("Jaeger").Bind(config);
+        _ = builder
+        .SetResourceBuilder(ResourceBuilder.CreateDefault().AddService(configuration.GetValue<string>("Jaeger:ServiceName")))
+        .AddHttpClientInstrumentation()
+        .AddAspNetCoreInstrumentation()
+        .AddEntityFrameworkCoreInstrumentation(config => config.SetDbStatementForText = true)
+        .AddJaegerExporter(config =>
+        {
+            configuration.GetSection("Jaeger").Bind(config);
+        });
     });
-});
-//it doesn's work ,so use 'Bind'
+
+//it doesn't work ,so use 'Bind'
 services.Configure<JaegerExporterOptions>(configuration.GetSection("Jaeger"));
 services.AddLogDashboard();
 //启动配置   
@@ -25,7 +28,11 @@ services.AddSwaggerGen(c =>
 {
     c.SwaggerDoc("v1", new OpenApiInfo { Title = "DDD project", Version = "v1" });
 });
-services.AddMediatR(typeof(Program), typeof(CommandHandler));
+services.AddMediatR(cfg =>
+{
+    cfg.RegisterServicesFromAssemblyContaining<Program>();
+    cfg.RegisterServicesFromAssemblyContaining<CommandHandler>();
+});
 
 NativeInjectorBootStrapper.RegisterServices(services, configuration);
 

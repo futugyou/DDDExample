@@ -5,7 +5,7 @@ public class ValueObjectTest
     [Fact]
     public void OneNullValueObjectShouldNotEqual()
     {
-        // Arrage
+        // Arrange
         var name = "thisisname";
         var a = new StubValueObject(name);
         StubValueObject? b = null;
@@ -24,7 +24,7 @@ public class ValueObjectTest
     [Fact]
     public void TwoNullValueObjectShouldEqual()
     {
-        // Arrage
+        // Arrange
         StubValueObject? b = null;
         StubValueObject? c = null;
 
@@ -40,7 +40,7 @@ public class ValueObjectTest
     [Fact]
     public void DifferentValueObjectShouldNotEqual()
     {
-        // Arrage
+        // Arrange
         var name = "thisisname";
         var a = new StubValueObject(name);
         var b = new Stub1ValueObject(name);
@@ -54,7 +54,7 @@ public class ValueObjectTest
     [Fact]
     public void EqualValueObjectShouldEqualHashCode()
     {
-        // Arrage
+        // Arrange
         var name = "thisisname";
         var a = new StubValueObject(name);
         var b = new StubValueObject(name);
@@ -69,7 +69,7 @@ public class ValueObjectTest
     [Fact]
     public void NullEqualityComponentsValueObjectShouldEqualHashCode()
     {
-        // Arrage
+        // Arrange
         var a = new StubNullValueObject();
         var b = new StubNullValueObject();
 
@@ -83,7 +83,7 @@ public class ValueObjectTest
     [Fact]
     public void CloneValueObjectShouldEqual()
     {
-        // Arrage
+        // Arrange
         var name = "thisisname";
         var a = new StubValueObject(name);
         var b = a.Clone();
@@ -98,7 +98,7 @@ public class ValueObjectTest
     [Fact]
     public void DifferentValueObjectPropShouldNotEqual()
     {
-        // Arrage
+        // Arrange
         var name = "thisisname";
         var a = new Stub1ValueObject(name);
         name = "thisisname1";

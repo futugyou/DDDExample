@@ -5,7 +5,7 @@ public class EntityTest
     [Fact]
     public void DifferentEntityTypeShouldNotEqual()
     {
-        // Arrage
+        // Arrange
         var id = Guid.NewGuid();
         var a = new StubEntity(id);
         var b = new StubEntityA(id);
@@ -22,7 +22,7 @@ public class EntityTest
     [Fact]
     public void NullEntityShouldNotEqual()
     {
-        // Arrage
+        // Arrange
         var id = Guid.NewGuid();
         var a = new StubEntity(id);
         StubEntity? n = null;
@@ -40,7 +40,7 @@ public class EntityTest
     [Fact]
     public void ReferenceEqualsEntityShouldEqual()
     {
-        // Arrage
+        // Arrange
         var id = Guid.NewGuid();
         var a = new StubEntity(id);
         var b = a;
@@ -56,7 +56,7 @@ public class EntityTest
     [Fact]
     public void EqualEntityShoudEqualHashCode()
     {
-        // Arrage
+        // Arrange
         var id = Guid.NewGuid();
         var a = new StubEntity(id);
         var b = new StubEntity(id);
@@ -73,7 +73,7 @@ public class EntityTest
     [Fact]
     public void EntityToStringShouldContainsID()
     {
-        // Arrage
+        // Arrange
         var id = Guid.NewGuid();
         var a = new StubEntity(id);
         var str = a.ToString();

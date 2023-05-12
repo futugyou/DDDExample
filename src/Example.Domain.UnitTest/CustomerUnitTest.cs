@@ -5,7 +5,7 @@ public class CustomerUnitTest
     [Fact]
     public void CustomerWithoutIDTest()
     {
-        // Arrage
+        // Arrange
         var id = Guid.Empty;
         // Act
         // Assert
@@ -20,7 +20,7 @@ public class CustomerUnitTest
     [InlineData(UnitTool.LongString)]
     public void CustomerWithInvalidNameTest(string name)
     {
-        // Arrage
+        // Arrange
         var id = Guid.NewGuid();
         // Act
         // Assert
@@ -30,7 +30,7 @@ public class CustomerUnitTest
     [Fact]
     public void CustomerSuccessTest()
     {
-        // Arrage
+        // Arrange
         var id = Guid.NewGuid();
         var name = "12345";
         var email = "";

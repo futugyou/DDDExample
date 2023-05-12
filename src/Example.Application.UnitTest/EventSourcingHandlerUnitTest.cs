@@ -5,7 +5,7 @@ public class EventSourcingHandlerUnitTest
     [Fact]
     public async Task HandlerWithNullEventShouldThrowArgumentNullExceptionTest()
     {
-        // Arrage
+        // Arrange
         var repository = new Mock<IEventStoreRepository<AggregateRoot>>();
         repository.Setup(a => a.AppendAsync(It.IsAny<EventStore>()))
             .Verifiable();
@@ -21,7 +21,7 @@ public class EventSourcingHandlerUnitTest
     [Fact]
     public async Task HandlerWithEventShouldCallAppendAsyncTest()
     {
-        // Arrage
+        // Arrange
         var repository = new Mock<IEventStoreRepository<AggregateRoot>>();
         repository.Setup(a => a.AppendAsync(It.IsAny<EventStore>()))
             .Verifiable();

@@ -6,7 +6,7 @@ public class RegisterCustomerUnitTest
     [Fact]
     public async Task RegisterCustomerSuccessTest()
     {
-        // Arrage
+        // Arrange
         var _mapper = new Mock<IMapper>();
         var _mediatorHandler = new Mock<IMediatorHandler>();
         var _customerRepository = new Mock<ICustomerRepository>();
@@ -32,7 +32,7 @@ public class RegisterCustomerUnitTest
     [Fact]
     public async Task RegisterCustomerFailedTest()
     {
-        // Arrage
+        // Arrange
         var _mapper = new Mock<IMapper>();
         var _mediatorHandler = new Mock<IMediatorHandler>();
         var _customerRepository = new Mock<ICustomerRepository>();

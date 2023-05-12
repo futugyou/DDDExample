@@ -11,7 +11,7 @@ public class GetCustomerUnitTest
     [Fact]
     public async Task GetAllCustomerSuccessTest()
     {
-        // Arrage
+        // Arrange
         var _mediatorHandler = new Mock<IMediatorHandler>();
         var _customerRepository = new Mock<ICustomerRepository>();
         var customers = new List<Customer> { customer }.AsQueryable();
@@ -29,7 +29,7 @@ public class GetCustomerUnitTest
     [Fact]
     public async Task GetAllCustomerWithNodataSuccessTest()
     {
-        // Arrage
+        // Arrange
         var _mediatorHandler = new Mock<IMediatorHandler>();
         var _customerRepository = new Mock<ICustomerRepository>();
         var customers = new List<Customer> { customer }.AsQueryable();
@@ -46,7 +46,7 @@ public class GetCustomerUnitTest
     [Fact]
     public async Task GetCustomerByidSuccessTest()
     {
-        // Arrage
+        // Arrange
         var _mediatorHandler = new Mock<IMediatorHandler>();
         var _customerRepository = new Mock<ICustomerRepository>();
         _customerRepository.Setup(c => c.GetById(customer.Id)).ReturnsAsync(customer);
@@ -62,7 +62,7 @@ public class GetCustomerUnitTest
     [Fact]
     public async Task GetCustomerByidWithNodataSuccessTest()
     {
-        // Arrage
+        // Arrange
         var _mediatorHandler = new Mock<IMediatorHandler>();
         var _customerRepository = new Mock<ICustomerRepository>();
         _customerRepository.Setup(c => c.GetById(Guid.Empty));

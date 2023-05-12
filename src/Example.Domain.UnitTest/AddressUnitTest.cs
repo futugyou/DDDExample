@@ -4,7 +4,7 @@ public class AddressUnitTest
     [Fact]
     public void AddressWithoutProvinceTest()
     {
-        // Arrage
+        // Arrange
         var province = "";
         // Act
         // Assert
@@ -14,8 +14,8 @@ public class AddressUnitTest
     [Fact]
     public void AddressWithoutCityTest()
     {
-        // Arrage
-        var province = "provice";
+        // Arrange
+        var province = "province";
         var city = "";
         // Act
         // Assert
@@ -25,8 +25,8 @@ public class AddressUnitTest
     [Fact]
     public void AddressWithoutCountyTest()
     {
-        // Arrage
-        var province = "provice";
+        // Arrange
+        var province = "province";
         var city = "city";
         var county = "";
         // Act
@@ -37,8 +37,8 @@ public class AddressUnitTest
     [Fact]
     public void AddressWithoutStreetTest()
     {
-        // Arrage
-        var province = "provice";
+        // Arrange
+        var province = "province";
         var city = "city";
         var county = "county";
         var street = "";
@@ -50,8 +50,8 @@ public class AddressUnitTest
     [Fact]
     public void AddressSuccessTest()
     {
-        // Arrage
-        var province = "provice";
+        // Arrange
+        var province = "province";
         var city = "city";
         var county = "county";
         var street = "street";

@@ -5,7 +5,7 @@ public class CustomerEventUnitTest
     [Fact]
     public void ApplyEventTest()
     {
-        // Arrage
+        // Arrange
         long _version = 0;
         var createEvent = new CustomerRegisterEvent(Guid.NewGuid(), "name", "e@e.com", DateTime.UtcNow, CustomerLevel.Comman);
         var customr = UnitTool.CreateNewAggregate<Customer>();
@@ -23,7 +23,7 @@ public class CustomerEventUnitTest
     [Fact]
     public void CallGetUncommittedEventsShouldGetDomainEventTest()
     {
-        // Arrage
+        // Arrange
         var customer = UnitTool.CreateNewAggregate<Customer>();
 
         // Act
@@ -38,7 +38,7 @@ public class CustomerEventUnitTest
     [Fact]
     public void CallClearUncommittedEventsShouldClearDomainEventTest()
     {
-        // Arrage
+        // Arrange
         var id = Guid.NewGuid();
         var name = "12345";
         var email = "";
@@ -57,7 +57,7 @@ public class CustomerEventUnitTest
     [Fact]
     public void CallLoadFromHistoryMethodShouldRenderCurrentStateTest()
     {
-        // Arrage
+        // Arrange
         var newname = "thisisnewname";
 
         var customr = UnitTool.CreateNewAggregate<Customer>()!;

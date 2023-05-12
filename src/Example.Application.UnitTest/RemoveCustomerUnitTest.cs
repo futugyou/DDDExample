@@ -4,7 +4,7 @@ public class RemoveCustomerUnitTest
     [Fact]
     public async Task RemoveCustomerSuccessTest()
     {
-        // Arrage
+        // Arrange
         var _mediatorHandler = new Mock<IMediatorHandler>();
         var _customerRepository = new Mock<ICustomerRepository>();
         // Act

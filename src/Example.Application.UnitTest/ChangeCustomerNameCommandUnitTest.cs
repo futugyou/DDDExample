@@ -1,12 +1,10 @@
-﻿using MediatR;
-
-namespace Example.Application.UnitTest;
+﻿namespace Example.Application.UnitTest;
 public class ChangeCustomerNameCommandUnitTest
 {
     [Fact]
-    public async Task ChangeCustometNameWithNullCommandShouldThrowArgumentNullExceptionTest()
+    public async Task ChangeCustomerNameWithNullCommandShouldThrowArgumentNullExceptionTest()
     {
-        // Arrage
+        // Arrange
         var unitOfWork = new Mock<IUnitOfWork>();
         var mediatorHandler = new Mock<IMediatorHandler>();
         var repository = new Mock<ICustomerRepository>();
@@ -24,9 +22,9 @@ public class ChangeCustomerNameCommandUnitTest
     }
 
     [Fact]
-    public async Task ChangeCustometNameWithNullNameShouldReturnUnitTest()
+    public async Task ChangeCustomerNameWithNullNameShouldReturnUnitTest()
     {
-        // Arrage
+        // Arrange
         var unitOfWork = new Mock<IUnitOfWork>();
         var mediatorHandler = new Mock<IMediatorHandler>();
         var repository = new Mock<ICustomerRepository>();
@@ -38,16 +36,15 @@ public class ChangeCustomerNameCommandUnitTest
                                                  repository.Object,
                                                  dispatch.Object);
         var request = new ChangeCustomerNameCommand(Guid.NewGuid(), null);
-        var result = await handler.Handle(request, default);
+        await handler.Handle(request, default);
 
         // Assert
-        Assert.Equal(result, Unit.Value);
     }
 
     [Fact]
-    public async Task ChangeCustometNameDonotFindCustomerShouldReturnUnitTest()
+    public async Task ChangeCustomerNameNoFindCustomerShouldReturnUnitTest()
     {
-        // Arrage
+        // Arrange
         var unitOfWork = new Mock<IUnitOfWork>();
         var mediatorHandler = new Mock<IMediatorHandler>();
         var repository = new Mock<ICustomerRepository>();
@@ -62,16 +59,15 @@ public class ChangeCustomerNameCommandUnitTest
                                                  mediatorHandler.Object,
                                                  repository.Object,
                                                  dispatch.Object);
-        var result = await handler.Handle(request, default);
+        await handler.Handle(request, default);
 
         // Assert
-        Assert.Equal(result, Unit.Value);
     }
 
     [Fact]
-    public async Task ChangeCustometNameSuccessShouldReturnUnitTest()
+    public async Task ChangeCustomerNameSuccessShouldReturnUnitTest()
     {
-        // Arrage
+        // Arrange
         var unitOfWork = new Mock<IUnitOfWork>();
         var mediatorHandler = new Mock<IMediatorHandler>();
         var repository = new Mock<ICustomerRepository>();
@@ -86,7 +82,7 @@ public class ChangeCustomerNameCommandUnitTest
                                                  mediatorHandler.Object,
                                                  repository.Object,
                                                  dispatch.Object);
-        var result = await handler.Handle(request, default);
+        await handler.Handle(request, default);
 
         // Assert
         repository.Verify(m => m.Update(
@@ -96,6 +92,5 @@ public class ChangeCustomerNameCommandUnitTest
                 && n.GetType().Equals(customer.GetType())
                 )),
                 Times.Once);
-        Assert.Equal(result, Unit.Value);
     }
 }

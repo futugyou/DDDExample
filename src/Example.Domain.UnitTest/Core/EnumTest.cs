@@ -5,7 +5,7 @@ public class EnumTest
     [Fact]
     public void EnumTostringShouldEqualName()
     {
-        // Arrage
+        // Arrange
         var id = 1;
         var name = "name";
         var e = new StubEnum(id, name);
@@ -20,7 +20,7 @@ public class EnumTest
     [Fact]
     public void GetAllShouldReturnAllEnumType()
     {
-        // Arrage
+        // Arrange
         var enums = Enumeration.GetAll<StubEnum>();
         // Act
 
@@ -32,7 +32,7 @@ public class EnumTest
     [Fact]
     public void FromValuWithExistIDeShouldReturnEnum()
     {
-        // Arrage
+        // Arrange
         var s = Enumeration.FromValue<StubEnum>(1);
         // Act
 
@@ -44,7 +44,7 @@ public class EnumTest
     [Fact]
     public void FromValuWithNotexistIDeShouldThrowInvalidOperationException()
     {
-        // Arrage
+        // Arrange
         // Act
 
         // Assert
@@ -54,7 +54,7 @@ public class EnumTest
     [Fact]
     public void FromValuWithExistNameeShouldReturnEnum()
     {
-        // Arrage
+        // Arrange
         var s = Enumeration.FromDisplayName<StubEnum>("submitted");
         // Act
 
@@ -66,7 +66,7 @@ public class EnumTest
     [Fact]
     public void FromValuWithNotexistNameeShouldThrowInvalidOperationException()
     {
-        // Arrage
+        // Arrange
         // Act
 
         // Assert
@@ -76,7 +76,7 @@ public class EnumTest
     [Fact]
     public void EqualIDAndEqualTypeShouldEqualEnum()
     {
-        // Arrage
+        // Arrange
         var id = 1;
         var name = "name";
         var e = new StubEnum(id, name);
@@ -95,7 +95,7 @@ public class EnumTest
     [Fact]
     public void NotEqualIDOrNotEqualTypeShouldNotEqualEnum()
     {
-        // Arrage
+        // Arrange
         var e = new StubEnum(1, "name");
         var f = new StubEnum(2, "name");
         var e1 = new StubEnum1(1, "name");

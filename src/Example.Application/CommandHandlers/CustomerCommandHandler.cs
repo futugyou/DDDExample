@@ -1,6 +1,6 @@
 ﻿namespace Example.Application;
 
-public class CustomerCommandHandler : CommandHandler, IRequestHandler<RegisterCustomerCommand>, IDisposable
+public class CustomerCommandHandler : CommandHandler, IRequestHandler<RegisterCustomerCommand>, IRequestHandler<ChangeCustomerNameCommand>, IDisposable
 {
     private readonly IMediatorHandler _mediatorHandler;
     private readonly ICustomerRepository _customerRepository;
@@ -20,14 +20,15 @@ public class CustomerCommandHandler : CommandHandler, IRequestHandler<RegisterCu
     public void Dispose()
     {
         _customerRepository.Dispose();
+        GC.SuppressFinalize(this);
     }
 
-    public async Task<Unit> Handle(RegisterCustomerCommand request, CancellationToken cancellationToken)
+    public async Task Handle(RegisterCustomerCommand request, CancellationToken _)
     {
         if (!request.IsValid())
         {
             await NotifyValidationErrors(request);
-            return Unit.Value;
+            return;
         }
 
         var customer = await _customerRepository.GetByEmail(request.Email);
@@ -35,7 +36,7 @@ public class CustomerCommandHandler : CommandHandler, IRequestHandler<RegisterCu
         {
             //domain notification
             await _mediatorHandler.RaiseEvent(new DomainNotification(customer.Id.ToString(), "email address already exists"));
-            return Unit.Value;
+            return;
         }
 
         customer = new Customer(request.Id, request.Name, request.Email, request.BirthDate);
@@ -44,20 +45,17 @@ public class CustomerCommandHandler : CommandHandler, IRequestHandler<RegisterCu
         await _eventSourcingDispatch.Dispatch(customer);
         await CommitAsync();
 
-        return Unit.Value;
+        return;
     }
 
-    public async Task<Unit> Handle(ChangeCustomerNameCommand request, CancellationToken _)
+    public async Task Handle(ChangeCustomerNameCommand request, CancellationToken _)
     {
-        if (request == null)
-        {
-            throw new ArgumentNullException(nameof(request));
-        }
+        ArgumentNullException.ThrowIfNull(request);
 
         if (!request.IsValid())
         {
             await NotifyValidationErrors(request);
-            return Unit.Value;
+            return;
         }
 
         var customer = await _customerRepository.GetById(request.Id);
@@ -65,7 +63,7 @@ public class CustomerCommandHandler : CommandHandler, IRequestHandler<RegisterCu
         {
             //domain notification
             await _mediatorHandler.RaiseEvent(new DomainNotification(request.Id.ToString(), "no customer found"));
-            return Unit.Value;
+            return;
         }
 
         customer.ChangeName(request.Name, customer.Version);
@@ -73,6 +71,6 @@ public class CustomerCommandHandler : CommandHandler, IRequestHandler<RegisterCu
         await _eventSourcingDispatch.Dispatch(customer);
         await CommitAsync();
 
-        return Unit.Value;
+        return;
     }
 }

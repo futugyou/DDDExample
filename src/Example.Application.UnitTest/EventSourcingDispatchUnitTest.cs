@@ -5,7 +5,7 @@ public class EventSourcingDispatchUnitTest
     [Fact]
     public async Task DispatchWithNoEventsShouldNotCallHandlerTest()
     {
-        // Arrage
+        // Arrange
         var handler = new Mock<IEventSourcingHandler<IDomainEvent>>();
         handler.Setup(e => e.Handle(It.IsAny<IDomainEvent>(), It.IsAny<long>())).Verifiable();
 
@@ -23,7 +23,7 @@ public class EventSourcingDispatchUnitTest
     [Fact]
     public async Task DispatchWithEventsShouldCallHandlerOnceTest()
     {
-        // Arrage
+        // Arrange
         var handler = new Mock<IEventSourcingHandler<IDomainEvent>>();
         handler.Setup(e => e.Handle(It.IsAny<IDomainEvent>(), It.IsAny<long>()))
             .Returns(Task.FromResult(true))

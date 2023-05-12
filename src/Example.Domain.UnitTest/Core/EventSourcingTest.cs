@@ -5,7 +5,7 @@ public class EventSourcingTest
     [Fact]
     public void ValidateVersionThrowConcurrencyExceptionTest()
     {
-        // Arrage
+        // Arrange
         long _version = 0;
         IEventSourcing sourcing = new StubEventSourcing();
 
@@ -17,7 +17,7 @@ public class EventSourcingTest
     [Fact]
     public void ValidateVersionOkTest()
     {
-        // Arrage
+        // Arrange
         long _version = -1;
         IEventSourcing sourcing = new StubEventSourcing();
 

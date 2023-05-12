@@ -4,7 +4,7 @@ public class UpdateCustomerUnitTest
     [Fact]
     public async Task UpdateCustomerSuccessTest()
     {
-        // Arrage
+        // Arrange
         var _mediatorHandler = new Mock<IMediatorHandler>();
         var _customerRepository = new Mock<ICustomerRepository>();
         var customerViewModel = new CustomerViewModel
@@ -29,7 +29,7 @@ public class UpdateCustomerUnitTest
     [Fact]
     public async Task UpdateCustomerFailedTest()
     {
-        // Arrage
+        // Arrange
         var _mediatorHandler = new Mock<IMediatorHandler>();
         var _customerRepository = new Mock<ICustomerRepository>();
 

@@ -15,3 +15,4 @@ global using global::Serilog;
 global using global::Serilog.Events;
 global using global::System.Data.SqlClient;
 global using global::WebApiHost;
+global using global::Microsoft.Extensions.DependencyInjection;
