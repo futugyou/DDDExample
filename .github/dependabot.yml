@@ -14,9 +14,6 @@ updates:
         patterns:
         - "Microsoft.EntityFrameworkCore*"
         - "Pomelo.EntityFrameworkCore.MySql"
-      autoMapper:
-        patterns:
-        - "AutoMapper*"
       openTelemetry:
         patterns:
         - "OpenTelemetry*"
