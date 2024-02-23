@@ -18,7 +18,7 @@ public class CustomerUnitTest
     [InlineData(" ")]
     [InlineData("1234")]
     [InlineData(UnitTool.LongString)]
-    public void CustomerWithInvalidNameTest(string name)
+    public void CustomerWithInvalidNameTest(string? name)
     {
         // Arrange
         var id = Guid.NewGuid();
@@ -71,7 +71,7 @@ public class CustomerUnitTest
     [InlineData(" ")]
     [InlineData("1234")]
     [InlineData(UnitTool.LongString)]
-    public void ChangeNameWhenNullOrEmptyShouldThrowAggregateExceptionTest(string newName)
+    public void ChangeNameWhenNullOrEmptyShouldThrowAggregateExceptionTest(string? newName)
     {
         //Arrange
         var id = Guid.NewGuid();
