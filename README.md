@@ -4,7 +4,7 @@
 [![Dependabot](https://github.com/futugyou/DDDExample/actions/workflows/dependabot-auto.yml/badge.svg)](https://github.com/futugyou/DDDExample/actions/workflows/dependabot-auto.yml)
 [![PullRequest](https://github.com/futugyou/DDDExample/actions/workflows/pull_request.yml/badge.svg)](https://github.com/futugyou/DDDExample/actions/workflows/pull_request.yml)
 [![Push](https://github.com/futugyou/DDDExample/actions/workflows/push.yml/badge.svg?branch=master)](https://github.com/futugyou/DDDExample/actions/workflows/push.yml)
-![Docker Automated build](https://img.shields.io/docker/automated/futugyousuzu/ddddemo_project)
+[![Docker pulls](https://img.shields.io/docker/pulls/futugyousuzu/ddddemo_project)](https://hub.docker.com/r/futugyousuzu/ddddemo_project)
 
 
 ### references:
