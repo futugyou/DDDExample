@@ -20,3 +20,8 @@ updates:
       configuration:
         patterns:
         - "Microsoft.Extensions.Configuration*"
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+      time: "02:00"
