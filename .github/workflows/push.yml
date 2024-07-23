@@ -41,7 +41,7 @@ jobs:
        
     - name: build image
       if: github.ref_name != 'master'
-      uses: docker/build-push-action@v5
+      uses: docker/build-push-action@v6
       with:
        push: false
        tags: futugyousuzu/ddddemo_project:latest
@@ -50,7 +50,7 @@ jobs:
        
     - name: Push to Docker Hub
       if: github.ref_name == 'master'
-      uses: docker/build-push-action@v5
+      uses: docker/build-push-action@v6
       with:
        push: true
        tags: futugyousuzu/ddddemo_project:latest
