@@ -1,36 +1,15 @@
 ﻿namespace Example.Domain.UnitTest;
 
-public class StubValueObject : ValueObject<StubValueObject>
+public record StubValueObject(string Name) : ValueObject<StubValueObject>
 {
-    public StubValueObject(string name)
-    {
-        Name = name;
-    }
-
-    public string Name { get; private set; }
-    protected override IEnumerable<object> GetEqualityComponents()
-    {
-        yield return Name;
-    }
+    public string Name { get; init; } = Name ?? throw new ArgumentNullException(nameof(Name));
 }
 
-public class Stub1ValueObject : ValueObject<Stub1ValueObject>
+public record Stub1ValueObject(string Name) : ValueObject<Stub1ValueObject>
 {
-    public Stub1ValueObject(string name)
-    {
-        Name = name;
-    }
-
-    public string Name { get; private set; }
-    protected override IEnumerable<object> GetEqualityComponents()
-    {
-        yield return Name;
-    }
+    public string Name { get; init; } = Name ?? throw new ArgumentNullException(nameof(Name));
 }
-public class StubNullValueObject : ValueObject<Stub1ValueObject>
+
+public record StubNullValueObject() : ValueObject<StubNullValueObject>
 {
-    protected override IEnumerable<object?> GetEqualityComponents()
-    {
-        yield return null;
-    }
 }

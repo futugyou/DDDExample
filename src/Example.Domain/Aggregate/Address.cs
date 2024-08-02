@@ -1,13 +1,21 @@
 namespace Example.Domain;
 
-public class Address : ValueObject<Address>
+public record Address : ValueObject<Address>
 {
+    public string Province { get; init; }
+    public string City { get; init; }
+    public string County { get; init; }
+    public string Street { get; init; }
+
     internal Address()
     {
+        Province = string.Empty;
+        City = string.Empty;
+        County = string.Empty;
+        Street = string.Empty;
     }
 
-    public Address(string province, string city,
-        string county, string street, string _)
+    public Address(string province, string city, string county, string street)
     {
         if (string.IsNullOrEmpty(province))
         {
@@ -29,35 +37,9 @@ public class Address : ValueObject<Address>
             throw new ArgumentNullException(nameof(street));
         }
 
-        this.Province = province;
-        this.City = city;
-        this.County = county;
-        this.Street = street;
-    }
-
-    /// <summary>
-    /// 省份
-    /// </summary>
-    public string Province { get; private set; }
-    /// <summary>
-    /// 城市
-    /// </summary>
-    public string City { get; private set; }
-    /// <summary>
-    /// 区县
-    /// </summary>
-    public string County { get; private set; }
-    /// <summary>
-    /// 街道
-    /// </summary>
-    public string Street { get; private set; }
-
-    protected override IEnumerable<object> GetEqualityComponents()
-    {
-        // Using a yield return statement to return each element one at a time
-        yield return Street;
-        yield return City;
-        yield return Province;
-        yield return County;
+        Province = province;
+        City = city;
+        County = county;
+        Street = street;
     }
 }

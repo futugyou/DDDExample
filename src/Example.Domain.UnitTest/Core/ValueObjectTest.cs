@@ -86,7 +86,7 @@ public class ValueObjectTest
         // Arrange
         var name = "thisisname";
         var a = new StubValueObject(name);
-        var b = a.Clone();
+        var b = a with { };
 
         // Act
 

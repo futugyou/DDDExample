@@ -8,7 +8,7 @@ public class AddressUnitTest
         var province = "";
         // Act
         // Assert
-        Assert.Throws<ArgumentNullException>(() => new Address(province, It.IsAny<string>(), It.IsAny<string>(), It.IsAny<string>(), It.IsAny<string>()));
+        Assert.Throws<ArgumentNullException>(() => new Address(province, It.IsAny<string>(), It.IsAny<string>(), It.IsAny<string>()));
     }
 
     [Fact]
@@ -19,7 +19,7 @@ public class AddressUnitTest
         var city = "";
         // Act
         // Assert
-        Assert.Throws<ArgumentNullException>(() => new Address(province, city, It.IsAny<string>(), It.IsAny<string>(), It.IsAny<string>()));
+        Assert.Throws<ArgumentNullException>(() => new Address(province, city, It.IsAny<string>(), It.IsAny<string>()));
     }
 
     [Fact]
@@ -31,7 +31,7 @@ public class AddressUnitTest
         var county = "";
         // Act
         // Assert
-        Assert.Throws<ArgumentNullException>(() => new Address(province, city, county, It.IsAny<string>(), It.IsAny<string>()));
+        Assert.Throws<ArgumentNullException>(() => new Address(province, city, county, It.IsAny<string>()));
     }
 
     [Fact]
@@ -44,7 +44,7 @@ public class AddressUnitTest
         var street = "";
         // Act
         // Assert
-        Assert.Throws<ArgumentNullException>(() => new Address(province, city, county, street, It.IsAny<string>()));
+        Assert.Throws<ArgumentNullException>(() => new Address(province, city, county, street));
     }
 
     [Fact]
@@ -57,9 +57,9 @@ public class AddressUnitTest
         var street = "street";
         var street2 = "street2";
         // Act
-        var address1 = new Address(province, city, county, street, It.IsAny<string>());
-        var address2 = new Address(province, city, county, street, It.IsAny<string>());
-        var address3 = new Address(province, city, county, street2, It.IsAny<string>());
+        var address1 = new Address(province, city, county, street);
+        var address2 = new Address(province, city, county, street);
+        var address3 = new Address(province, city, county, street2);
         // Assert
         Assert.True(address1 == address2);
         Assert.Equal(address1, address2);
