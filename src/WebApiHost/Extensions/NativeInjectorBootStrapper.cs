@@ -4,6 +4,11 @@ public class NativeInjectorBootStrapper
 {
     public static void RegisterServices(IServiceCollection services, IConfiguration config)
     {
+        var mySqlServerVersion = config["MysqlVersion"];
+        if (string.IsNullOrWhiteSpace(mySqlServerVersion))
+        {
+            throw new ArgumentException("The configuration value for 'MysqlVersion' is null or whitespace.", nameof(config));
+        }
         //application
         services.AddScoped<ICustomerAppService, CustomerAppService>();
 
@@ -22,7 +27,7 @@ public class NativeInjectorBootStrapper
         //infrastruct
         services.AddScoped<ICustomerRepository, CustomerRepository>();
 
-        var serverVersion = new MySqlServerVersion(new Version(config["MysqlVersion"]));
+        var serverVersion = new MySqlServerVersion(new Version(mySqlServerVersion));
         services.AddDbContextPool<CustomerContext>(
             dbContextOptions => dbContextOptions
                 .UseMySql(config.GetConnectionString("Default"), serverVersion)

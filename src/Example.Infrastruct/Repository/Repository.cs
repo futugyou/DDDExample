@@ -29,7 +29,7 @@ public class Repository<TEntity> : IRepository<TEntity> where TEntity : Aggregat
         return Task.FromResult(_dbSet.AsQueryable());
     }
 
-    public async Task<TEntity> GetById(Guid id)
+    public async Task<TEntity?> GetById(Guid id)
     {
         return await _dbSet.FindAsync(id);
     }
@@ -37,7 +37,7 @@ public class Repository<TEntity> : IRepository<TEntity> where TEntity : Aggregat
     public async Task Remove(Guid id)
     {
         var entity = await _dbSet.FindAsync(id);
-        if (entity != null)
+        if (entity is not null)
         {
             _dbSet.Remove(entity);
         }

@@ -8,7 +8,13 @@ public class Customer : AggregateRoot
     private const int MinNameLenght = 5;
     private const int MaxNameLenght = 100;
 
-    protected Customer() { }
+    protected Customer()
+    {
+        Name = string.Empty;
+        Email = string.Empty;
+        CustomerLevel = CustomerLevel.Comman;
+        Address = new Address();
+    }
 
     public Customer(Guid id, string name, string email, DateTime birthDate)
     {
@@ -70,12 +76,12 @@ public class Customer : AggregateRoot
             throw new AggregateException(nameof(newName));
         }
 
-        if (newName?.Length < MinNameLenght)
+        if (newName.Length < MinNameLenght)
         {
             throw new AggregateException("name is too short");
         }
 
-        if (newName?.Length > MaxNameLenght)
+        if (newName.Length > MaxNameLenght)
         {
             throw new AggregateException("name is too long");
         }

@@ -1,6 +1,6 @@
 ﻿namespace Example.Domain;
 
-public class ChangeCustomerLevelEvent : DomainEvent
+public record ChangeCustomerLevelEvent : DomainEvent
 {
     public ChangeCustomerLevelEvent(CustomerLevel customerLevel)
     {

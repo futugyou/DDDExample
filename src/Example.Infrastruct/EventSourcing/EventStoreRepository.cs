@@ -32,9 +32,9 @@ public class EventStoreRepository<T> : IEventStoreRepository<T> where T : Aggreg
         }
 
         var aggregate = _invoker.CreateInstanceOfAggregateRoot();
-        if (aggregate == null)
+        if (aggregate is null)
         {
-            throw new ArgumentNullException(nameof(aggregate));
+            throw new ArgumentNullException(nameof(id), "CreateInstanceOfAggregateRoot return null");
         }
 
         var eventItemss = _dbSet.AsNoTracking().Where(p => p.AggregateId == id);

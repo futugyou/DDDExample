@@ -15,7 +15,7 @@ public class EventSourcingHandlerUnitTest
         var handler = new EventSourcingHandler<AggregateRoot>(repository.Object);
 
         // Assert
-        await Assert.ThrowsAsync<ArgumentNullException>(() => handler.Handle(null, version));
+        await Assert.ThrowsAsync<ArgumentNullException>(() => handler.Handle(null!, version));
     }
 
     [Fact]

@@ -4,12 +4,14 @@ var services = builder.Services;
 var configuration = builder.Configuration;
 
 services.AddControllers();
-services
-    .AddOpenTelemetry()
-    .WithTracing((builder) =>
+var openTelemetryBuilder = services.AddOpenTelemetry();
+var serviceName = configuration.GetValue<string>("Jaeger:ServiceName");
+if (!string.IsNullOrWhiteSpace(serviceName))
+{
+    openTelemetryBuilder = openTelemetryBuilder.WithTracing((builder) =>
     {
         _ = builder
-        .SetResourceBuilder(ResourceBuilder.CreateDefault().AddService(configuration.GetValue<string>("Jaeger:ServiceName")))
+        .SetResourceBuilder(ResourceBuilder.CreateDefault().AddService(serviceName))
         .AddHttpClientInstrumentation()
         .AddAspNetCoreInstrumentation()
         .AddEntityFrameworkCoreInstrumentation(config => config.SetDbStatementForText = true)
@@ -18,6 +20,7 @@ services
             configuration.GetSection("Jaeger").Bind(config);
         });
     });
+}
 
 //it doesn't work ,so use 'Bind'
 services.Configure<JaegerExporterOptions>(configuration.GetSection("Jaeger"));

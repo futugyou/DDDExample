@@ -24,7 +24,7 @@ public class CustomerUnitTest
         var id = Guid.NewGuid();
         // Act
         // Assert
-        Assert.Throws<CustomerNameCheckException>(() => new Customer(id, name, It.IsAny<string>(), It.IsAny<DateTime>()));
+        Assert.Throws<CustomerNameCheckException>(() => new Customer(id, name!, It.IsAny<string>(), It.IsAny<DateTime>()));
     }
 
     [Fact]
@@ -81,7 +81,7 @@ public class CustomerUnitTest
 
         //Act
         //Assert
-        Assert.Throws<AggregateException>(() => customer.ChangeName(newName, It.IsAny<long>()));
+        Assert.Throws<AggregateException>(() => customer.ChangeName(newName!, It.IsAny<long>()));
     }
 
     [Fact]

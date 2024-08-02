@@ -7,19 +7,19 @@ public static class DbMigrateExtensions
         using var scope = app.Services.CreateScope();
         var services = scope.ServiceProvider;
         var logger = services.GetRequiredService<ILogger<TContext>>();
-        var context = services.GetService<TContext>();
+        var context = services.GetRequiredService<TContext>();
 
         logger.LogInformation("Migrating database associated with context {DbContextName}", typeof(TContext).Name);
 
         try
         {
             var retry = Policy.Handle<SqlException>()
-                .WaitAndRetry(new TimeSpan[]
-                {
+                .WaitAndRetry(
+                [
                     TimeSpan.FromSeconds(3),
                     TimeSpan.FromSeconds(5),
                     TimeSpan.FromSeconds(8),
-                });
+                ]);
 
             //if the sql server container is not created on run docker compose this
             //migration can't fail for network related exception. The retry options for DbContext only 

@@ -87,8 +87,8 @@ public class EnumTest
         Assert.True(e == f);
         Assert.True(e.Equals(f));
         Assert.False(e.Equals(new object()));
-        Assert.False(null == f);
-        Assert.False(e == null);
+        Assert.False(null! == f);
+        Assert.False(e == null!);
         Assert.True(e.GetHashCode() == f.GetHashCode());
     }
 

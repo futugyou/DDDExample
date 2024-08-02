@@ -32,9 +32,9 @@ public class EntityTest
         //Assert
         Assert.NotEqual<Entity>(a, n);
         Assert.False(a.Equals(n));
-        Assert.False(a == n);
-        Assert.False(n == a);
-        Assert.True(a != n);
+        Assert.False(a == n!);
+        Assert.False(n! == a);
+        Assert.True(a != n!);
     }
 
     [Fact]

@@ -37,6 +37,6 @@ public class UpdateCustomerUnitTest
         ICustomerAppService service = new CustomerAppService(_customerRepository.Object, AutoMapperHelper.mapper, _mediatorHandler.Object);
 
         // Assert
-        await Assert.ThrowsAsync<ArgumentNullException>(() => service.Update(null));
+        await Assert.ThrowsAsync<ArgumentNullException>(() => service.Update(null!));
     }
 }

@@ -1,7 +1,7 @@
 ﻿namespace Example.Application.UnitTest;
 public class AutoMapperHelper
 {
-    public static IMapper mapper = GetMapper();
+    public static readonly IMapper mapper = GetMapper();
 
     private static IMapper GetMapper()
     {

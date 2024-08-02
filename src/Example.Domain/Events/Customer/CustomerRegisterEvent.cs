@@ -1,6 +1,6 @@
 ﻿namespace Example.Domain;
 
-public class CustomerRegisterEvent : DomainEvent
+public record CustomerRegisterEvent : DomainEvent
 {
     public CustomerRegisterEvent(Guid id, string name, string email, DateTime brithDate, CustomerLevel customerLevel)
     {

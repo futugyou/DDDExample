@@ -1,31 +1,27 @@
 ﻿namespace Example.Domain.Core;
 
-public class EventStore
+public record EventStore
 {
     public int Id { get; private set; }
-    public long Version { get; private set; }
     public Guid AggregateId { get; private set; }
+    public long Version { get; private set; }
     public string Name { get; private set; }
     public string TypeName { get; private set; }
     public DateTime Created { get; private set; }
     public string PayLoad { get; private set; }
 
-    private EventStore()
-    {
-    }
-
     public EventStore(Guid aggregateId,
-                      long aggregateVersion,
-                      string name,
-                      string typeName,
-                      DateTime created,
-                      string serializedBody)
+                     long version,
+                     string name,
+                     string typeName,
+                     DateTime created,
+                     string payLoad)
     {
-        Version = aggregateVersion;
         AggregateId = aggregateId;
+        Version = version;
         Name = name;
         TypeName = typeName;
         Created = created;
-        PayLoad = serializedBody;
+        PayLoad = payLoad;
     }
 }

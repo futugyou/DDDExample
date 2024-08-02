@@ -6,6 +6,23 @@ public class DomainEventRebuilder : IDomainEventRebuilder
     public IEnumerable<IDomainEvent> RebuildDomainEvents(IEnumerable<EventStore> events)
     {
         var op = new JsonSerializerOptions();
-        return events.Select(e => System.Text.Json.JsonSerializer.Deserialize(e.PayLoad, Type.GetType(e.TypeName), op) as IDomainEvent);
+        var domainEvents = new List<IDomainEvent>();
+
+        foreach (var e in events)
+        {
+            var type = Type.GetType(e.TypeName) ?? throw new InvalidOperationException($"Type '{e.TypeName}' could not be found.");
+
+            if (JsonSerializer.Deserialize(e.PayLoad, type, op) is IDomainEvent domainEvent)
+            {
+                domainEvents.Add(domainEvent);
+            }
+            else
+            {
+                throw new InvalidOperationException($"Deserialization of event '{e.TypeName}' failed.");
+            }
+        }
+
+        return domainEvents;
     }
+
 }

@@ -16,7 +16,7 @@ public interface IRepository<TEntity> : IDisposable where TEntity : AggregateRoo
     /// </summary>
     /// <param name="id"></param>
     /// <returns></returns>
-    Task<TEntity> GetById(Guid id);
+    Task<TEntity?> GetById(Guid id);
     /// <summary>
     /// 获取列表
     /// </summary>

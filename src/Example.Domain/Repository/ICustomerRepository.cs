@@ -7,5 +7,5 @@ namespace Example.Domain;
 public interface ICustomerRepository : IRepository<Customer>
 {
     //一些Customer独有的接口
-    Task<Customer> GetByEmail(string email);
+    Task<Customer?> GetByEmail(string email);
 }

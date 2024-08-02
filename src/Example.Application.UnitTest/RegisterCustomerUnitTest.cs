@@ -41,6 +41,6 @@ public class RegisterCustomerUnitTest
         ICustomerAppService service = new CustomerAppService(_customerRepository.Object, _mapper.Object, _mediatorHandler.Object);
 
         // Assert
-        await Assert.ThrowsAsync<ArgumentNullException>(() => service.Register(null));
+        await Assert.ThrowsAsync<ArgumentNullException>(() => service.Register(null!));
     }
 }

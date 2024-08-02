@@ -18,7 +18,7 @@ public class ChangeCustomerNameCommandUnitTest
         ChangeCustomerNameCommand? request = null;
 
         // Assert
-        await Assert.ThrowsAsync<ArgumentNullException>(() => handler.Handle(request, default));
+        await Assert.ThrowsAsync<ArgumentNullException>(() => handler.Handle(request!, default));
     }
 
     [Fact]
@@ -35,7 +35,7 @@ public class ChangeCustomerNameCommandUnitTest
                                                  mediatorHandler.Object,
                                                  repository.Object,
                                                  dispatch.Object);
-        var request = new ChangeCustomerNameCommand(Guid.NewGuid(), null);
+        var request = new ChangeCustomerNameCommand(Guid.NewGuid(), null!);
         await handler.Handle(request, default);
 
         // Assert
@@ -74,7 +74,7 @@ public class ChangeCustomerNameCommandUnitTest
         var dispatch = new Mock<IEventSourcingDispatch>();
         var customer = new Customer(Guid.NewGuid(), "this is name", "email@e.com", DateTime.UtcNow);
         var request = new ChangeCustomerNameCommand(customer.Id, "this is new name");
-        repository.Setup(m => m.GetById(request.Id)).Returns(Task.FromResult(customer));
+        repository.Setup(m => m.GetById(request.Id)).Returns(Task.FromResult<Customer?>(customer));
         repository.Setup(m => m.Update(customer)).Returns(Task.CompletedTask).Verifiable();
 
         // Act

@@ -15,11 +15,14 @@ public abstract class Entity
     /// </summary>
     /// <param name="obj"></param>
     /// <returns></returns>
-    public override bool Equals(object obj)
+    public override bool Equals(object? obj)
     {
-        var compareTo = obj as Entity;
+        if (obj == null)
+        {
+            return false;
+        }
 
-        if (compareTo is null)
+        if (obj is not Entity compareTo)
         {
             return false;
         }
@@ -36,6 +39,7 @@ public abstract class Entity
 
         return Id.Equals(compareTo.Id);
     }
+
     /// <summary>
     /// 重写方法 实体比较 ==
     /// </summary>

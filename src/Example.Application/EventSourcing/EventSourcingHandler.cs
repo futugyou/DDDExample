@@ -11,16 +11,13 @@ public class EventSourcingHandler<T> : IEventSourcingHandler<IDomainEvent> where
 
     public async Task Handle(IDomainEvent @event, long aggregateVersion)
     {
-        if (@event == null)
-        {
-            throw new ArgumentNullException(nameof(@event));
-        }
+        ArgumentNullException.ThrowIfNull(@event);
 
         var serializedBody = JsonSerializer.Serialize(@event);
 
         var eventStore = new EventStore(@event.AggregateId, aggregateVersion,
             $"{aggregateVersion}@{@event.AggregateId}",
-            @event.GetType().AssemblyQualifiedName,
+            @event.GetType().AssemblyQualifiedName ?? "",
             @event.Timestamp,
             serializedBody);
         await _eventStoreRepository.AppendAsync(eventStore);

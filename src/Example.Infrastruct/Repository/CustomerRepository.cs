@@ -9,5 +9,5 @@ public class CustomerRepository : Repository<Customer>, ICustomerRepository
     {
     }
     //对特例接口进行实现
-    public async Task<Customer> GetByEmail(string email) => await _dbSet.FirstOrDefaultAsync(p => p.Email == email);
+    public async Task<Customer?> GetByEmail(string email) => await _dbSet.FirstOrDefaultAsync(p => p.Email == email);
 }

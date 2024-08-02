@@ -1,6 +1,6 @@
 ﻿namespace Example.Domain.Core;
 
-public abstract class DomainEvent : IDomainEvent
+public abstract record DomainEvent : IDomainEvent
 {
     public Guid AggregateId { get; protected set; }
     public Guid EventId => Guid.NewGuid();

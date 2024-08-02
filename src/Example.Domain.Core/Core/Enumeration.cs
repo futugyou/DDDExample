@@ -17,7 +17,7 @@ public abstract class Enumeration
                     .Select(f => f.GetValue(null))
                     .Cast<T>();
 
-    public override bool Equals(object obj)
+    public override bool Equals(object? obj)
     {
         if (obj is not Enumeration otherValue)
         {
@@ -69,7 +69,7 @@ public abstract class Enumeration
     {
         var matchingItem = GetAll<T>().FirstOrDefault(predicate);
 
-        return matchingItem == null
+        return matchingItem is null
             ? throw new InvalidOperationException($"'{value}' is not a valid {description} in {typeof(T)}")
             : matchingItem;
     }
