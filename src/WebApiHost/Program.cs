@@ -14,10 +14,16 @@ if (!string.IsNullOrWhiteSpace(serviceName))
         .SetResourceBuilder(ResourceBuilder.CreateDefault().AddService(serviceName))
         .AddHttpClientInstrumentation()
         .AddAspNetCoreInstrumentation()
+        .AddBaggageActivityProcessor()
         .AddEntityFrameworkCoreInstrumentation(config => config.SetDbStatementForText = true)
         .AddJaegerExporter(config =>
         {
             configuration.GetSection("Jaeger").Bind(config);
+        })
+        .AddOtlpExporter(option =>
+        {
+            option.Endpoint = new Uri(configuration["Honeycomb:Endpoint"]!);
+            option.Headers = $"x-honeycomb-team={configuration["Honeycomb:ApiKey"]!}";
         });
     });
 }

@@ -6,6 +6,7 @@ services:
       - ASPNETCORE_ENVIRONMENT=Development
       - ASPNETCORE_URLS=https://+:443;http://+:80
       - ConnectionString=Server=sqldata;Database=ddddemo;User Id=sa;Password=Pass@word
+      - HONEYCOMB__APIKEY=your_api_key_value
     ports:
       - "80"
       - "443"
