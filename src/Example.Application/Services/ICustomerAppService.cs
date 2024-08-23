@@ -9,7 +9,7 @@ public interface ICustomerAppService : IDisposable
 {
     Task Register(CustomerViewModel customerViewModel);
     Task<IEnumerable<CustomerViewModel>> GetAll();
-    Task<CustomerViewModel> GetById(Guid id);
+    Task<CustomerViewModel?> GetById(Guid id);
     Task Update(CustomerViewModel customerViewModel);
     Task Remove(Guid id);
 }

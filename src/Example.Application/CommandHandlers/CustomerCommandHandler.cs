@@ -32,7 +32,7 @@ public class CustomerCommandHandler : CommandHandler, IRequestHandler<RegisterCu
         }
 
         var customer = await _customerRepository.GetByEmail(request.Email);
-        if (customer != null)
+        if (customer is not null)
         {
             //domain notification
             await _mediatorHandler.RaiseEvent(new DomainNotification(customer.Id.ToString(), "email address already exists"));
@@ -59,7 +59,7 @@ public class CustomerCommandHandler : CommandHandler, IRequestHandler<RegisterCu
         }
 
         var customer = await _customerRepository.GetById(request.Id);
-        if (customer == null)
+        if (customer is null)
         {
             //domain notification
             await _mediatorHandler.RaiseEvent(new DomainNotification(request.Id.ToString(), "no customer found"));

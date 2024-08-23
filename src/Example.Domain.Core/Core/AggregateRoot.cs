@@ -3,7 +3,7 @@ public abstract class AggregateRoot : Entity, IEventSourcing
 {
     public IReadOnlyCollection<IDomainEvent> DomainEvents => _domainEvents.AsReadOnly();
 
-    private readonly List<IDomainEvent> _domainEvents = new();
+    private readonly List<IDomainEvent> _domainEvents = [];
 
     public long Version { get; private set; } = -1;
 

@@ -32,10 +32,10 @@ public class CustomerAppService : ICustomerAppService
         return domain.ProjectTo<CustomerViewModel>(_mapper.ConfigurationProvider);
     }
 
-    public async Task<CustomerViewModel> GetById(Guid id)
+    public async Task<CustomerViewModel?> GetById(Guid id)
     {
         var domain = await _customerRepository.GetById(id);
-        if (domain == null)
+        if (domain is null)
         {
             return null;
         }
