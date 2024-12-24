@@ -1,10 +1,24 @@
 {
+	"name": "C# (.NET)",
 	"image": "mcr.microsoft.com/devcontainers/universal:2",
+	"features": {
+		"ghcr.io/devcontainers/features/dotnet:2": {
+			"workloads": "aspire, wasm-tools"
+		},
+		"ghcr.io/dapr/cli/dapr-cli:0": {}
+	},
 	"customizations": {
 		"vscode": {
 			"extensions": [
-				"ms-dotnettools.csdevkit"
+				"ms-dotnettools.csdevkit",
+				"EditorConfig.EditorConfig",
+				"k--kato.docomment",
+				"dbaeumer.vscode-eslint",
+				"ms-azuretools.vscode-docker",
+				"GitHub.copilot",
+				"GitHub.copilot-chat"
 			]
 		}
-	}
+	},
+	"remoteUser": "root"
 }
