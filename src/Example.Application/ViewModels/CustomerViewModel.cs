@@ -12,12 +12,12 @@ public class CustomerViewModel
     [MinLength(5)]
     [MaxLength(100)]
     [DisplayName("Name")]
-    public string Name { get; set; }
+    public required string Name { get; set; }
 
     [Required(ErrorMessage = "The E-mail is Required")]
     [EmailAddress]
     [DisplayName("E-mail")]
-    public string Email { get; set; }
+    public required string Email { get; set; }
 
     [Required(ErrorMessage = "The BirthDate is Required")]
     [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:yyyy-MM-dd}")]
@@ -29,20 +29,20 @@ public class CustomerViewModel
     /// </summary>
     [Required(ErrorMessage = "The Province is Required")]
     [DisplayName("Province")]
-    public string Province { get; set; }
+    public required string Province { get; set; }
 
     /// <summary>
     /// 城市
     /// </summary>
-    public string City { get; set; }
+    public required string City { get; set; }
 
     /// <summary>
     /// 区县
     /// </summary>
-    public string County { get; set; }
+    public required string County { get; set; }
 
     /// <summary>
     /// 街道
     /// </summary>
-    public string Street { get; set; }
+    public required string Street { get; set; }
 }

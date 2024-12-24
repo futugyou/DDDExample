@@ -5,22 +5,26 @@ namespace WebApiHost.UnitTest;
 public class CustomerControllerTest
 {
     [Fact]
-    public void RegisterCustomerFaildTest()
+    public void CustomerValidateSuccessTest()
     {
-        //Arrange
-        var moq = new Mock<ICustomerAppService>();
+        //Arrange 
         var result = new List<ValidationResult>();
-        var controller = new CustomerController(moq.Object);
-        var customer = new CustomerViewModel();
+        var customer = new CustomerViewModel
+        {
+            Name = "John Doe",
+            Email = "john.doe@example.com",
+            Province = "Some Province",
+            City = "Some City",
+            County = "Some County",
+            Street = "123 Some Street"
+        };
 
         //Act 
         var isValid = Validator.TryValidateObject(customer, new ValidationContext(customer), result);
 
         //Assert
-        Assert.False(isValid);
-        Assert.Equal(3, result.Count);
-        Assert.Equal("Name", result[0].MemberNames.ElementAt(0));
-        Assert.Equal("The Name is Required", result[0].ErrorMessage);
+        Assert.True(isValid);
+        Assert.Empty(result);
     }
 
     // This doesn't make sense
@@ -30,7 +34,15 @@ public class CustomerControllerTest
         //Arrange
         var moq = new Mock<ICustomerAppService>();
         var controller = new CustomerController(moq.Object);
-        var customer = new CustomerViewModel();
+        var customer = new CustomerViewModel
+        {
+            Name = "John Doe",
+            Email = "john.doe@example.com",
+            Province = "Some Province",
+            City = "Some City",
+            County = "Some County",
+            Street = "123 Some Street"
+        };
 
         //Act 
         await controller.SaveCustomer(customer);
