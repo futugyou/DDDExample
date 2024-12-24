@@ -34,7 +34,7 @@ public class CustomerController : ControllerBase
     /// <param name="id"></param>
     /// <returns></returns>
     [HttpGet]
-    public async Task<CustomerViewModel> GetCustomer(Guid id)
+    public async Task<CustomerViewModel?> GetCustomer(Guid id)
     {
         return await _customerAppService.GetById(id);
     }
