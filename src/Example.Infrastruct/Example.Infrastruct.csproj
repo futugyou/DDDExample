@@ -20,7 +20,7 @@
 		</PackageReference>
 		<PackageReference Include="Microsoft.Extensions.Configuration.FileExtensions" Version="9.0.2" />
 		<PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="9.0.2" />
-		<PackageReference Include="Pomelo.EntityFrameworkCore.MySql" Version="9.0.0-preview.2.efcore.9.0.0" />
+		<PackageReference Include="Pomelo.EntityFrameworkCore.MySql" Version="9.0.0-preview.3.efcore.9.0.0" />
 	</ItemGroup>
 
 	<ItemGroup>
