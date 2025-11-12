@@ -1,5 +1,5 @@
 #See https://aka.ms/containerfastmode to understand how Visual Studio uses this Dockerfile to build your images for faster debugging.
-ARG NET_IMAGE=9.0
+ARG NET_IMAGE=10.0
 FROM mcr.microsoft.com/dotnet/aspnet:${NET_IMAGE} AS base
 WORKDIR /app
 EXPOSE 80
@@ -12,6 +12,8 @@ COPY ["Example.Application/Example.Application.csproj", "Example.Application/"]
 COPY ["Example.Domain/Example.Domain.csproj", "Example.Domain/"]
 COPY ["Example.Domain.Core/Example.Domain.Core.csproj", "Example.Domain.Core/"]
 COPY ["Example.Infrastruct/Example.Infrastruct.csproj", "Example.Infrastruct/"]
+COPY ["Directory.Build.props", "./"]
+COPY ["Directory.Packages.props", "./"]
 RUN dotnet restore "WebApiHost/WebApiHost.csproj"
 COPY . .
 WORKDIR "/src/WebApiHost"

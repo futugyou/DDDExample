@@ -1,4 +1,7 @@
-﻿namespace Example.Application.UnitTest;
+﻿using Microsoft.Extensions.Logging.Abstractions;
+
+namespace Example.Application.UnitTest;
+
 public class AutoMapperHelper
 {
     public static readonly IMapper mapper = GetMapper();
@@ -10,7 +13,7 @@ public class AutoMapperHelper
             mc.AddProfile(new DomainToViewModelMappingProfile());
             mc.AddProfile(new ViewModelToDomainMappingProfile());
             mc.AddProfile(new ViewModelToCommandMappingProfile());
-        });
+        }, new NullLoggerFactory());
 
         return mappingConfig.CreateMapper();
     }

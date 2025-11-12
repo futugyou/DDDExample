@@ -8,9 +8,12 @@ public static class AutoMapperSetup
         {
             throw new ArgumentNullException(nameof(services));
         }
-        //添加服务
-        services.AddAutoMapper(typeof(Program), typeof(AutoMapperConfig));
-        //启动配置
+
+        services.AddAutoMapper(cfg => { },
+            typeof(Program),
+            typeof(AutoMapperConfig)
+        );
+
         AutoMapperConfig.RegisterMapper();
     }
 }

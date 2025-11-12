@@ -1,11 +1,11 @@
 {
 	"name": "C# (.NET)",
-	"image": "mcr.microsoft.com/devcontainers/universal:2",
+	"image": "mcr.microsoft.com/devcontainers/base:bookworm",
 	"features": {
 		"ghcr.io/devcontainers/features/dotnet:2": {
-			"workloads": "aspire, wasm-tools"
+			"workloads": "wasm-tools"
 		},
-		"ghcr.io/dapr/cli/dapr-cli:0": {}
+		"ghcr.io/devcontainers/features/docker-in-docker:2": {},
 	},
 	"customizations": {
 		"vscode": {

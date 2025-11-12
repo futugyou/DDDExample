@@ -1,0 +1,56 @@
+<Project>
+  <ItemGroup>
+    <!-- EF Core -->
+    <PackageVersion Include="Pomelo.EntityFrameworkCore.MySql" Version="9.0.0" />
+    <PackageVersion Include="Microsoft.EntityFrameworkCore.Design" Version="9.0.0" />
+    <PackageVersion Include="Microsoft.EntityFrameworkCore.Tools" Version="9.0.0" />
+    <PackageVersion Include="Microsoft.EntityFrameworkCore.InMemory" Version="9.0.0" />
+
+    <!-- Extensions -->
+    <PackageVersion Include="Microsoft.Extensions.Configuration" Version="10.0.0" />
+    <PackageVersion Include="Microsoft.Extensions.DependencyInjection" Version="10.0.0" />
+    <PackageVersion Include="Microsoft.Extensions.FileProviders.Embedded" Version="10.0.0" />
+    <PackageVersion Include="Microsoft.Extensions.Http.Polly" Version="10.0.0" />
+    <PackageVersion Include="Microsoft.Extensions.Http.Resilience" Version="10.0.0" />
+    <PackageVersion Include="Microsoft.Extensions.Options.ConfigurationExtensions" Version="10.0.0" />
+    <PackageVersion Include="Microsoft.Extensions.ServiceDiscovery" Version="10.0.0" />
+    <PackageVersion Include="Microsoft.Extensions.Hosting" Version="10.0.0" />
+
+    <!-- OpenApi -->
+    <PackageVersion Include="Microsoft.AspNetCore.OpenApi" Version="10.0.0" />
+    <PackageVersion Include="Swashbuckle.AspNetCore" Version="10.0.0" />
+    <PackageVersion Include="Microsoft.Extensions.ApiDescription.Server" Version="10.0.0" />
+
+    <!-- OpenTelemetry-->    
+    <PackageVersion Include="OpenTelemetry" Version="1.13.1" />     
+    <PackageVersion Include="OpenTelemetry.Extensions" Version="1.13.0-beta.1" />
+    <PackageVersion Include="OpenTelemetry.Extensions.Hosting" Version="1.13.1" />
+    <PackageVersion Include="OpenTelemetry.Exporter.OpenTelemetryProtocol" Version="1.13.1" />
+    <PackageVersion Include="OpenTelemetry.Instrumentation.AspNetCore" Version="1.13.0" />
+    <PackageVersion Include="OpenTelemetry.Instrumentation.Http" Version="1.13.0" />
+    <PackageVersion Include="OpenTelemetry.Instrumentation.Runtime" Version="1.13.0" />
+    <PackageVersion Include="OpenTelemetry.Instrumentation.EntityFrameworkCore" Version="1.13.0-beta.2" />
+    <PackageVersion Include="OpenTelemetry.Exporter.Console" Version="1.14.0-rc.1" /> 
+
+    <!-- AWS -->    
+    <PackageVersion Include="AWSSDK.ConfigService" Version="4.0.4.3" />
+    <PackageVersion Include="AWSSDK.Extensions.NETCore.Setup" Version="4.0.3.11" />
+    <PackageVersion Include="AWSSDK.IdentityManagement" Version="4.0.6" />
+
+    <!-- Test -->
+    <PackageVersion Include="Microsoft.NET.Test.Sdk" Version="17.13.0" />
+    <PackageVersion Include="Moq" Version="4.20.72" />
+    <PackageVersion Include="xunit" Version="2.9.3" />
+    <PackageVersion Include="xunit.runner.visualstudio" Version="3.1.0" />
+    <PackageVersion Include="coverlet.collector" Version="6.0.4" />
+
+
+    <PackageVersion Include="Polly" Version="8.6.4" />
+    <PackageVersion Include="Polly.Core" Version="8.6.4" />
+    <PackageVersion Include="Serilog.AspNetCore" Version="9.0.0" /> 
+    <PackageVersion Include="AutoMapper" Version="15.1.0" />
+    <PackageVersion Include="FluentValidation" Version="12.1.0" />
+    <PackageVersion Include="MediatR" Version="13.1.0" />
+    <PackageVersion Include="System.Data.SqlClient" Version="4.9.0" />
+  </ItemGroup>
+</Project>

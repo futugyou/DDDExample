@@ -1,3 +1,5 @@
+using Microsoft.Extensions.Logging.Abstractions;
+
 namespace Example.Application;
 
 public class AutoMapperConfig
@@ -9,6 +11,6 @@ public class AutoMapperConfig
             conf.AddProfile(new DomainToViewModelMappingProfile());
             conf.AddProfile(new ViewModelToDomainMappingProfile());
             conf.AddProfile(new ViewModelToCommandMappingProfile());
-        });
+        }, new NullLoggerFactory());
     }
 }

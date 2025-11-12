@@ -1,4 +1,5 @@
 ﻿namespace Example.Infrastruct.UnitTest;
+
 public class DatabaseContextUnitTest
 {
     [Fact]

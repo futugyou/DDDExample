@@ -2,12 +2,9 @@
 global using global::Example.Domain;
 global using global::Example.Domain.Core;
 global using global::Example.Infrastruct;
-global using global::LogDashboard;
 global using global::MediatR;
 global using global::Microsoft.AspNetCore.Mvc;
 global using global::Microsoft.EntityFrameworkCore;
-global using global::Microsoft.OpenApi.Models;
-global using global::OpenTelemetry.Exporter;
 global using global::OpenTelemetry.Resources;
 global using global::OpenTelemetry.Trace;
 global using global::Polly;

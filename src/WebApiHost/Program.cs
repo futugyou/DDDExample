@@ -14,12 +14,8 @@ if (!string.IsNullOrWhiteSpace(serviceName))
         .SetResourceBuilder(ResourceBuilder.CreateDefault().AddService(serviceName))
         .AddHttpClientInstrumentation()
         .AddAspNetCoreInstrumentation()
-        .AddBaggageActivityProcessor()
-        .AddEntityFrameworkCoreInstrumentation(config => config.SetDbStatementForText = true)
-        .AddJaegerExporter(config =>
-        {
-            configuration.GetSection("Jaeger").Bind(config);
-        })
+        .AddBaggageActivityProcessor(_ => true)
+        .AddEntityFrameworkCoreInstrumentation()
         .AddOtlpExporter(option =>
         {
             option.Endpoint = new Uri(configuration["Honeycomb:Endpoint"]!);
@@ -28,15 +24,8 @@ if (!string.IsNullOrWhiteSpace(serviceName))
     });
 }
 
-//it doesn't work ,so use 'Bind'
-services.Configure<JaegerExporterOptions>(configuration.GetSection("Jaeger"));
-services.AddLogDashboard();
-//启动配置   
 services.AddAutoMapperSetup();
-services.AddSwaggerGen(c =>
-{
-    c.SwaggerDoc("v1", new OpenApiInfo { Title = "DDD project", Version = "v1" });
-});
+services.AddSwaggerGen();
 services.AddMediatR(cfg =>
 {
     cfg.RegisterServicesFromAssemblyContaining<Program>();
@@ -54,7 +43,6 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseRouting();
-app.UseLogDashboard();
 app.UseAuthorization();
 
 app.MapControllers();
