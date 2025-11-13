@@ -29,6 +29,6 @@
 		<PackageReference Include="Polly" />
 		<PackageReference Include="Serilog.AspNetCore" />
 		<PackageReference Include="Swashbuckle.AspNetCore" />
-		<PackageReference Include="System.Data.SqlClient" />
+		<PackageReference Include="Microsoft.Data.SqlClient" />
 	</ItemGroup>
 </Project>

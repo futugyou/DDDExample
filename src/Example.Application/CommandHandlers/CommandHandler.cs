@@ -12,7 +12,7 @@ public class CommandHandler
 
     protected async Task NotifyValidationErrors(Command command)
     {
-        foreach (var item in command.ValidationResult.Errors)
+        foreach (var item in command.ValidationResult?.Errors ?? Enumerable.Empty<FluentValidation.Results.ValidationFailure>())
         {
             await _mediatorHandler.RaiseEvent(new DomainNotification("", item.ErrorMessage));
         }

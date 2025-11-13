@@ -56,6 +56,7 @@ public class GetCustomerUnitTest
         var users = await service.GetById(customer.Id);
 
         // Assert
+        Assert.True(users != null);
         Assert.Equal(users.Id, customer.Id);
     }
 
