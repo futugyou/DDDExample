@@ -2,9 +2,9 @@
   <ItemGroup>
     <!-- EF Core -->
     <PackageVersion Include="Pomelo.EntityFrameworkCore.MySql" Version="9.0.0" />
-    <PackageVersion Include="Microsoft.EntityFrameworkCore.Design" Version="10.0.7" />
-    <PackageVersion Include="Microsoft.EntityFrameworkCore.Tools" Version="10.0.7" />
-    <PackageVersion Include="Microsoft.EntityFrameworkCore.InMemory" Version="10.0.7" />
+    <PackageVersion Include="Microsoft.EntityFrameworkCore.Design" Version="10.0.8" />
+    <PackageVersion Include="Microsoft.EntityFrameworkCore.Tools" Version="10.0.8" />
+    <PackageVersion Include="Microsoft.EntityFrameworkCore.InMemory" Version="10.0.8" />
 
     <!-- Extensions -->
     <PackageVersion Include="Microsoft.Extensions.Configuration" Version="10.0.0" />
