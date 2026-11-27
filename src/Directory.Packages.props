@@ -51,6 +51,6 @@
     <PackageVersion Include="AutoMapper" Version="16.3.0" />
     <PackageVersion Include="FluentValidation" Version="12.2.0" />
     <PackageVersion Include="MediatR" Version="14.0.0" />
-    <PackageVersion Include="Microsoft.Data.SqlClient" Version="7.1.2" />
+    <PackageVersion Include="Microsoft.Data.SqlClient" Version="8.0.0" />
   </ItemGroup>
 </Project>
